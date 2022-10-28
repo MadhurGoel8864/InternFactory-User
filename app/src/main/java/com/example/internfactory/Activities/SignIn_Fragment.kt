@@ -38,10 +38,9 @@ class SignIn_Fragment : Fragment() {
         }
         password_text.addTextChangedListener{
             login_btn.isEnabled = (email_cont.helperText == null) and (password_cont.helperText == null)
-            password_cont.helperText = validemail()
+            password_cont.helperText = validPass()
         }
     }
-
     private fun validPass(): String? {
         val pass_txt = password_text.text.toString()
         if(pass_txt.length<8){
@@ -53,7 +52,6 @@ class SignIn_Fragment : Fragment() {
         if(!pass_txt.matches(".*[a-z]*.".toRegex())){
             return "At least 1 LowerCase Alphabet Required"
         }
-
         if(!pass_txt.matches(".*[@#$%^&*+=]*.".toRegex())){
             return "At least 1  Special Character Required"
         }
