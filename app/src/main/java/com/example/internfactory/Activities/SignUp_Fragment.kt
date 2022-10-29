@@ -99,6 +99,5 @@ class SignUp_Fragment : Fragment() {
 //                button.isEnabled =
 //                    android.util.Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches() and (password.text?.isNotEmpty() == true) and (firstname.text?.isNotEmpty()==true) and (lastname.text?.isNotEmpty()==true)
 //            }
-//        })
 
 }
