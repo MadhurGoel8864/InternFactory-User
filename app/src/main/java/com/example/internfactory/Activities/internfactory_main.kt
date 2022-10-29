@@ -31,7 +31,6 @@ class MainActivity : Activity() {
         val retrofitAPI = ServiceBuilder.buildService(RetrofitApi::class.java)
         val call = retrofitAPI.sendUserData(user)
 
-
         val x = call.enqueue(object: Callback<User> {
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 if (response.body() != null) {
