@@ -39,7 +39,7 @@ class ForgotPassword_Fragment : Fragment() {
     private fun validEmail(): String? {
         val email_text = email_inp.text.toString()
         if (!Patterns.EMAIL_ADDRESS.matcher(email_text).matches()) {
-            return "Invalid Email Address"
+            return "Invalid Email Address "
         }
         return null
     }

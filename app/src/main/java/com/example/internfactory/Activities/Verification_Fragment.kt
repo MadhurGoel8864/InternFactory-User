@@ -42,7 +42,6 @@ private lateinit var otp_btn : Button
                     otp_cont.helperText = "Required"
 
                 }
-//                    (otp_input.text?.isNotEmpty() == true)
             }
         })
 
