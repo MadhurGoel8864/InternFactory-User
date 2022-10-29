@@ -33,12 +33,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="330dp"
         android:id="@+id/first_name"
         app:hintTextColor="#212427"
         android:textColorHint="#212427"
-        android:layout_height="60dp"
+        app:helperText="Required"
+        app:helperTextTextColor="#FB2A2A"
+        android:layout_marginHorizontal="20dp"
+        android:layout_height="wrap_content"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
         app:startIconDrawable="@drawable/ic_baseline_person_24"
@@ -50,6 +55,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/first_name_inp"
+            android:lines="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/custom_sing_in"
@@ -86,7 +92,10 @@
         android:id="@+id/email_box"
         app:hintTextColor="#212427"
         android:textColorHint="#212427"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
+        app:helperText="Required"
+        app:helperTextTextColor="#FB2A2A"
+        android:layout_marginHorizontal="20dp"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
         android:layout_marginTop="16dp"
@@ -100,6 +109,7 @@
             android:id="@+id/email_inp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:lines="1"
             android:background="@drawable/custom_sing_in"
             android:inputType="textEmailAddress"
             android:textColor="#212427"
@@ -107,12 +117,15 @@
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="330dp"
-        android:id="@+id/password_inp"
+        android:id="@+id/password"
         app:hintTextColor="#212427"
         android:textColorHint="#212427"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
+        app:helperText="Required"
+        app:helperTextTextColor="#FB2A2A"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="16dp"
         android:hint="Password"
         app:startIconDrawable="@drawable/lock"
@@ -126,6 +139,7 @@
             android:id="@+id/password_form_inp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:lines="1"
             android:background="@drawable/custom_sing_in"
             android:inputType="textPassword"
             android:textColor="#212427"
@@ -143,7 +157,7 @@
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_inp" />
+        app:layout_constraintTop_toBottomOf="@+id/password"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -157,17 +171,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#212427"
-            android:text="Already Registered?"
+            android:text="Already Registered?  "
             />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/login_btn"
-            android:padding="0dp"
+            android:textAlignment="textStart"
             style="?android:attr/borderlessButtonStyle"
             android:textStyle="bold"
             android:onClick="logInFrag"
             android:text="Login"
+            android:padding="0dp"
             android:textColor="#212427"
             android:textAllCaps="false"
             />

@@ -77,6 +77,8 @@
         android:layout_marginTop="25dp"
         android:hint="Enter OTP"
         app:boxStrokeWidth="0dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="6"
         app:boxStrokeWidthFocused="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

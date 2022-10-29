@@ -32,13 +32,14 @@ class SignIn_Fragment : Fragment() {
         login_btn = requireView().findViewById(R.id.login_btn)
         email_cont = requireView().findViewById(R.id.ed1)
         password_cont = requireView().findViewById(R.id.password_inp)
+
         ed1.addTextChangedListener{
+            email_cont.helperText = validemail()
             login_btn.isEnabled = (email_cont.helperText == null) and (password_cont.helperText == null)
-                    email_cont.helperText = validemail()
         }
         password_text.addTextChangedListener{
-            login_btn.isEnabled = (email_cont.helperText == null) and (password_cont.helperText == null)
             password_cont.helperText = validPass()
+            login_btn.isEnabled = (email_cont.helperText == null) and (password_cont.helperText == null)
         }
     }
     private fun validPass(): String? {
