@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ServiceBuilder {
-    private const val URL = "https://7057-223-233-74-91.in.ngrok.io"
+    private const val URL = "http://localhost:8080/api/auth/login"
 
     private val okHttp = OkHttpClient.Builder()
 
