@@ -3,6 +3,7 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -27,7 +28,7 @@ class SignIn_Fragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        password_text = requireView().findViewById(R.id.password_input)
+        password_text = requireView().findViewById(R.id.password_input  )
         ed1 = requireView().findViewById(R.id.email_inp)
         login_btn = requireView().findViewById(R.id.login_btn)
         email_cont = requireView().findViewById(R.id.ed1)
@@ -45,9 +46,10 @@ class SignIn_Fragment : Fragment() {
     private fun validPass(): String? {
         val pass_txt = password_text.text.toString()
         if(pass_txt.length<8){
+            Log.d("madhur","1st cont")
             return "Minimum 8 characters Required"
         }
-        if(!pass_txt.matches(".*[A-Z]*.".toRegex())){
+        if(!(pass_txt.matches(".*[A-Z]*.".toRegex()))){
             return "At least 1 UpperCase Alphabet Required"
         }
         if(!pass_txt.matches(".*[a-z]*.".toRegex())){
@@ -56,7 +58,7 @@ class SignIn_Fragment : Fragment() {
         if(!pass_txt.matches(".*[@#$%^&*+=]*.".toRegex())){
             return "At least 1  Special Character Required"
         }
-    return null
+            return null
     }
     private fun validemail(): String? {
         val email_text = ed1.text.toString()
