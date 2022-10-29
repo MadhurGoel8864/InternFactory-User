@@ -42,22 +42,22 @@ class SignUp_Fragment : Fragment() {
         email_box = requireView().findViewById(R.id.email_box)
         password = requireView().findViewById(R.id.password)
 
-        email_inp.addTextChangedListener {
-            email_box.helperText = validemail()
-            button.isEnabled =
-                (email_box.helperText == null) and (password.helperText == null) and (firstname.helperText == null)
-        }
-        password_inp.addTextChangedListener {
-            password.helperText = validPass()
-            button.isEnabled =
-                (email_box.helperText == null) and (password.helperText == null) and (firstname.helperText == null)
-        }
-        firstname_inp.addTextChangedListener {
-            firstname.helperText = validemail()
-            button.isEnabled =
-                (email_box.helperText == null) and (password.helperText == null) and (firstname.helperText == null)
-        }
-    }
+//        email_inp.addTextChangedListener {
+//            email_box.helperText = validemail()
+//            button.isEnabled =
+//                (email_box.helperText == null) and (password.helperText == null) and (firstname.helperText == null)
+//        }
+//        password_inp.addTextChangedListener {
+//            password.helperText = validPass()
+//            button.isEnabled =
+//                (email_box.helperText == null) and (password.helperText == null) and (firstname.helperText == null)
+//        }
+//        firstname_inp.addTextChangedListener {
+//            firstname.helperText = validemail()
+//            button.isEnabled =
+//                (email_box.helperText == null) and (password.helperText == null) and (firstname.helperText == null)
+//        }
+//    }
 
 //        firstname.addTextChangedListener(object : TextWatcher {
 //            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -98,6 +98,6 @@ class SignUp_Fragment : Fragment() {
 //            override fun afterTextChanged(p0: Editable?) {
 //                button.isEnabled =
 //                    android.util.Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches() and (password.text?.isNotEmpty() == true) and (firstname.text?.isNotEmpty()==true) and (lastname.text?.isNotEmpty()==true)
-//            }
+           }
 
 }
