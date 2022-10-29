@@ -14,7 +14,6 @@
     tools:context=".Activities.Verification_Fragment">
 
     <!-- TODO: Update blank fragment layout -->
-
     <ImageView
         android:id="@+id/veri_logo"
         android:layout_width="217dp"
@@ -100,6 +99,7 @@
         android:layout_width="330dp"
         android:layout_height="60dp"
         android:text="Continue"
+        android:onClick="ResetPassword"
         android:enabled="false"
         android:layout_marginTop="40dp"
         android:textColor="@color/white"
