@@ -55,6 +55,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/first_name_inp"
+            android:textCursorDrawable="@color/black"
             android:lines="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -81,6 +82,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/last_name_inp"
             android:layout_width="match_parent"
+            android:textCursorDrawable="@color/black"
             android:layout_height="match_parent"
             android:background="@drawable/custom_sing_in"
             android:inputType="text"
@@ -109,6 +111,7 @@
             android:id="@+id/email_inp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:textCursorDrawable="@color/black"
             android:lines="1"
             android:background="@drawable/custom_sing_in"
             android:inputType="textEmailAddress"
@@ -139,6 +142,7 @@
             android:id="@+id/password_form_inp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:textCursorDrawable="@color/black"
             android:lines="1"
             android:background="@drawable/custom_sing_in"
             android:inputType="textPassword"

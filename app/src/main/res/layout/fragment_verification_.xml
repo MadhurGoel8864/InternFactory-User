@@ -88,13 +88,13 @@
             android:lines="1"
             android:maxLength="6"
             android:layout_width="match_parent"
+            android:textCursorDrawable="@color/black"
             android:layout_height="match_parent"
             android:inputType="number"
             android:background="@drawable/custom_sing_in"
             android:textColor="#212427"
             />
     </com.google.android.material.textfield.TextInputLayout>
-
     <Button
         android:id="@+id/button2"
         android:layout_width="330dp"
