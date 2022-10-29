@@ -1,5 +1,4 @@
 package com.example.internfactory.Activities
-
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -21,7 +20,6 @@ private lateinit var otp_btn : Button
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_verification_, container, false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,7 +33,15 @@ private lateinit var otp_btn : Button
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
             override fun afterTextChanged(p0: Editable?) {
-                otp_btn.isEnabled =(otp_input.text?.length == 6)
+                if(otp_input.text?.length == 6){
+                    otp_btn.isEnabled = true
+                    otp_cont.helperText = null
+                }
+                else{
+                    otp_btn.isEnabled = false
+                    otp_cont.helperText = "Required"
+
+                }
 //                    (otp_input.text?.isNotEmpty() == true)
             }
         })
