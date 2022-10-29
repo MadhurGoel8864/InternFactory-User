@@ -39,21 +39,9 @@ class ForgotPassword_Fragment : Fragment() {
     private fun validEmail(): String? {
         val email_text = email_inp.text.toString()
         if (!Patterns.EMAIL_ADDRESS.matcher(email_text).matches()) {
-            return "Invalid Email Address"
+            return "Invalid Email Address "
         }
         return null
     }
 }
-//        email_inp.addTextChangedListener(object: TextWatcher {
-//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//            }
-//
-//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//            }
-//
-//            override fun afterTextChanged(p0: Editable?) {
-//                if (android.util.Patterns.EMAIL_ADDRESS.matcher(email_inp.text.toString()).matches()){
-//                    button.isEnabled = true
-//                }
-//            }
-//        })
+

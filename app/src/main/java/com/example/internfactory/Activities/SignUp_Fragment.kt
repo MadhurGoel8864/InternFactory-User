@@ -3,6 +3,7 @@ package com.example.internfactory.Activities
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -42,62 +43,49 @@ class SignUp_Fragment : Fragment() {
         email_box = requireView().findViewById(R.id.email_box)
         password = requireView().findViewById(R.id.password)
 
-//        email_inp.addTextChangedListener {
-//            email_box.helperText = validemail()
-//            button.isEnabled =
-//                (email_box.helperText == null) and (password.helperText == null) and (firstname.helperText == null)
-//        }
-//        password_inp.addTextChangedListener {
-//            password.helperText = validPass()
-//            button.isEnabled =
-//                (email_box.helperText == null) and (password.helperText == null) and (firstname.helperText == null)
-//        }
-//        firstname_inp.addTextChangedListener {
-//            firstname.helperText = validemail()
-//            button.isEnabled =
-//                (email_box.helperText == null) and (password.helperText == null) and (firstname.helperText == null)
-//        }
-//    }
+        email_inp.addTextChangedListener {
+            email_box.helperText = validemail()
+            button.isEnabled =
+                (email_box.helperText == null) and (password.helperText == null) and (firstname.helperText == null)
+        }
+        password_inp.addTextChangedListener {
+            password.helperText = validPass()
+            button.isEnabled =
+                (email_box.helperText == null) and (password.helperText == null) and (firstname.helperText == null)
+        }
+        firstname_inp.addTextChangedListener {
+            if(firstname_inp.text.toString() != "") {
+                firstname.helperText = null
+            }
+            else{
+                firstname.helperText = "Required"
+            }
+            button.isEnabled =
+                (email_box.helperText == null) and (password.helperText == null) and (firstname.helperText == null)
+        }
+    }
+    private fun validPass(): String? {
+        val pass_txt = password_inp.text.toString()
+        if(pass_txt.length<8){
+            return "Minimum 8 characters Required"
+        }
+        if(!pass_txt.matches(".*[A-Z]*.".toRegex())){
+            return "At least 1 UpperCase Alphabet Required"
+        }
+        if(!pass_txt.matches(".*[a-z]*.".toRegex())){
+            return "At least 1 LowerCase Alphabet Required"
+        }
+        if(!pass_txt.matches(".*[@#$%^&*+=]*.".toRegex())){
+            return "At least 1  Special Character Required"
+        }
+        return null
+    }
 
-//        firstname.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//            }
-//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//            }
-//            override fun afterTextChanged(p0: Editable?) {
-//                button.isEnabled =
-//                    android.util.Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches() and (password.text?.isNotEmpty() == true) and (firstname.text?.isNotEmpty()==true) and (lastname.text?.isNotEmpty()==true)
-//            }
-//        })
-//                lastname.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//            }
-//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//            }
-//            override fun afterTextChanged(p0: Editable?) {
-//                button.isEnabled =
-//                    android.util.Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches() and (password.text?.isNotEmpty() == true) and (firstname.text?.isNotEmpty()==true) and (lastname.text?.isNotEmpty()==true)
-//            }
-//        })
-//
-//        email.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//            }
-//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//            }
-//            override fun afterTextChanged(p0: Editable?) {
-//                button.isEnabled =
-//                    android.util.Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches() and (password.text?.isNotEmpty() == true) and (firstname.text?.isNotEmpty()==true) and (lastname.text?.isNotEmpty()==true)
-//            }
-//        })
-//        password.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//            }
-//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//            }
-//            override fun afterTextChanged(p0: Editable?) {
-//                button.isEnabled =
-//                    android.util.Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches() and (password.text?.isNotEmpty() == true) and (firstname.text?.isNotEmpty()==true) and (lastname.text?.isNotEmpty()==true)
-           }
-
+    private fun validemail(): String? {
+        val email_text = email_inp.text.toString()
+        if(!Patterns.EMAIL_ADDRESS.matcher(email_text).matches()){
+            return "Invalid Email Address"
+        }
+        return null
+    }
 }
