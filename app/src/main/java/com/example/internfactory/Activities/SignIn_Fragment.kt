@@ -1,4 +1,5 @@
 package com.example.internfactory.Activities
+
 import android.app.AlertDialog
 import android.os.Bundle
 import android.text.Editable
@@ -9,11 +10,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.widget.addTextChangedListener
 import com.example.internfactory.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+
+
 class SignIn_Fragment : Fragment() {
+
+    private lateinit var emailin: EditText
+    private lateinit var passwordin:EditText
+    private lateinit var buttonin:Button
+
+
+
     private lateinit var password_text : TextInputEditText
     private lateinit var password_cont : TextInputLayout
     private lateinit var ed1 : TextInputEditText
