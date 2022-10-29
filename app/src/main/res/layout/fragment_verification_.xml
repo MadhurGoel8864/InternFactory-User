@@ -95,7 +95,6 @@
             android:textColor="#212427"
             />
     </com.google.android.material.textfield.TextInputLayout>
-
     <Button
         android:id="@+id/button2"
         android:layout_width="330dp"
