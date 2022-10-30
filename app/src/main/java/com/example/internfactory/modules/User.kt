@@ -1,10 +1,10 @@
 package com.example.internfactory.modules
 
-import com.google.gson.annotations.SerializedName
+import retrofit2.http.Field
 
 data class User(
-    @SerializedName("firstName") var firstName : String?,
-    @SerializedName("lastName") var lastName : String?,
-    @SerializedName("email") var email : String?,
-    @SerializedName("password") var password : String?
+    @Field("firstName") var firstName : String?,
+    @Field("lastName") var lastName : String?,
+    @Field("email") var email : String?,
+    @Field("password") var password : String?
     )
