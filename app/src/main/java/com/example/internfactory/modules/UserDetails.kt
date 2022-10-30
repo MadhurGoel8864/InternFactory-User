@@ -21,7 +21,7 @@ class UserDetails(val context: Context){
         }
     }
 
-    fun getName()=context.dataStore.data.map {
+    fun getToken()=context.dataStore.data.map {
         it[TOKEN]?:""
     }
 }
