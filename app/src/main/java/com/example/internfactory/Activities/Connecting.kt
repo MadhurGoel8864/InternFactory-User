@@ -45,6 +45,10 @@ class connecting : AppCompatActivity() {
         val otpVerificationFrag = Verification_Fragment()
         replaceFrag(otpVerificationFrag,"otppage")
     }
+    fun ResetPassword(view: View){
+        val reset_pass = ResetPassword_Fragment()
+        replaceFrag(reset_pass,"reset_pass")
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

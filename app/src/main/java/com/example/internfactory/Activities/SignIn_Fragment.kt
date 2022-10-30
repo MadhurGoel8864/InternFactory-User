@@ -139,19 +139,18 @@ class SignIn_Fragment : Fragment() {
     private fun validPass(): String? {
         val pass_txt = password_text.text.toString()
         if(pass_txt.length<8){
-            Log.d("madhur","1st cont")
             return "Minimum 8 characters Required"
         }
-        if(!(pass_txt.matches(".*[A-Z]*.".toRegex()))){
+        if(!pass_txt.contains(Regex("[A-Z]"))){
             return "At least 1 UpperCase Alphabet Required"
         }
-        if(!pass_txt.matches(".*[a-z]*.".toRegex())){
+        if(!pass_txt.contains(Regex("[a-z]"))){
             return "At least 1 LowerCase Alphabet Required"
         }
-        if(!pass_txt.matches(".*[@#$%^&*+=]*.".toRegex())){
+        if(!pass_txt.contains(Regex("[@#\$%^&*+=]"))){
             return "At least 1  Special Character Required"
         }
-            return null
+        return null
     }
     private fun validemail(): String? {
         val email_text = ed1.text.toString()
