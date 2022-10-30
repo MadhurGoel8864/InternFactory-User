@@ -20,6 +20,7 @@ import com.example.internfactory.server.RetrofitApi
 import com.example.internfactory.server.ServiceBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,6 +32,7 @@ class SignIn_Fragment : Fragment() {
     private lateinit var passwordin:TextInputEditText
     private lateinit var buttonin:Button
     private lateinit var userDetails: UserDetails
+    private lateinit var apiClient:ApiClient
 
 
     private lateinit var password_text : TextInputEditText
@@ -42,83 +44,56 @@ class SignIn_Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {        // Inflate the layout for this fragment
-        val view= inflater.inflate(R.layout.fragment_sign_in_, container, false)
+        val view = inflater.inflate(R.layout.fragment_sign_in_, container, false)
 
-        emailin= view.findViewById(R.id.email_inp)
-        passwordin= view.findViewById(R.id.password_input)
-        buttonin= view.findViewById(R.id.login_btn)
+        emailin = view.findViewById(R.id.email_inp)
+        passwordin = view.findViewById(R.id.password_input)
+        buttonin = view.findViewById(R.id.login_btn)
 
-        userDetails=UserDetails(view.context)
+        userDetails = UserDetails(view.context)
+        apiClient=ApiClient()
 
 
         buttonin.setOnClickListener {
 
-//            apiClient.getApiService().login(LoginRequest("bansal@gmail.com", "12345678"))
-//                .enqueue(object : Callback<LoginResponse> {
-//
-//                    override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-//                        Toast.makeText(
-//                            view.context,
-//                            "Please check your internet connection",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                        Log.i("Naman", "Please check your internet connection")
-//                    }
-//
-//                    override fun onResponse(
-//                        call: Call<LoginResponse>,
-//                        response: Response<LoginResponse>
-//                    ) {
-//                        val loginResponse = response.body()
-//
-//                        if (loginResponse?.user != null) {
-//
-//                            suspend fun storedData(name:String){
-//                                var x=userDetails.storeUserData(loginResponse.authToken.toString())
-//                                return x
-//                            }
-//                            Toast.makeText(view.context, "Hello " + "!", Toast.LENGTH_SHORT).show()
-////                        Log.i("Naman", response.body().toString())
-//                        }
-//                        if(loginResponse?.user==null){
-//                            Toast.makeText(view.context, "Invalid Email or Password", Toast.LENGTH_SHORT).show()
-//                        }
-//                    }
-//                })
-//        }
-//        return view
+            apiClient.getApiService().login(LoginRequest("bansal@gmail.com", "12345678"))
+                .enqueue(object : Callback<LoginResponse> {
 
 
-
-
-            val user= User(null,null,emailin.text.toString(),passwordin.text.toString())
-            val retrofitApi= ServiceBuilder.buildService(RetrofitApi::class.java)
-            val call=retrofitApi.sendUserData(user)
-
-
-            call.enqueue(object: Callback<User>{
-                override fun onResponse(call: Call<User>, response: Response<User>) {
-                    val login_response=response.body()
-
-                    if(login_response == null){
-                        Toast.makeText(view.context, "Invalid Email or Password", Toast.LENGTH_SHORT).show()
-                    }
-                    else{
-//                        userDetails.storeUserData(login_response.Token.toString())
-                        Toast.makeText(view.context, "Hello " + response.body()?.firstName.toString() + "!", Toast.LENGTH_SHORT).show()
-                        Log.i("Naman", response.body().toString())
-                    }
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                    Toast.makeText(
+                        view.context,
+                        "Please check your internet connection",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    Log.i("Naman", "Please check your internet connection")
                 }
 
-                override fun onFailure(call: Call<User>, t: Throwable) {
-                    Toast.makeText(view.context, "Please check your internet connection", Toast.LENGTH_SHORT).show()
-                    Log.i("Naman", "Please check your internet connection")
+                override fun onResponse(
+                    call: Call<LoginResponse>,
+                    response: Response<LoginResponse>
+                ) {
+                    val loginResponse = response.body()
+
+                    if (loginResponse?.user != null) {
+
+                        runBlocking { userDetails.storeUserData(loginResponse.authToken.toString()) }
+                        Toast.makeText(view.context, "Hello !", Toast.LENGTH_SHORT).show()
+                        Log.i("Naman", response.body().toString())
+                    }
+                    if (loginResponse?.user == null) {
+                        Toast.makeText(
+                            view.context,
+                            "Invalid Email or Password",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             })
         }
         return view
-
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         password_text = requireView().findViewById(R.id.password_input  )
