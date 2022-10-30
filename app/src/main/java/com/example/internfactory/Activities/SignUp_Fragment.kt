@@ -69,18 +69,17 @@ class SignUp_Fragment : Fragment() {
         if(pass_txt.length<8){
             return "Minimum 8 characters Required"
         }
-        if(!pass_txt.matches(".*[A-Z]*.".toRegex())){
+        if(!pass_txt.contains(Regex("[A-Z]"))){
             return "At least 1 UpperCase Alphabet Required"
         }
-        if(!pass_txt.matches(".*[a-z]*.".toRegex())){
+        if(!pass_txt.contains(Regex("[a-z]"))){
             return "At least 1 LowerCase Alphabet Required"
         }
-        if(!pass_txt.matches(".*[@#$%^&*+=]*.".toRegex())){
+        if(!pass_txt.contains(Regex("[@#\$%^&*+=]"))){
             return "At least 1  Special Character Required"
         }
         return null
     }
-
     private fun validemail(): String? {
         val email_text = email_inp.text.toString()
         if(!Patterns.EMAIL_ADDRESS.matcher(email_text).matches()){
