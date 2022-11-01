@@ -1,5 +1,6 @@
 package com.example.internfactory.server
 
+import com.example.internfactory.modules.Email
 import com.example.internfactory.modules.User
 import retrofit2.Call
 import retrofit2.Response
@@ -16,4 +17,7 @@ interface RetrofitApi {
 
     @GET("api/")
     suspend fun getDetails(): Response<User>
+
+    @POST("api/auth/forget")
+    fun forgotPassword(@Body email : Email) : Call<String>
 }
