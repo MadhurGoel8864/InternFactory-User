@@ -1,5 +1,6 @@
 package com.example.internfactory.Activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -16,11 +17,13 @@ import com.example.internfactory.modules.LoginResponse
 import com.example.internfactory.modules.User
 import com.example.internfactory.modules.UserDetails
 import com.example.internfactory.server.ApiClient
+import com.example.internfactory.server.OAuthInterceptor
 import com.example.internfactory.server.RetrofitApi
 import com.example.internfactory.server.ServiceBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.coroutines.runBlocking
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,7 +35,6 @@ class SignIn_Fragment : Fragment() {
     private lateinit var passwordin:TextInputEditText
     private lateinit var buttonin:Button
     private lateinit var userDetails: UserDetails
-    private lateinit var apiClient:ApiClient
 
 
     private lateinit var password_text : TextInputEditText
@@ -51,46 +53,47 @@ class SignIn_Fragment : Fragment() {
         buttonin = view.findViewById(R.id.login_btn)
 
         userDetails = UserDetails(view.context)
-        apiClient=ApiClient()
 
-
-        buttonin.setOnClickListener {
-
-            apiClient.getApiService().login(LoginRequest("bansal@gmail.com", "12345678"))
-                .enqueue(object : Callback<LoginResponse> {
-
-
-                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                    Toast.makeText(
-                        view.context,
-                        "Please check your internet connection",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    Log.i("Naman", "Please check your internet connection")
-                }
-
-                override fun onResponse(
-                    call: Call<LoginResponse>,
-                    response: Response<LoginResponse>
-                ) {
-                    val loginResponse = response.body()
-
-                    if (loginResponse?.user != null) {
-
-                        runBlocking { userDetails.storeUserData(loginResponse.authToken.toString()) }
-                        Toast.makeText(view.context, "Hello !", Toast.LENGTH_SHORT).show()
-                        Log.i("Naman", response.body().toString())
-                    }
-                    if (loginResponse?.user == null) {
-                        Toast.makeText(
-                            view.context,
-                            "Invalid Email or Password",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
-            })
-        }
+//
+//        buttonin.setOnClickListener {
+//
+//            val user = User(null, null, emailin.text.toString(), passwordin.text.toString())
+//            val retrofitAPI = ServiceBuilder.providesApiService()
+//            val call = retrofitAPI.login(user)
+//
+//                call.enqueue(object : Callback<User> {
+//
+//
+//                override fun onFailure(call: Call<User>, t: Throwable) {
+//                    Toast.makeText(
+//                        view.context,
+//                        "Please check your internet connection",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                    Log.i("Naman", "Please check your internet connection")
+//                }
+//
+//                override fun onResponse(
+//                    call: Call<User>,
+//                    response: Response<User>
+//                ) {
+//                    val loginResponse = response.body()
+//
+//                    if (loginResponse!= null) {
+//
+//                        Toast.makeText(view.context, "Hello !", Toast.LENGTH_SHORT).show()
+//                        Log.i("Naman", response.body().toString())
+//                    }
+//                    if (loginResponse == null) {
+//                        Toast.makeText(
+//                            view.context,
+//                            "Invalid Email or Password !!"+response.body()?.toString(),
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                    }
+//                }
+//            })
+//        }
         return view
     }
 
