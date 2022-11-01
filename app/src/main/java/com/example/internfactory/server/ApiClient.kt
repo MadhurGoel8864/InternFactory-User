@@ -11,7 +11,7 @@ class ApiClient {
         // Initialize ApiService if not initialized yet
         if (!::apiService.isInitialized) {
             val retrofit = Retrofit.Builder()
-                .baseUrl("https://e03f-223-233-74-91.in.ngrok.io")
+                .baseUrl(" https://99a1-223-233-74-91.in.ngrok.io")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
