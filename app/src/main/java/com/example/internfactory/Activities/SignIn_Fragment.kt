@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.example.internfactory.R
+import com.example.internfactory.main_screen
 import com.example.internfactory.modules.LoginRequest
 import com.example.internfactory.modules.LoginResponse
 import com.example.internfactory.modules.User
@@ -54,7 +55,11 @@ class SignIn_Fragment : Fragment() {
 
         userDetails = UserDetails(view.context)
 
-//
+        buttonin.setOnClickListener{
+            main_screen()
+        }
+
+
 //        buttonin.setOnClickListener {
 //
 //            val user = User(null, null, emailin.text.toString(), passwordin.text.toString())
