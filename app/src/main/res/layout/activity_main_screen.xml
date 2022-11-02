@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:background="#e2ebf8"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".Activities.main_screen">
 
 
@@ -52,6 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/rectangle_1" />
 
     <TextView
+        android:id="@+id/trending_seeall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="See all"
@@ -87,15 +93,101 @@
         app:layout_constraintTop_toBottomOf="@+id/viewpager2" />
 
     <TextView
+        android:id="@+id/categories_seall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:text="See all"
         android:textColor="#CC212427"
-        android:layout_marginTop="5dp"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/rectangle_1"
         app:layout_constraintTop_toTopOf="@+id/Categories_heading" />
 
+    <View
+        android:id="@+id/categ_item1"
+        android:layout_width="140dp"
+        android:layout_height="147dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/categ_item_code"
+        android:elevation="25dp"
+        app:layout_constraintStart_toStartOf="@+id/Categories_heading"
+        app:layout_constraintTop_toBottomOf="@+id/Categories_heading" />
 
+    <View
+        android:id="@+id/categ_item2"
+        android:layout_width="140dp"
+        android:layout_height="147dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/categ_item_code"
+        android:elevation="25dp"
+        app:layout_constraintEnd_toEndOf="@+id/categories_seall"
+        app:layout_constraintTop_toBottomOf="@+id/Categories_heading" />
+
+    <View
+        android:id="@+id/categ_item3"
+        android:layout_width="140dp"
+        android:layout_height="147dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/categ_item_code"
+        android:elevation="25dp"
+        app:layout_constraintStart_toStartOf="@+id/Categories_heading"
+        app:layout_constraintTop_toBottomOf="@+id/categ_item1" />
+
+
+    <View
+        android:id="@+id/categ_item4"
+        android:layout_width="140dp"
+        android:layout_height="147dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/categ_item_code"
+        android:elevation="25dp"
+        app:layout_constraintEnd_toEndOf="@+id/categories_seall"
+        app:layout_constraintTop_toBottomOf="@+id/categ_item2" />
+
+    <View
+        android:id="@+id/categ_item5"
+        android:layout_width="140dp"
+        android:layout_height="147dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/categ_item_code"
+        android:elevation="25dp"
+        app:layout_constraintStart_toStartOf="@+id/Categories_heading"
+        app:layout_constraintTop_toBottomOf="@+id/categ_item3" />
+
+
+    <View
+        android:id="@+id/categ_item6"
+        android:layout_width="140dp"
+        android:layout_height="147dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/categ_item_code"
+        android:elevation="25dp"
+        app:layout_constraintEnd_toEndOf="@+id/categories_seall"
+        app:layout_constraintTop_toBottomOf="@+id/categ_item4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
