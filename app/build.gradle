@@ -84,4 +84,10 @@ dependencies {
 
     //okhttp
     implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
+
+
+//  View Page
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+    // Rounded image view
+    implementation 'com.makeramen:roundedimageview:2.3.0'
 }

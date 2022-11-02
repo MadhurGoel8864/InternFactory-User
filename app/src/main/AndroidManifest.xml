@@ -15,14 +15,8 @@
         android:theme="@style/Theme.InternFactory"
         tools:targetApi="31">
         <activity
-            android:name=".MainScreen"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".main_screen"
+            android:name=".Activities.main_screen"
+
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

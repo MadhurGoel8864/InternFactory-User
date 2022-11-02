@@ -1,5 +1,6 @@
 package com.example.internfactory.Activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -22,10 +23,14 @@ class connecting : AppCompatActivity() {
         ft.commit()
     }
 
+
+
     fun signUpFrag(view: View){
         val signUpFrag = SignUp_Fragment()
         replaceFrag(signUpFrag,"signup")
     }
+
+
     fun logInFrag(view : View){
         val fm : FragmentManager = supportFragmentManager
         if(fm.backStackEntryCount>0){

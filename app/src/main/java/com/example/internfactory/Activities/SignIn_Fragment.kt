@@ -1,33 +1,18 @@
 package com.example.internfactory.Activities
 
-import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import com.example.internfactory.R
-import com.example.internfactory.main_screen
-import com.example.internfactory.modules.LoginRequest
-import com.example.internfactory.modules.LoginResponse
-import com.example.internfactory.modules.User
 import com.example.internfactory.modules.UserDetails
-import com.example.internfactory.server.ApiClient
-import com.example.internfactory.server.OAuthInterceptor
-import com.example.internfactory.server.RetrofitApi
-import com.example.internfactory.server.ServiceBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import kotlinx.coroutines.runBlocking
-import okhttp3.OkHttpClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class SignIn_Fragment : Fragment() {
@@ -54,10 +39,6 @@ class SignIn_Fragment : Fragment() {
         buttonin = view.findViewById(R.id.login_btn)
 
         userDetails = UserDetails(view.context)
-
-        buttonin.setOnClickListener{
-            main_screen()
-        }
 
 
 //        buttonin.setOnClickListener {
@@ -109,6 +90,14 @@ class SignIn_Fragment : Fragment() {
         login_btn = requireView().findViewById(R.id.login_btn)
         email_cont = requireView().findViewById(R.id.ed1)
         password_cont = requireView().findViewById(R.id.password_inp)
+
+
+        login_btn.setOnClickListener{
+            activity?.let {
+                val intent = Intent(it,main_screen::class.java)
+                it.startActivity(intent)
+            }
+        }
 
         ed1.addTextChangedListener{
             email_cont.helperText = validemail()
