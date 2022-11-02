@@ -4,7 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import com.example.internfactory.Activities.Home_page
+import com.example.internfactory.Activities.Categories_SeeAll
 import com.example.internfactory.Activities.main_screen
 
 class MainActivity : Activity() {

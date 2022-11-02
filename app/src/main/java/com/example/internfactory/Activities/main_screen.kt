@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -18,13 +19,25 @@ class main_screen : Activity() {
     lateinit var viewpager2 : ViewPager2
     lateinit var handler: Handler
     lateinit var imageList: ArrayList<Int>
-
+    lateinit var categ_seeall_btn: TextView
+    lateinit var trending_seeall_btn: TextView
 
     lateinit var adapter: ImageAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_screen)
+
+        categ_seeall_btn = findViewById(R.id.categories_seall)
+        categ_seeall_btn.setOnClickListener{
+            val intent = Intent(this,Categories_SeeAll::class.java)
+            startActivity(intent)
+        }
+        trending_seeall_btn = findViewById(R.id.trending_seeall)
+        trending_seeall_btn.setOnClickListener{
+            val intent = Intent(this,Trending_SeeAll::class.java)
+            startActivity(intent)
+        }
 
         init()
         setUptransformer()
@@ -37,7 +50,6 @@ class main_screen : Activity() {
             }
         })
     }
-
     override fun onPause() {
         super.onPause()
         handler.removeCallbacks(runnable)
