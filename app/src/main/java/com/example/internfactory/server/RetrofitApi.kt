@@ -15,9 +15,6 @@ interface RetrofitApi {
     @POST("api/auth/signup")
     fun signIn(@Body userSend: User) : Call<String>
 
-    @GET("api/")
-    suspend fun getDetails(): Response<User>
-
     @POST("api/auth/forget")
     fun forgotPassword(@Body email : Email) : Call<String>
 }
