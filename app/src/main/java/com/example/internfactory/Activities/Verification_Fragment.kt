@@ -44,8 +44,5 @@ private lateinit var otp_btn : Button
                 }
             }
         })
-
-
-
     }
 }

@@ -4,15 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
-import android.widget.Toast
 import com.example.internfactory.Activities.Home_page
-import com.example.internfactory.modules.User
-import com.example.internfactory.server.RetrofitApi
-import com.example.internfactory.server.ServiceBuilder
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.internfactory.Activities.main_screen
 
 class MainActivity : Activity() {
 
