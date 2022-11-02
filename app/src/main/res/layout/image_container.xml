@@ -12,7 +12,6 @@
         android:layout_height="match_parent"
         android:scaleType="fitXY"
         android:src="@drawable/img6"
-        android:adjustViewBounds="true"
         android:id="@+id/imageView"
         />
     

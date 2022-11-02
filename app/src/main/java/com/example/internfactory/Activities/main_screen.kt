@@ -34,7 +34,6 @@ class main_screen : Activity() {
                 super.onPageSelected(position)
                 handler.removeCallbacks(runnable)
                 handler.postDelayed(runnable,2000)
-
             }
         })
     }
@@ -59,7 +58,7 @@ class main_screen : Activity() {
         transformer.addTransformer(MarginPageTransformer(40))
         transformer.addTransformer { page, position ->
             val r = 1 - abs(position)
-            page.scaleY = 0.85f + r + 0.14f
+            page.scaleY = 0.85f + r * 0.14f
         }
         viewpager2.setPageTransformer(transformer)
     }
@@ -86,21 +85,5 @@ class main_screen : Activity() {
     }
 
 
-
-
-//        var list = mutableListOf<Int>()
-//
-//        list.add(R.drawable.img7)
-//        list.add(R.drawable.img10)
-//        list.add(R.drawable.img11)
-//        list.add(R.drawable.img12)
-//
-//
-//
-//        adapters = main_page_Carousel_adapter(this)
-//        adapters.setContentList(list)
-//
-//        abc = findViewById(R.id.carousel_pageview)
-//        abc.adapter = adapters
 
 }
