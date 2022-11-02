@@ -98,7 +98,7 @@ class SignUp_Fragment : Fragment() {
                 }
             }
             else{
-                Toast.makeText(view.context, "Enter a valid first name", Toast.LENGTH_SHORT).show()
+                Toast.makeText(view.context, "Enter valid first name", Toast.LENGTH_SHORT).show()
             }
         }
         return view

@@ -42,9 +42,6 @@ class ForgotPassword_Fragment : Fragment() {
             call.enqueue(object: Callback<String>{
                 override fun onResponse(call: Call<String>, response: Response<String>){
                     Toast.makeText(view.context, response.body().toString(), Toast.LENGTH_LONG).show()
-                    if(response.body().toString() == "OTP"){
-
-                    }
 
                 }
                 override fun onFailure(call: Call<String>, t:Throwable){
