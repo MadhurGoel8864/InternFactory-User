@@ -46,10 +46,10 @@ class connecting : AppCompatActivity() {
         replaceFrag(forgotPasswordFrag,"forgotpass")
     }
 
-    fun otpVerificationFrag(view : View){
-        val otpVerificationFrag = Verification_Fragment()
-        replaceFrag(otpVerificationFrag,"otppage")
-    }
+        fun otpVerificationFrag(view : View){
+            val otpVerificationFrag = Verification_Fragment()
+            replaceFrag(otpVerificationFrag,"otppage")
+        }
     fun ResetPassword(view: View){
         val reset_pass = ResetPassword_Fragment()
         replaceFrag(reset_pass,"reset_pass")
