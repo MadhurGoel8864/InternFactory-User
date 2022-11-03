@@ -70,6 +70,7 @@ class SignIn_Fragment : Fragment() {
                     }
                     else{
                         android.widget.Toast.makeText(view.context, "NULL", android.widget.Toast.LENGTH_SHORT).show()
+
                     }
                 }
 

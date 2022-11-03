@@ -5,8 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import com.example.internfactory.Activities.Auth.Home_page
-import com.example.internfactory.Activities.Categories_SeeAll
-import com.example.internfactory.Activities.main_screen
 
 class MainActivity : Activity() {
 
@@ -14,7 +12,7 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
         Handler().postDelayed({
-            val Intent = Intent(this@MainActivity, main_screen::class.java)
+            val Intent = Intent(this@MainActivity, activity_Dashboard::class.java)
             startActivity(Intent)
             finish()
         }, 3000)
