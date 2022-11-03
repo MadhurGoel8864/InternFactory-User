@@ -22,6 +22,11 @@ class activity_Dashboard : AppCompatActivity() {
         replaceFrag(trendingFrag,"trending")
     }
 
+    fun categoryFrag(view : View){
+        val categoryFrag = CategoriesSeeAll()
+        replaceFrag(categoryFrag,"category")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
