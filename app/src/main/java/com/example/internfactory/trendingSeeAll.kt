@@ -23,7 +23,7 @@ class trendingSeeAll : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_trending_see_all, container, false)
-        imageId = arrayOf(R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6)
+        imageId = arrayOf(R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo)
 
         newRecyclerView = view.findViewById(R.id.recyclerview)
 

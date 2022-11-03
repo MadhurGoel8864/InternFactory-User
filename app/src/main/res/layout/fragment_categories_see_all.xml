@@ -56,16 +56,18 @@
                 app:layout_constraintBottom_toTopOf="@+id/head1"
                 app:layout_constraintStart_toStartOf="@+id/categ_item1"
                 app:layout_constraintTop_toTopOf="@+id/categ_item1" />
+
             <TextView
                 android:id="@+id/head1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:elevation="200dp"
                 android:fontFamily="@font/montserrat_semibold"
                 android:text="Web Development"
-                android:textSize="14sp"
-                android:elevation="200dp"
                 android:textColor="#000000"
+                android:textSize="14sp"
 
+                app:layout_constraintBottom_toBottomOf="@+id/categ_item1"
                 app:layout_constraintEnd_toEndOf="@+id/categ_item1"
                 app:layout_constraintStart_toStartOf="@+id/categ_item1"
                 app:layout_constraintTop_toBottomOf="@+id/imageView1" />
@@ -94,15 +96,17 @@
                 app:layout_constraintBottom_toTopOf="@+id/head2"
                 app:layout_constraintStart_toStartOf="@+id/categ_item2"
                 app:layout_constraintTop_toTopOf="@+id/categ_item2" />
+
             <TextView
                 android:id="@+id/head2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:elevation="200dp"
                 android:fontFamily="@font/montserrat_semibold"
                 android:text="App Development"
-                android:textSize="14sp"
-                android:elevation="200dp"
                 android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/categ_item2"
                 app:layout_constraintEnd_toEndOf="@+id/categ_item2"
                 app:layout_constraintStart_toStartOf="@+id/categ_item2"
                 app:layout_constraintTop_toBottomOf="@+id/imageView2" />
@@ -141,6 +145,7 @@
                 android:textSize="14sp"
                 android:elevation="200dp"
                 android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/categ_item3"
                 app:layout_constraintEnd_toEndOf="@+id/categ_item3"
                 app:layout_constraintStart_toStartOf="@+id/categ_item3"
                 app:layout_constraintTop_toBottomOf="@+id/imageView3" />
@@ -176,6 +181,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_semibold"
                 android:text="Machine Learning"
+                app:layout_constraintBottom_toBottomOf="@id/categ_item4"
                 android:textSize="14sp"
                 android:elevation="200dp"
                 android:textColor="#000000"
@@ -217,6 +223,8 @@
                 android:textSize="14sp"
                 android:elevation="200dp"
                 android:textColor="#000000"
+                app:layout_constraintBottom_toBottomOf="@id/categ_item5"
+
                 app:layout_constraintEnd_toEndOf="@+id/categ_item5"
                 app:layout_constraintStart_toStartOf="@+id/categ_item5"
                 app:layout_constraintTop_toBottomOf="@+id/imageView5" />
@@ -231,6 +239,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="30dp"
+
                 android:background="@drawable/categ_item_code"
                 android:elevation="25dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -251,6 +260,7 @@
                 android:id="@+id/head6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/categ_item6"
                 android:fontFamily="@font/montserrat_semibold"
                 android:text="Content Writing"
                 android:textSize="14sp"
@@ -296,6 +306,7 @@
                 android:text="Ethical Hacking"
                 android:textSize="14sp"
                 android:elevation="200dp"
+                app:layout_constraintBottom_toBottomOf="@id/categ_item7"
                 android:textColor="#000000"
                 app:layout_constraintEnd_toEndOf="@+id/categ_item7"
                 app:layout_constraintStart_toStartOf="@+id/categ_item7"
@@ -332,6 +343,7 @@
             <TextView
                 android:id="@+id/head8"
                 android:layout_width="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/categ_item8"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_semibold"
                 android:text="Backend Developer"
@@ -341,8 +353,6 @@
                 app:layout_constraintEnd_toEndOf="@+id/categ_item8"
                 app:layout_constraintStart_toStartOf="@+id/categ_item8"
                 app:layout_constraintTop_toBottomOf="@+id/imageView8" />
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
