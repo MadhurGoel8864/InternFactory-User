@@ -12,7 +12,9 @@ import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import com.example.internfactory.Activities.Adapters.ImageAdapter
 import com.example.internfactory.R
+import com.example.internfactory.activity_Dashboard
 import kotlin.math.abs
 
 class main_screen : Activity() {
@@ -30,12 +32,12 @@ class main_screen : Activity() {
 
         categ_seeall_btn = findViewById(R.id.categories_seall)
         categ_seeall_btn.setOnClickListener{
-            val intent = Intent(this,Categories_SeeAll::class.java)
+            val intent = Intent(this,activity_Dashboard::class.java)
             startActivity(intent)
         }
         trending_seeall_btn = findViewById(R.id.trending_seeall)
         trending_seeall_btn.setOnClickListener{
-            val intent = Intent(this,Trending_SeeAll::class.java)
+            val intent = Intent(this,activity_Dashboard::class.java)
             startActivity(intent)
         }
 
@@ -96,6 +98,8 @@ class main_screen : Activity() {
 
     }
 
-
-
+    fun Dashboardconnect(view : View){
+        val intent=Intent(this, activity_Dashboard::class.java)
+        startActivity(intent)
+    }
 }

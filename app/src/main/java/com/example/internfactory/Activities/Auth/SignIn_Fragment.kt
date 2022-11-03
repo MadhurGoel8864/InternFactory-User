@@ -1,6 +1,5 @@
-package com.example.internfactory.Activities
+package com.example.internfactory.Activities.Auth
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns

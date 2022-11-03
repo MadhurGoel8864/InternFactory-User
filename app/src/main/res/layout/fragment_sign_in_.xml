@@ -11,7 +11,7 @@ android:layout_width="match_parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#e2ebf8"
-    tools:context=".Activities.SignIn_Fragment">
+    tools:context=".Activities.Auth.SignIn_Fragment">
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="184dp"

@@ -1,9 +1,10 @@
-package com.example.internfactory.Activities
+package com.example.internfactory.Activities.Auth
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import com.example.internfactory.Activities.connecting
 import com.example.internfactory.R
 
 class Home_page : Activity() {

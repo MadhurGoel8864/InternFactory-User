@@ -1,8 +1,6 @@
-package com.example.internfactory.Activities
+package com.example.internfactory.Activities.Auth
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns
 import androidx.fragment.app.Fragment
