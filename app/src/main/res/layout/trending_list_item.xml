@@ -10,7 +10,6 @@
         android:paddingStart="30dp"
         android:paddingEnd="30dp"
         android:id="@+id/img"
-        android:src="@drawable/img10"
         android:scaleType="centerCrop"
         app:shapeAppearanceOverlay="@style/RoundCorners"
         app:layout_constraintEnd_toEndOf="parent"

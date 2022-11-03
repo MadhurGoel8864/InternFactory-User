@@ -16,10 +16,10 @@
 >
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="107dp"
-        android:layout_height="107dp"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
         android:layout_marginTop="60dp"
-        android:src="@drawable/logo_interfactory"
+        android:src="@drawable/profile_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

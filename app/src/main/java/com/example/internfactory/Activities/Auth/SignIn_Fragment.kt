@@ -57,59 +57,42 @@ class SignIn_Fragment : Fragment() {
         userDetails = UserDetails(view.context)
 
 
-        buttonin.setOnClickListener {
+//        buttonin.setOnClickListener {
 
-            val user = User(null, null, emailin.text.toString(), passwordin.text.toString())
-            val retrofitAPI = ServiceBuilder.buildService(RetrofitApi::class.java)
-            val call = retrofitAPI.login(user)
-
-            call.enqueue(object: Callback<LoginResponse> {
-                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                    if (response.code()==200){
-                        Toast.makeText(view.context, response.body()?.toString(), Toast.LENGTH_SHORT).show()
-                        runBlocking { UserDetails(view.context).storeUserData(response.body()?.authToken.toString()) }
-                        Log.i("Naman", response.body()?.authToken.toString())
-                    }
-                    else{
-                        Toast.makeText(view.context, response.code().toString(), Toast.LENGTH_SHORT).show()
-
-                    }
-                }
-
-                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                    Toast.makeText(view.context, "Please check your internet connection", Toast.LENGTH_SHORT).show()
-                    Log.i("Naman", "Please check your internet connection")
-                }
-            })
-        }
+//        }
         return view
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         password_text = requireView().findViewById(R.id.password_input  )
         ed1 = requireView().findViewById(R.id.email_inp)
         login_btn = requireView().findViewById(R.id.login_btn)
         email_cont = requireView().findViewById(R.id.ed1)
         password_cont = requireView().findViewById(R.id.password_inp)
 
-
-//        login_btn.setOnClickListener{
-//            activity?.let {
-//                val intent = Intent(it,main_screen::class.java)
-//                it.startActivity(intent)
-//            }
+//        ed1.addTextChangedListener{
+//            email_cont.helperText = validemail()
+//            login_btn.isEnabled = (email_cont.helperText == null) and (password_cont.helperText == null)
 //        }
+//        password_text.addTextChangedListener{
+//            password_cont.helperText = validPass()
+//            login_btn.isEnabled = (email_cont.helperText == null) and (password_cont.helperText == null)
+//        }
+//    }
 
-        ed1.addTextChangedListener{
+        login_btn.setOnClickListener{
+
             email_cont.helperText = validemail()
-            login_btn.isEnabled = (email_cont.helperText == null) and (password_cont.helperText == null)
-        }
-        password_text.addTextChangedListener{
             password_cont.helperText = validPass()
-            login_btn.isEnabled = (email_cont.helperText == null) and (password_cont.helperText == null)
+
+            if(email_cont.helperText == null && password_cont.helperText == null){
+                apicalling()
+            }
         }
-    }
+        }
+
     private fun validPass(): String? {
         val pass_txt = password_text.text.toString()
         if(pass_txt.length<8){
@@ -146,4 +129,34 @@ class SignIn_Fragment : Fragment() {
         val otpVerificationFrag = Verification_Fragment()
         replaceFrag(otpVerificationFrag,"otppage")
     }
+
+    fun apicalling() {
+        val user = User(null, null, emailin.text.toString(), passwordin.text.toString())
+        val retrofitAPI = ServiceBuilder.buildService(RetrofitApi::class.java)
+        val call = retrofitAPI.login(user)
+
+        call.enqueue(object : Callback<LoginResponse> {
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                if (response.code() == 200) {
+                    Toast.makeText(view?.context, response.body()?.toString(), Toast.LENGTH_SHORT).show()
+                    runBlocking { view?.let { UserDetails(it.context).storeUserData(response.body()?.authToken.toString()) } }
+                    Log.i("Naman", response.code().toString().toString())
+                } else {
+                    Toast.makeText(view?.context, response.code().toString(), Toast.LENGTH_SHORT).show()
+
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                Toast.makeText(
+                    view?.context,
+                    "Please check your internet connection",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.i("Naman", "Please check your internet connection")
+            }
+        })
+    }
+
+
 }
