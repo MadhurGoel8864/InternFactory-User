@@ -7,7 +7,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.create
 
 object ServiceBuilder {
-    private const val URL = "https://internfactory.herokuapp.com/"
+    private const val URL = "https://internfactory.herokuapp.com"
 
     private val okHttp = OkHttpClient.Builder()
 

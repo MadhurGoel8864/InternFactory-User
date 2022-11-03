@@ -13,7 +13,7 @@ class UserDetails(val context: Context){
     val Context.dataStore:DataStore<Preferences> by preferencesDataStore("pref")
 
     companion object{
-        val TOKEN= stringPreferencesKey("Token")
+        val TOKEN= stringPreferencesKey("token")
     }
 
     suspend fun storeUserData(name:String){

@@ -13,12 +13,14 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.internfactory.R
+import com.example.internfactory.modules.LoginResponse
 import com.example.internfactory.modules.User
 import com.example.internfactory.modules.UserDetails
 import com.example.internfactory.server.RetrofitApi
 import com.example.internfactory.server.ServiceBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -61,20 +63,20 @@ class SignIn_Fragment : Fragment() {
             val retrofitAPI = ServiceBuilder.buildService(RetrofitApi::class.java)
             val call = retrofitAPI.login(user)
 
-            call.enqueue(object: Callback<User> {
-                override fun onResponse(call: Call<User>, response: Response<User>) {
-                    if (response.isSuccessful && response.body()!=null){
+            call.enqueue(object: Callback<LoginResponse> {
+                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                    if (response.code()==200){
                         Toast.makeText(view.context, response.body()?.toString(), Toast.LENGTH_SHORT).show()
-                        otpVerificationFrag()
-                        Log.i("Naman", response.body().toString())
+                        runBlocking { UserDetails(view.context).storeUserData(response.body()?.authToken.toString()) }
+                        Log.i("Naman", response.body()?.authToken.toString())
                     }
                     else{
-                        android.widget.Toast.makeText(view.context, "NULL", android.widget.Toast.LENGTH_SHORT).show()
+                        Toast.makeText(view.context, response.code().toString(), Toast.LENGTH_SHORT).show()
 
                     }
                 }
 
-                override fun onFailure(call: Call<User>, t: Throwable) {
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     Toast.makeText(view.context, "Please check your internet connection", Toast.LENGTH_SHORT).show()
                     Log.i("Naman", "Please check your internet connection")
                 }

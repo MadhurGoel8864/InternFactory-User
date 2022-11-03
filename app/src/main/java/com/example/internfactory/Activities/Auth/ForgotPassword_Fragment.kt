@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.internfactory.R
 import com.example.internfactory.modules.Email
+import com.example.internfactory.modules.User
 import com.example.internfactory.server.RetrofitApi
 import com.example.internfactory.server.ServiceBuilder
 import com.google.android.material.textfield.TextInputEditText
@@ -45,13 +46,13 @@ class ForgotPassword_Fragment : Fragment() {
 
             call.enqueue(object: Callback<String>{
                 override fun onResponse(call: Call<String>, response: Response<String>){
-                    if (response.isSuccessful && response.body()!=null){
+                    if (response.code()==200){
                         Toast.makeText(view.context, response.body()?.toString(), Toast.LENGTH_SHORT).show()
                         otpVerificationFrag()
                         Log.i("Naman", response.body().toString())
                     }
                     else{
-                        android.widget.Toast.makeText(view.context, "NULL", android.widget.Toast.LENGTH_SHORT).show()
+                        android.widget.Toast.makeText(view.context, response.code().toString(), android.widget.Toast.LENGTH_SHORT).show()
                     }
                 }
                 override fun onFailure(call: Call<String>, t:Throwable){
