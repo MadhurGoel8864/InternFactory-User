@@ -27,12 +27,17 @@ class activity_Dashboard : AppCompatActivity() {
         replaceFrag(categoryFrag,"category")
     }
 
+    fun dashboardFrag(view : View){
+        val dashboardFrag = DashBoard_Fragment()
+        replaceFrag(dashboardFrag,"mainScreen")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
         val fm : FragmentManager = supportFragmentManager
         val ft : FragmentTransaction = fm.beginTransaction()
-        val logInFragment = trendingSeeAll()
+        val logInFragment = DashBoard_Fragment()
         ft.add(R.id.dashboard, logInFragment)
         ft.commit()
 

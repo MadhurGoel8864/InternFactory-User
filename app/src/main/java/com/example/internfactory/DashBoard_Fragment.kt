@@ -1,23 +1,24 @@
-package com.example.internfactory.Activities
+package com.example.internfactory
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
-import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.internfactory.Activities.Adapters.ImageAdapter
-import com.example.internfactory.R
-import com.example.internfactory.activity_Dashboard
+import java.util.Locale.Category
 import kotlin.math.abs
 
-class main_screen : Activity() {
+class DashBoard_Fragment : Fragment() {
+
     lateinit var viewpager2 : ViewPager2
     lateinit var handler: Handler
     lateinit var imageList: ArrayList<Int>
@@ -26,31 +27,36 @@ class main_screen : Activity() {
 
     lateinit var adapter: ImageAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_screen)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        val view= inflater.inflate(R.layout.fragment_dash_board_, container, false)
 
-        categ_seeall_btn = findViewById(R.id.categories_seall)
-        categ_seeall_btn.setOnClickListener{
-            val intent = Intent(this,activity_Dashboard::class.java)
-            startActivity(intent)
-        }
-        trending_seeall_btn = findViewById(R.id.trending_seeall)
-        trending_seeall_btn.setOnClickListener{
-            val intent = Intent(this,activity_Dashboard::class.java)
-            startActivity(intent)
-        }
+//        categ_seeall_btn = view.findViewById(R.id.categories_seall)
+//        categ_seeall_btn.setOnClickListener{
+//            val intent = Intent(view.context,trendingSeeAll::class.java)
+//            startActivity(intent)
+//        }
+//        trending_seeall_btn = view.findViewById(R.id.trending_seeall)
+//        trending_seeall_btn.setOnClickListener{
+//            val intent = Intent(view.context,CategoriesSeeAll::class.java)
+//            startActivity(intent)
+//        }
 
-        init()
+        init(view)
         setUptransformer()
 
-        viewpager2.registerOnPageChangeCallback(object : OnPageChangeCallback(){
+        viewpager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 handler.removeCallbacks(runnable)
                 handler.postDelayed(runnable,2000)
             }
         })
+        return view
+
     }
     override fun onPause() {
         super.onPause()
@@ -77,8 +83,8 @@ class main_screen : Activity() {
         viewpager2.setPageTransformer(transformer)
     }
 
-    private fun init(){
-        viewpager2 = findViewById(R.id.viewpager2)
+    private fun init(view: View){
+        viewpager2 = view.findViewById(R.id.viewpager2)
         handler = Handler(Looper.myLooper()!!)
         imageList = ArrayList()
 
@@ -95,11 +101,10 @@ class main_screen : Activity() {
         viewpager2.clipChildren = false
         viewpager2.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
 
-
     }
 
     fun Dashboardconnect(view : View){
-        val intent=Intent(this, activity_Dashboard::class.java)
+        val intent= Intent(view.context, activity_Dashboard::class.java)
         startActivity(intent)
     }
-}
+    }
