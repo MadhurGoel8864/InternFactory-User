@@ -82,11 +82,11 @@ class main_screen : Activity() {
         handler = Handler(Looper.myLooper()!!)
         imageList = ArrayList()
 
-        imageList.add(R.drawable.img10)
-        imageList.add(R.drawable.img11)
-        imageList.add(R.drawable.img12)
-        imageList.add(R.drawable.img6)
-        imageList.add(R.drawable.img8)
+        imageList.add(R.drawable.t_logo)
+        imageList.add(R.drawable.t_logo)
+        imageList.add(R.drawable.t_logo)
+        imageList.add(R.drawable.t_logo)
+
 
         adapter = ImageAdapter(imageList,viewpager2)
         viewpager2.adapter = adapter
