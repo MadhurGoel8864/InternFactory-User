@@ -3,6 +3,7 @@ package com.example.internfactory.Activities
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.internfactory.R
 import com.example.internfactory.modules.Email
 import com.example.internfactory.server.RetrofitApi
@@ -33,6 +36,10 @@ class ForgotPassword_Fragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view : View =  inflater.inflate(R.layout.fragment_forgot_password_, container, false)
+
+        val fm : FragmentManager = parentFragmentManager
+        val ft : FragmentTransaction = fm.beginTransaction()
+
         otpBtn = view.findViewById(R.id.otp_btn)
         otpBtn.setOnClickListener{
             val email = Email(email_inp.text.toString())
@@ -41,8 +48,14 @@ class ForgotPassword_Fragment : Fragment() {
 
             call.enqueue(object: Callback<String>{
                 override fun onResponse(call: Call<String>, response: Response<String>){
-                    Toast.makeText(view.context, response.body().toString(), Toast.LENGTH_LONG).show()
-
+                    if (response.isSuccessful && response.body()!=null){
+                        Toast.makeText(view.context, response.body()?.toString(), Toast.LENGTH_SHORT).show()
+                        otpVerificationFrag()
+                        Log.i("Naman", response.body().toString())
+                    }
+                    else{
+                        android.widget.Toast.makeText(view.context, "NULL", android.widget.Toast.LENGTH_SHORT).show()
+                    }
                 }
                 override fun onFailure(call: Call<String>, t:Throwable){
                     Toast.makeText(view.context, "Failed", Toast.LENGTH_LONG).show()
@@ -68,6 +81,19 @@ class ForgotPassword_Fragment : Fragment() {
             return "Invalid Email Address "
         }
         return null
+    }
+
+    private fun replaceFrag(fragment : Fragment,name: String){
+        val fm : FragmentManager = parentFragmentManager
+        val ft : FragmentTransaction = fm.beginTransaction()
+        ft.addToBackStack(name)
+        ft.add(R.id.container, fragment)
+        ft.commit()
+    }
+
+    fun otpVerificationFrag(){
+        val otpVerificationFrag = Verification_Fragment()
+        replaceFrag(otpVerificationFrag,"otppage")
     }
 }
 

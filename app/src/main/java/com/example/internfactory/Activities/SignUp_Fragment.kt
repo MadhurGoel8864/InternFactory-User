@@ -12,6 +12,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.internfactory.R
 import com.example.internfactory.modules.User
 import com.example.internfactory.server.RetrofitApi
@@ -43,6 +45,9 @@ class SignUp_Fragment : Fragment() {
     ): View? {
         val view: View= inflater.inflate(R.layout.fragment_sign_up_, container, false)
 
+        val fm : FragmentManager = parentFragmentManager
+        val ft : FragmentTransaction = fm.beginTransaction()
+
         firstname_inp=view.findViewById(R.id.first_name_inp)
         lastname_inp=view.findViewById(R.id.last_name_inp)
         email_inp = view.findViewById(R.id.email_inp)
@@ -72,6 +77,7 @@ class SignUp_Fragment : Fragment() {
                                 override fun onResponse(call: Call<String>, response: Response<String>) {
                                     if (response.isSuccessful && response.body()!=null){
                                         Toast.makeText(view.context, response.body()?.toString(), Toast.LENGTH_SHORT).show()
+                                        otpVerificationFrag()
                                         Log.i("Naman", response.body().toString())
                                     }
                                     else{
@@ -223,5 +229,18 @@ class SignUp_Fragment : Fragment() {
         val indexOfAt = email.indexOf('@')
         val indexOfDot = email.lastIndexOf('.')
         return indexOfDot != -1 && indexOfAt != -1 && indexOfDot > indexOfAt
+    }
+
+    private fun replaceFrag(fragment : Fragment,name: String){
+        val fm : FragmentManager = parentFragmentManager
+        val ft : FragmentTransaction = fm.beginTransaction()
+        ft.addToBackStack(name)
+        ft.add(R.id.container, fragment)
+        ft.commit()
+    }
+
+    fun otpVerificationFrag(){
+        val otpVerificationFrag = Verification_Fragment()
+        replaceFrag(otpVerificationFrag,"otppage")
     }
 }
