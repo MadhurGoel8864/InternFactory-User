@@ -1,4 +1,4 @@
-package com.example.internfactory.Activities
+package com.example.internfactory.Activities.Adapters
 
 import android.view.LayoutInflater
 import android.view.View

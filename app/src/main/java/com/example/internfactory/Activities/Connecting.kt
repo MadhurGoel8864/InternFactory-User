@@ -1,15 +1,14 @@
 package com.example.internfactory.Activities
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.util.Log.*
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.internfactory.*
+import com.example.internfactory.Activities.Auth.*
+import com.example.internfactory.Activities.Auth.ForgotPassword_Fragment
 
 class connecting : AppCompatActivity() {
 

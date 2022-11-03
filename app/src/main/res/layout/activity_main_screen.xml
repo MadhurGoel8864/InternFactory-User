@@ -27,18 +27,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
             android:layout_marginStart="24dp"
-            android:fontFamily="@font/dm_sans_bold"
+            android:layout_marginTop="24dp"
             android:text="Hello,"
             android:textColor="@color/white"
-            android:textSize="25sp"
-            />
+            android:textSize="25sp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:fontFamily="@font/dm_sans"
             android:text="good Morning"
             android:textColor="@color/white"
             android:textSize="21sp" />
@@ -61,6 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="See all"
+        android:onClick="Dashboardconnect"
         android:textColor="#CC212427"
         android:textSize="18sp"
     android:layout_marginTop="5dp"
@@ -98,6 +96,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="See all"
+        android:onClick="Dashboardconnect"
         android:textColor="#CC212427"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/rectangle_1"
