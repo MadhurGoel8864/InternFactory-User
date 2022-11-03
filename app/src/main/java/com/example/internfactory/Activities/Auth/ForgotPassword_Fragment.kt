@@ -68,11 +68,41 @@ class ForgotPassword_Fragment : Fragment() {
         button = requireView().findViewById(R.id.otp_btn)
         email_cont = requireView().findViewById(R.id.ed1)
         email_inp = requireView().findViewById(R.id.forgot_email_inp)
-        email_inp.addTextChangedListener {
+
+        button.setOnClickListener{
             email_cont.helperText = validEmail()
-            button.isEnabled = (email_cont.helperText == null)
+            if(email_cont.helperText == null){
+                val email = Email(email_inp.text.toString())
+                val retrofitApi = ServiceBuilder.buildService(RetrofitApi::class.java)
+                val call = retrofitApi.forgotPassword(email)
+
+                call.enqueue(object: Callback<String>{
+                    override fun onResponse(call: Call<String>, response: Response<String>){
+                        if (response.code()==200){
+                            Toast.makeText(view.context, response.body()?.toString(), Toast.LENGTH_SHORT).show()
+                            otpVerificationFrag()
+                            Log.i("Naman", response.body().toString())
+                        }
+                        else{
+                            android.widget.Toast.makeText(view.context, response.code().toString(), android.widget.Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    override fun onFailure(call: Call<String>, t:Throwable){
+                        Toast.makeText(view.context, "Failed", Toast.LENGTH_LONG).show()
+                    }
+                })
+            }
+
         }
+
+//        email_inp.addTextChangedListener {
+//            email_cont.helperText = validEmail()
+//            button.isEnabled = (email_cont.helperText == null)
+//        }
     }
+
+
+
     private fun validEmail(): String? {
         val email_text = email_inp.text.toString()
         if (!Patterns.EMAIL_ADDRESS.matcher(email_text).matches()) {
