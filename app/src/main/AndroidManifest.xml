@@ -15,6 +15,13 @@
         android:theme="@style/Theme.InternFactory"
         tools:targetApi="31">
         <activity
+            android:name=".Profile_Page"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Activities.Trending_SeeAll"
             android:exported="false">
             <meta-data
