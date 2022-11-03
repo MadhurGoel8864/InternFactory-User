@@ -18,7 +18,7 @@ class Trending_SeeAll : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trending_see_all)
 
-        imageId = arrayOf(R.drawable.img6,R.drawable.img7,R.drawable.img8,R.drawable.img9,R.drawable.img10)
+        imageId = arrayOf(R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6,R.drawable.img6)
 
         newRecyclerView = findViewById(R.id.recyclerview)
 
