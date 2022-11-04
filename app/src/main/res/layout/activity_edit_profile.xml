@@ -81,7 +81,6 @@
             android:id="@+id/first_name_inp"
             android:textCursorDrawable="@color/black"
             android:lines="1"
-            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/custom_edit_fields"
@@ -109,6 +108,7 @@
         android:layout_height="wrap_content"
         app:boxStrokeWidth="0dp"
         app:boxStrokeWidthFocused="0dp"
+        app:helperTextTextColor="#FB2A2A"
         android:layout_marginTop="10dp"
         android:hint="Singh"
         app:startIconTint="#212427"
@@ -121,7 +121,6 @@
             android:lines="1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp"
             android:background="@drawable/custom_edit_fields"
             android:inputType="text"
             android:textColor="#212427"
@@ -163,7 +162,6 @@
         android:textCursorDrawable="@color/black"
         android:lines="1"
         android:layout_width="match_parent"
-        android:padding="10dp"
         android:layout_height="match_parent"
         android:background="@drawable/custom_edit_fields"
         android:inputType="text"
@@ -202,21 +200,19 @@
             android:id="@+id/phone_no_inp"
             android:textCursorDrawable="@color/black"
             android:lines="1"
-            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/custom_edit_fields"
-            android:inputType="text"
+            android:inputType="number"
             android:textColor="#212427"
             />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/submit_bn"
         android:layout_width="330dp"
         android:layout_height="60dp"
         android:backgroundTint="@color/color"
-        android:onClick="ResetPassword"
         android:text="Continue"
         android:textAllCaps="false"
         android:layout_marginTop="10dp"
@@ -225,7 +221,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phone_no_cont" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
