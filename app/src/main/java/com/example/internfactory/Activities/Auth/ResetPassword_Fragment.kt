@@ -11,10 +11,9 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.internfactory.Activities.connecting
 import com.example.internfactory.R
-import com.example.internfactory.modules.LoginResponse
-import com.example.internfactory.modules.User
-import com.example.internfactory.modules.UserDetails
+import com.example.internfactory.modules.*
 import com.example.internfactory.server.RetrofitApi
 import com.example.internfactory.server.ServiceBuilder
 import com.google.android.material.textfield.TextInputEditText
@@ -28,6 +27,9 @@ class ResetPassword_Fragment : Fragment() {
 
     lateinit var btn:Button
 
+    val fm : FragmentManager = parentFragmentManager
+    val ft : FragmentTransaction = fm.beginTransaction()
+
     private lateinit var pass_input: TextInputEditText
     private lateinit var pass : TextInputLayout
     private lateinit var conf_pass : TextInputLayout
@@ -39,51 +41,36 @@ class ResetPassword_Fragment : Fragment() {
     ): View? {
         val view= inflater.inflate(R.layout.fragement_reset_password, container, false)
 
-        val fm : FragmentManager = parentFragmentManager
-        val ft : FragmentTransaction = fm.beginTransaction()
-
         pass_input = view.findViewById(R.id.password_form_inp)
         conf_pass_inp= view.findViewById(R.id.conf_password_form_inp)
         btn= view.findViewById(R.id.reset_btn)
 
-//        btn.setOnClickListener {
-//            val user = User(null, null, emailin.text.toString(), passwordin.text.toString())
-//            val retrofitAPI = ServiceBuilder.buildService(RetrofitApi::class.java)
-//            val call = retrofitAPI.login(user)
-//
-//            call.enqueue(object : Callback<LoginResponse> {
-//                override fun onResponse(
-//                    call: Call<LoginResponse>,
-//                    response: Response<LoginResponse>
-//                ) {
-//                    if (response.code() == 200) {
-//                        Toast.makeText(
-//                            view?.context,
-//                            response.body()?.toString(),
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                        runBlocking { view?.let { UserDetails(it.context).storeUserData(response.body()?.authToken.toString()) } }
-//                        Log.i("Naman", response.code().toString().toString())
-//                    } else {
-//                        Toast.makeText(
-//                            view?.context,
-//                            response.code().toString(),
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-//                    Toast.makeText(
-//                        view?.context,
-//                        "Please check your internet connection",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-//                    Log.i("Naman", "Please check your internet connection")
-//                }
-//            })
-//        }
+        btn.setOnClickListener {
+            val resetpass=ResetPassRequest((activity as connecting).email,pass_input.text.toString(),conf_pass_inp.text.toString())
+            val retrofitAPI = ServiceBuilder.buildService(RetrofitApi::class.java)
+            val call = retrofitAPI.resetPassRequest(resetpass)
+
+            call.enqueue(object : Callback<ResetPasswordResponse> {
+                override fun onResponse(
+                    call: Call<ResetPasswordResponse>,
+                    response: Response<ResetPasswordResponse>
+                ) {
+                    if (response.code() == 200) {
+                        Toast.makeText(view?.context, response.body()?.toString(), Toast.LENGTH_SHORT).show()
+                        logInFrag()
+                        Log.i("Naman", response.code().toString().toString())
+                    } else {
+                        Toast.makeText(view?.context, response.code().toString(), Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+
+                override fun onFailure(call: Call<ResetPasswordResponse>, t: Throwable) {
+                    Toast.makeText(view?.context, "Please check your internet connection", Toast.LENGTH_SHORT).show()
+                    Log.i("Naman", "Please check your internet connection")
+                }
+            })
+        }
 
         return view
     }
@@ -129,5 +116,16 @@ class ResetPassword_Fragment : Fragment() {
         return null
     }
 
+    private fun replaceFrag(fragment : Fragment,name: String){
+        val fm : FragmentManager =parentFragmentManager
+        val ft : FragmentTransaction = fm.beginTransaction()
+        ft.addToBackStack(name)
+        ft.add(R.id.container, fragment)
+        ft.commit()
+    }
 
+    fun logInFrag(){
+        val logInFrag = SignIn_Fragment()
+        replaceFrag(logInFrag,"signin")
+    }
 }
