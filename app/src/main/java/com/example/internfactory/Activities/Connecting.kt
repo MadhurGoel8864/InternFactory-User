@@ -13,6 +13,7 @@ import com.example.internfactory.Activities.Auth.ForgotPassword_Fragment
 class connecting : AppCompatActivity() {
 
     var count=1;
+    lateinit var email:String
 
     private fun replaceFrag(fragment : Fragment,name: String){
         val fm : FragmentManager =supportFragmentManager

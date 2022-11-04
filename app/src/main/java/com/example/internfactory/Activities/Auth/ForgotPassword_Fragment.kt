@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.internfactory.Activities.connecting
 import com.example.internfactory.R
 import com.example.internfactory.modules.Email
 import com.example.internfactory.modules.User
@@ -40,6 +41,7 @@ class ForgotPassword_Fragment : Fragment() {
 
         otpBtn = view.findViewById(R.id.otp_btn)
         otpBtn.setOnClickListener{
+            (activity as connecting).email = email_inp.text.toString()
             val email = Email(email_inp.text.toString())
             val retrofitApi = ServiceBuilder.buildService(RetrofitApi::class.java)
             val call = retrofitApi.forgotPassword(email)
