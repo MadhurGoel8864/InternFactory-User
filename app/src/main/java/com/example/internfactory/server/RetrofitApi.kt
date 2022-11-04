@@ -1,9 +1,6 @@
 package com.example.internfactory.server
 
-import com.example.internfactory.modules.Email
-import com.example.internfactory.modules.LoginResponse
-import com.example.internfactory.modules.User
-import com.example.internfactory.modules.VerifyOtp
+import com.example.internfactory.modules.*
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
@@ -22,4 +19,7 @@ interface RetrofitApi {
 
     @POST("/api/auth/verifyotp")
     fun verifyotp(@Body verifyOtp: VerifyOtp) : Call<String>
+
+    @POST("api/auth/resetpass")
+    fun resetpass(@Body resetpass: ResetPassword) : Call<String>
 }
