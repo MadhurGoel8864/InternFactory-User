@@ -20,6 +20,6 @@ interface RetrofitApi {
     @POST("/api/auth/verifyotp")
     fun verifyotp(@Body verifyOtp: VerifyOtp) : Call<String>
 
-    @POST("api/auth/resetpass")
-    fun resetpass(@Body resetpass: ResetPassword) : Call<String>
+//    @POST("api/auth/resetpass")
+//    fun resetpass(@Body resetpass: ResetPassword) : Call<String>
 }

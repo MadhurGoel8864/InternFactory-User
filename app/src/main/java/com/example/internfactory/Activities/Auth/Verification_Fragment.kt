@@ -42,6 +42,8 @@ lateinit var verifybtn: Button
         verifybtn=view.findViewById(R.id.button2)
         verifybtn.setOnClickListener {
             val verifyOtp = VerifyOtp((activity as connecting).email,otp_input.text.toString())
+            Log.d("Naman", "Hello")
+            Log.d("Naman", (activity as connecting).email)
             val retrofitApi = ServiceBuilder.buildService(RetrofitApi::class.java)
             val call = retrofitApi.verifyotp(verifyOtp)
 

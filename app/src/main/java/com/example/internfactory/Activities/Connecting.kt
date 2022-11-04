@@ -13,7 +13,7 @@ import com.example.internfactory.Activities.Auth.ForgotPassword_Fragment
 class connecting : AppCompatActivity() {
 
     var count=1;
-    lateinit var email:String
+    lateinit var email: String
 
     private fun replaceFrag(fragment : Fragment,name: String){
         val fm : FragmentManager =supportFragmentManager
@@ -58,6 +58,7 @@ class connecting : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_connecting)
+
         val fm : FragmentManager = supportFragmentManager
         val ft : FragmentTransaction = fm.beginTransaction()
         val logInFragment = SignIn_Fragment()

@@ -54,6 +54,7 @@ class SignIn_Fragment : Fragment() {
         passwordin = view.findViewById(R.id.password_input)
         buttonin = view.findViewById(R.id.login_btn)
 
+
         userDetails = UserDetails(view.context)
 
 

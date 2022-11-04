@@ -25,6 +25,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ForgotPassword_Fragment : Fragment() {
+    lateinit var email_in:TextInputEditText
     private lateinit var email_inp: TextInputEditText
     private lateinit var email_cont: TextInputLayout
     private lateinit var button: Button
@@ -39,12 +40,13 @@ class ForgotPassword_Fragment : Fragment() {
         val fm : FragmentManager = parentFragmentManager
         val ft : FragmentTransaction = fm.beginTransaction()
 
+        email_in=view.findViewById(R.id.forgot_email_inp)
         otpBtn = view.findViewById(R.id.otp_btn)
         otpBtn.setOnClickListener{
-            (activity as connecting).email = email_inp.text.toString()
-            val email = Email(email_inp.text.toString())
+            (activity as connecting).email = email_in.text.toString()
+            val emaiil = Email(email_in.text.toString())
             val retrofitApi = ServiceBuilder.buildService(RetrofitApi::class.java)
-            val call = retrofitApi.forgotPassword(email)
+            val call = retrofitApi.forgotPassword(emaiil)
 
             call.enqueue(object: Callback<String>{
                 override fun onResponse(call: Call<String>, response: Response<String>){
