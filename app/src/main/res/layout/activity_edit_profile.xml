@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e2ebf8"
+    tools:context=".activity_EditProfile">
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/profile_logo"
+        app:layout_constraintEnd_toStartOf="@+id/txtedt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtedt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="Edit Profile"
+        android:textColor="#212427"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView9"
+        app:layout_constraintTop_toTopOf="@+id/imageView9" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/edit_logo"
+        app:layout_constraintStart_toStartOf="@id/txtedt"
+        app:layout_constraintTop_toBottomOf="@+id/txtedt" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="35dp"
+        android:background="#1A212427"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="First Name"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="330dp"
+        android:id="@+id/first_name_cont"
+        app:hintTextColor="#212427"
+        android:textColorHint="#212427"
+        app:helperText="Required"
+        app:helperTextTextColor="#FB2A2A"
+        android:layout_marginHorizontal="20dp"
+        android:layout_height="wrap_content"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        android:layout_marginTop="10dp"
+        android:hint="Aman"
+        app:startIconTint="#212427"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/first_name_inp"
+            android:textCursorDrawable="@color/black"
+            android:lines="1"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/custom_edit_fields"
+            android:inputType="text"
+            android:textColor="#212427"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Last Name"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/first_name_cont"
+        app:layout_constraintTop_toBottomOf="@+id/first_name_cont" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="330dp"
+        android:id="@+id/last_name_cont"
+        app:hintTextColor="#212427"
+        android:textColorHint="#212427"
+        android:layout_marginHorizontal="20dp"
+        android:layout_height="wrap_content"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        android:layout_marginTop="10dp"
+        android:hint="Singh"
+        app:startIconTint="#212427"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/last_name_inp"
+            android:textCursorDrawable="@color/black"
+            android:lines="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:background="@drawable/custom_edit_fields"
+            android:inputType="text"
+            android:textColor="#212427"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Email ID"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/last_name_cont"
+        app:layout_constraintTop_toBottomOf="@+id/last_name_cont" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="330dp"
+        android:id="@+id/email_cont"
+        app:hintTextColor="#212427"
+        android:textColorHint="#212427"
+        android:layout_marginHorizontal="20dp"
+        app:helperText="Required"
+        app:helperTextTextColor="#FB2A2A"
+
+        android:layout_height="wrap_content"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        android:layout_marginTop="10dp"
+        android:hint="amansingh@mail.com"
+        app:startIconTint="#212427"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13">
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/email_inp"
+        android:textCursorDrawable="@color/black"
+        android:lines="1"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/custom_edit_fields"
+        android:inputType="text"
+        android:textColor="#212427"
+        />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Mobile No."
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="@+id/email_cont"
+        app:layout_constraintTop_toBottomOf="@+id/email_cont" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="330dp"
+        android:id="@+id/phone_no_cont"
+        app:hintTextColor="#212427"
+        android:textColorHint="#212427"
+        android:layout_marginHorizontal="20dp"
+        app:helperText="Required"
+        app:helperTextTextColor="#FB2A2A"
+        android:layout_height="wrap_content"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        android:layout_marginTop="10dp"
+        android:hint="11425542"
+        app:startIconTint="#212427"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phone_no_inp"
+            android:textCursorDrawable="@color/black"
+            android:lines="1"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/custom_edit_fields"
+            android:inputType="text"
+            android:textColor="#212427"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="330dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/color"
+        android:onClick="ResetPassword"
+        android:text="Continue"
+        android:textAllCaps="false"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phone_no_cont" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
