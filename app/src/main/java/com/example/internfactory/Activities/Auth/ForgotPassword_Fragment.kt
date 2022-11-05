@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.internfactory.Activities.connecting
 import com.example.internfactory.R
 import com.example.internfactory.modules.Email
+import com.example.internfactory.modules.ForgotPassResponse
 import com.example.internfactory.modules.User
 import com.example.internfactory.server.RetrofitApi
 import com.example.internfactory.server.ServiceBuilder
@@ -42,28 +43,28 @@ class ForgotPassword_Fragment : Fragment() {
 
         email_in=view.findViewById(R.id.forgot_email_inp)
         otpBtn = view.findViewById(R.id.otp_btn)
-        otpBtn.setOnClickListener{
-            (activity as connecting).email = email_in.text.toString()
-            val emaiil = Email(email_in.text.toString())
-            val retrofitApi = ServiceBuilder.buildService(RetrofitApi::class.java)
-            val call = retrofitApi.forgotPassword(emaiil)
-
-            call.enqueue(object: Callback<String>{
-                override fun onResponse(call: Call<String>, response: Response<String>){
-                    if (response.code()==200){
-                        Toast.makeText(view.context, response.body()?.toString(), Toast.LENGTH_SHORT).show()
-                        otpVerificationFrag()
-                        Log.i("Naman", response.body().toString())
-                    }
-                    else{
-                        android.widget.Toast.makeText(view.context, response.code().toString(), android.widget.Toast.LENGTH_SHORT).show()
-                    }
-                }
-                override fun onFailure(call: Call<String>, t:Throwable){
-                    Toast.makeText(view.context, "Failed", Toast.LENGTH_LONG).show()
-                }
-            })
-        }
+//        otpBtn.setOnClickListener{
+//            (activity as connecting).email = email_in.text.toString()
+//            val emaiil = Email(email_in.text.toString())
+//            val retrofitApi = ServiceBuilder.buildService(RetrofitApi::class.java)
+//            val call = retrofitApi.forgotPassword(emaiil)
+//
+//            call.enqueue(object: Callback<ForgotPassResponse>{
+//                override fun onResponse(call: Call<ForgotPassResponse>, response: Response<ForgotPassResponse>){
+//                    if (response.code()==200){
+//                        Toast.makeText(view.context, response.body()?.toString(), Toast.LENGTH_SHORT).show()
+//                        otpVerificationFrag()
+//                        Log.i("Naman", response.body().toString())
+//                    }
+//                    else{
+//                        android.widget.Toast.makeText(view.context, response.code().toString(), android.widget.Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//                override fun onFailure(call: Call<ForgotPassResponse>, t:Throwable){
+//                    Toast.makeText(view.context, "Failed", Toast.LENGTH_LONG).show()
+//                }
+//            })
+//        }
         return view
     }
 
@@ -77,21 +78,23 @@ class ForgotPassword_Fragment : Fragment() {
             email_cont.helperText = validEmail()
             if(email_cont.helperText == null){
                 val email = Email(email_inp.text.toString())
+                (activity as connecting).email=email_inp.text.toString()
                 val retrofitApi = ServiceBuilder.buildService(RetrofitApi::class.java)
                 val call = retrofitApi.forgotPassword(email)
 
-                call.enqueue(object: Callback<String>{
-                    override fun onResponse(call: Call<String>, response: Response<String>){
+                call.enqueue(object: Callback<ForgotPassResponse>{
+                    override fun onResponse(call: Call<ForgotPassResponse>, response: Response<ForgotPassResponse>){
                         if (response.code()==200){
-                            Toast.makeText(view.context, response.body()?.toString(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(view.context,(activity as connecting).email, Toast.LENGTH_SHORT).show()
                             otpVerificationFrag()
                             Log.i("Naman", response.body().toString())
                         }
                         else{
-                            android.widget.Toast.makeText(view.context, response.code().toString(), android.widget.Toast.LENGTH_SHORT).show()
+                            Toast.makeText(view.context, response.code().toString(),Toast.LENGTH_SHORT).show()
+                            Log.i("Naman", response.body().toString())
                         }
                     }
-                    override fun onFailure(call: Call<String>, t:Throwable){
+                    override fun onFailure(call: Call<ForgotPassResponse>, t:Throwable){
                         Toast.makeText(view.context, "Failed", Toast.LENGTH_LONG).show()
                     }
                 })
@@ -99,10 +102,10 @@ class ForgotPassword_Fragment : Fragment() {
 
         }
 
-//        email_inp.addTextChangedListener {
-//            email_cont.helperText = validEmail()
-//            button.isEnabled = (email_cont.helperText == null)
-//        }
+        email_inp.addTextChangedListener {
+            email_cont.helperText = validEmail()
+            button.isEnabled = (email_cont.helperText == null)
+        }
     }
 
 

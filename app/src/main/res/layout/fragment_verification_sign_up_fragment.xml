@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#e2ebf8"
+        tools:context=".Activities.Auth.Verification_Fragment">
+
+        <!-- TODO: Update blank fragment layout -->
+        <ImageView
+            android:id="@+id/veri_logo1"
+            android:layout_width="217dp"
+            android:layout_height="211dp"
+            android:layout_marginTop="65dp"
+            android:src="@drawable/verificationimage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Verification"
+            android:layout_marginTop="65dp"
+            android:textStyle="bold"
+            android:textColor="#212427"
+            android:textSize="40sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/veri_logo1" />
+
+        <TextView
+            android:id="@+id/textView7n"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter 6 digit OTP send to your Email Id"
+            android:layout_marginTop="5dp"
+            android:textColor="#212427"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewn" />
+
+        <!--    <EditText-->
+        <!--        android:id="@+id/otp_input"-->
+        <!--        android:layout_width="330dp"-->
+        <!--        android:layout_height="60dp"-->
+        <!--        android:ems="10"-->
+        <!--        android:inputType="numberPassword"-->
+        <!--        android:hint="Enter OTP"-->
+        <!--        android:textColor="@color/black"-->
+        <!--        android:paddingLeft="15dp"-->
+        <!--        android:textColorHint="#212427"-->
+        <!--        android:layout_marginTop="32dp"-->
+        <!--        android:background="@drawable/custom_sing_in"-->
+        <!--        app:layout_constraintEnd_toEndOf="parent"-->
+        <!--        app:layout_constraintStart_toStartOf="parent"-->
+        <!--        app:layout_constraintTop_toBottomOf="@+id/textView7" />-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="330dp"
+            android:id="@+id/otp_contn"
+            app:hintTextColor="#212427"
+            android:textColorHint="#212427"
+            app:helperText="Required"
+            app:helperTextTextColor="#FB2A2A"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="25dp"
+            android:hint="Enter OTP"
+            app:boxStrokeWidth="0dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="6"
+            app:boxStrokeWidthFocused="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7n">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/otp_inputn"
+                android:lines="1"
+                android:maxLength="6"
+                android:layout_width="match_parent"
+                android:textCursorDrawable="@color/black"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:background="@drawable/custom_sing_in"
+                android:textColor="#212427"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            android:id="@+id/button2n"
+            android:layout_width="330dp"
+            android:layout_height="60dp"
+            android:text="Continue"
+            android:onClick="ResetPassword"
+            android:enabled="false"
+            android:layout_marginTop="40dp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:backgroundTint="@color/color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/otp_contn" />
+
+        <TextView
+            android:id="@+id/textView8n"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="otpVerificationFrag"
+            android:text="Resend OTP"
+            android:layout_marginTop="8dp"
+            android:textColor="#212427"
+            app:layout_constraintEnd_toEndOf="@+id/otp_contn"
+            app:layout_constraintTop_toBottomOf="@+id/otp_contn" />
+
+        <LinearLayout
+            android:id="@+id/titlen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:flow_horizontalAlign="center"
+            android:layout_marginTop="70dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button2n">
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/logo_interfactory_black" />
+
+            <TextView
+                android:id="@+id/Headingn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  INTERNFACTORY"
+                android:textColor="#212427"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout></ScrollView>

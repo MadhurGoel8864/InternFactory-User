@@ -12,8 +12,9 @@ import com.example.internfactory.Activities.Auth.ForgotPassword_Fragment
 
 class connecting : AppCompatActivity() {
 
-    var count=1;
     lateinit var email: String
+    lateinit var signUpEmail:String
+    lateinit var signuppass:String
 
     private fun replaceFrag(fragment : Fragment,name: String){
         val fm : FragmentManager =supportFragmentManager
@@ -50,7 +51,13 @@ class connecting : AppCompatActivity() {
             val otpVerificationFrag = Verification_Fragment()
             replaceFrag(otpVerificationFrag,"otppage")
         }
-    fun ResetPassword(view: View){
+
+    fun signupotpVerificationFrag(view : View){
+        val signupotpVerificationFrag = Verification_signUp_fragment()
+        replaceFrag(signupotpVerificationFrag,"SignUpOtpPage")
+    }
+
+    fun reset_pass(view: View){
         val reset_pass = ResetPassword_Fragment()
         replaceFrag(reset_pass,"reset_pass")
     }

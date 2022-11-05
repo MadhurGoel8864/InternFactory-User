@@ -1,5 +1,6 @@
 package com.example.internfactory.Activities.Auth
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -13,6 +14,8 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.internfactory.R
+import com.example.internfactory.activity_Dashboard
+import com.example.internfactory.modules.LogInInfo
 import com.example.internfactory.modules.LoginResponse
 import com.example.internfactory.modules.User
 import com.example.internfactory.modules.UserDetails
@@ -20,6 +23,9 @@ import com.example.internfactory.server.RetrofitApi
 import com.example.internfactory.server.ServiceBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
@@ -89,7 +95,7 @@ class SignIn_Fragment : Fragment() {
             password_cont.helperText = validPass()
 
             if(email_cont.helperText == null && password_cont.helperText == null){
-                apicalling()
+                apicalling(view)
             }
         }
         }
@@ -131,7 +137,7 @@ class SignIn_Fragment : Fragment() {
         replaceFrag(otpVerificationFrag,"otppage")
     }
 
-    fun apicalling() {
+    fun apicalling(view: View) {
         val user = User(null, null, emailin.text.toString(), passwordin.text.toString())
         val retrofitAPI = ServiceBuilder.buildService(RetrofitApi::class.java)
         val call = retrofitAPI.login(user)
@@ -140,7 +146,19 @@ class SignIn_Fragment : Fragment() {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.code() == 200) {
                     Toast.makeText(view?.context, response.body()?.toString(), Toast.LENGTH_SHORT).show()
-                    runBlocking { view?.let { UserDetails(it.context).storeUserData(response.body()?.authToken.toString()) } }
+//                    runBlocking { view?.let { UserDetails(it.context).storeUserData(
+//                        LogInInfo(response.body()?.authToken.toString(),true)
+//                    ) } }
+
+                    GlobalScope.launch(Dispatchers.IO) {
+                        val dataStoreManage = UserDetails(view.context)
+                        dataStoreManage.storeUserData(LogInInfo(response.body()?.authToken.toString(), true))
+                    }
+
+                    requireActivity().run{
+                        startActivity(Intent(context,activity_Dashboard::class.java))
+                        finish()
+                    }
                     Log.i("Naman", response.code().toString().toString())
                 } else {
                     Toast.makeText(view?.context, response.code().toString(), Toast.LENGTH_SHORT).show()

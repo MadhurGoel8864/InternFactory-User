@@ -27,9 +27,6 @@ class ResetPassword_Fragment : Fragment() {
 
     lateinit var btn:Button
 
-    val fm : FragmentManager = parentFragmentManager
-    val ft : FragmentTransaction = fm.beginTransaction()
-
     private lateinit var pass_input: TextInputEditText
     private lateinit var pass : TextInputLayout
     private lateinit var conf_pass : TextInputLayout
@@ -44,6 +41,9 @@ class ResetPassword_Fragment : Fragment() {
         pass_input = view.findViewById(R.id.password_form_inp)
         conf_pass_inp= view.findViewById(R.id.conf_password_form_inp)
         btn= view.findViewById(R.id.reset_btn)
+
+        val fm : FragmentManager = parentFragmentManager
+        val ft : FragmentTransaction = fm.beginTransaction()
 
         btn.setOnClickListener {
             val resetpass=ResetPassRequest((activity as connecting).email,pass_input.text.toString(),conf_pass_inp.text.toString())

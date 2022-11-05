@@ -12,13 +12,13 @@ interface RetrofitApi {
     fun login(@Body userSend: User) : Call<LoginResponse>
 
     @POST("/api/auth/signup")
-    fun signIn(@Body userSend: User) : Call<String>
+    fun signIn(@Body userSend: User) : Call<SignUpResponse>
 
     @POST("/api/auth/forget")
-    fun forgotPassword(@Body email : Email) : Call<String>
+    fun forgotPassword(@Body email : Email) : Call<ForgotPassResponse>
 
     @POST("/api/auth/verifyotp")
-    fun verifyotp(@Body verifyOtp: VerifyOtp) : Call<String>
+    fun verifyotp(@Body verifyOtp: VerifyOtp) : Call<VerifyOtpResponse>
 
     @POST("api/auth/resetpass")
     fun resetPassRequest(@Body resetPassRequest: ResetPassRequest) : Call<ResetPasswordResponse>

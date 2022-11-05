@@ -5,6 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import com.example.internfactory.Activities.Auth.Home_page
+import com.example.internfactory.modules.UserDetails
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class MainActivity : Activity() {
 
@@ -12,10 +17,18 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
         Handler().postDelayed({
-            val Intent = Intent(this@MainActivity, activity_Dashboard::class.java)
+            val Intent = Intent(this@MainActivity, Home_page::class.java)
             startActivity(Intent)
             finish()
         }, 3000)
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val userDetails=UserDetails(this@MainActivity)
+            userDetails.getToken().collect{
+                if(it.logInState){
+                    intent=Intent(this@MainActivity,activity_Dashboard::class.java)
+                }
+            }
+        }
     }
 }
-

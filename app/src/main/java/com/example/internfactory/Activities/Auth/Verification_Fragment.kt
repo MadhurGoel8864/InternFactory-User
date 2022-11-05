@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -16,6 +17,7 @@ import com.example.internfactory.Activities.connecting
 import com.example.internfactory.R
 import com.example.internfactory.modules.Email
 import com.example.internfactory.modules.VerifyOtp
+import com.example.internfactory.modules.VerifyOtpResponse
 import com.example.internfactory.server.RetrofitApi
 import com.example.internfactory.server.ServiceBuilder
 import com.google.android.material.textfield.TextInputEditText
@@ -29,6 +31,8 @@ private lateinit var otp_input : TextInputEditText
 private lateinit var otp_cont : TextInputLayout
 private lateinit var otp_btn : Button
 
+
+private lateinit var reset_otp:TextView
 lateinit var verifybtn: Button
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +43,9 @@ lateinit var verifybtn: Button
         val fm : FragmentManager = parentFragmentManager
         val ft : FragmentTransaction = fm.beginTransaction()
 
+//        reset_otp=view.findViewById(R.id.textView8)
+//        reset_otp.setOnClickListener()
+
         verifybtn=view.findViewById(R.id.button2)
         verifybtn.setOnClickListener {
             val verifyOtp = VerifyOtp((activity as connecting).email,otp_input.text.toString())
@@ -47,18 +54,18 @@ lateinit var verifybtn: Button
             val retrofitApi = ServiceBuilder.buildService(RetrofitApi::class.java)
             val call = retrofitApi.verifyotp(verifyOtp)
 
-            call.enqueue(object: Callback<String> {
-                override fun onResponse(call: Call<String>, response: Response<String>){
+            call.enqueue(object: Callback<VerifyOtpResponse> {
+                override fun onResponse(call: Call<VerifyOtpResponse>, response: Response<VerifyOtpResponse>){
                     if (response.code()==200){
                         Toast.makeText(view.context, response.body()?.toString(), Toast.LENGTH_SHORT).show()
-                        ResetPasswordFrag()
+                        reset_pass()
                         Log.i("Naman", response.body().toString())
                     }
                     else{
-                        android.widget.Toast.makeText(view.context, (activity as connecting).email.toString(), android.widget.Toast.LENGTH_SHORT).show()
+                        Toast.makeText(view.context, (activity as connecting).email,Toast.LENGTH_SHORT).show()
                     }
                 }
-                override fun onFailure(call: Call<String>, t:Throwable){
+                override fun onFailure(call: Call<VerifyOtpResponse>, t:Throwable){
                     Toast.makeText(view.context, "Failed", Toast.LENGTH_LONG).show()
                 }
             })
@@ -97,8 +104,8 @@ lateinit var verifybtn: Button
         ft.commit()
     }
 
-    fun ResetPasswordFrag(){
-        val ResetPasswordFrag = ResetPassword_Fragment()
-        replaceFrag(ResetPasswordFrag,"reset_pass")
+    fun reset_pass(){
+        val reset_pass = ResetPassword_Fragment()
+        replaceFrag(reset_pass,"reset_pass")
     }
 }
