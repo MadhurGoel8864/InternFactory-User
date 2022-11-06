@@ -1,5 +1,6 @@
 package com.example.internfactory.Activities.Auth
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -31,18 +32,40 @@ private lateinit var otp_input : TextInputEditText
 private lateinit var otp_cont : TextInputLayout
 private lateinit var otp_btn : Button
 
+private lateinit var resend_btn:TextView
 
 private lateinit var reset_otp:TextView
+
 lateinit var verifybtn: Button
+
+lateinit var timer: CountDownTimer
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view= inflater.inflate(R.layout.fragment_verification_, container, false)
 
+        resend_btn = view.findViewById(R.id.textView8)
+
         val fm : FragmentManager = parentFragmentManager
         val ft : FragmentTransaction = fm.beginTransaction()
 
+        timer = object : CountDownTimer(8000,1000){
+            override fun onTick(millisUntilFinished: Long) {
+                resend_btn.text ="You can resend OTP in"+" ${millisUntilFinished.toString()}"
+                resend_btn.isEnabled = false
+            }
+
+            override fun onFinish() {
+                resend_btn.text = "Resend OTP"
+                resend_btn.isEnabled = true
+            }
+        }
+        resend_btn.setOnClickListener{
+
+
+        }
 //        reset_otp=view.findViewById(R.id.textView8)
 //        reset_otp.setOnClickListener()
 
@@ -72,6 +95,19 @@ lateinit var verifybtn: Button
 
         return view
     }
+
+
+    override fun onStart() {
+        super.onStart()
+        timer.start()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        timer.cancel()
+    }
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         otp_input = requireView().findViewById(R.id.otp_input)

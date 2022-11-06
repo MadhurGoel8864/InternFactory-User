@@ -88,7 +88,7 @@ class ResetPassword_Fragment : Fragment() {
             else{
                 conf_pass.helperText =null
             }
-        }
+
         if(pass.helperText==null && conf_pass.helperText==null){
             val resetpass=ResetPassRequest((activity as connecting).email,pass_input.text.toString(),conf_pass_inp.text.toString())
             val retrofitAPI = ServiceBuilder.buildService(RetrofitApi::class.java)
@@ -114,7 +114,7 @@ class ResetPassword_Fragment : Fragment() {
                     Log.i("Naman", "Please check your internet connection")
                 }
             })
-        }
+        }}
 
 //        pass_input.addTextChangedListener {
 //            pass.helperText = validPass()
