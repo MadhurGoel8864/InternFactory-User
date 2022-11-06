@@ -3,8 +3,10 @@ package com.example.internfactory.Activities.Adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.internfactory.CategoriesSeeAll
 import com.example.internfactory.R
 import com.example.internfactory.modules.category_seeall_response
@@ -27,9 +29,12 @@ class category_adapter(val categoriesSeeAll: MutableList<category_seeall_respons
 class category_ViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
     private val categorytitle:TextView = itemView.findViewById(R.id.category_title)
     private val categoryheading:TextView = itemView.findViewById(R.id.category_heading)
+    private val categotyimage:ImageView = itemView.findViewById(R.id.category_image)
 
     fun bindview(categorySeeallResponse: category_seeall_response){
         categorytitle.text = categorySeeallResponse.categoryName
         categoryheading.text = categorySeeallResponse.imageName
+        val x = "https://internfactory.herokuapp.com/file/images/" + categorySeeallResponse.imageName
+        categotyimage.load(x)
     }
 }
