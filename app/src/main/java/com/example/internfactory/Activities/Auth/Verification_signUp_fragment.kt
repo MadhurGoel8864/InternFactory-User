@@ -47,70 +47,70 @@ class Verification_signUp_fragment : Fragment() {
         val ft : FragmentTransaction = fm.beginTransaction()
 
 
-        verifybtn=view.findViewById(R.id.button2n)
-        verifybtn.setOnClickListener {
-            val verifyOtp = VerifyOtp((activity as connecting).signUpEmail,otp_input.text.toString())
-            Log.d("Naman", "Hello")
-            Log.d("Naman", (activity as connecting).signUpEmail)
-            val retrofitApi = ServiceBuilder.buildService(RetrofitApi::class.java)
-            val call = retrofitApi.verifyotp(verifyOtp)
-
-            call.enqueue(object: Callback<VerifyOtpResponse> {
-                override fun onResponse(call: Call<VerifyOtpResponse>, response: Response<VerifyOtpResponse>){
-                    if (response.code()==200){
-                        Toast.makeText(view.context, response.body()?.toString(), Toast.LENGTH_SHORT).show()
-                        Log.i("Naman", response.body().toString())
-
-                        val user = User(null, null, (activity as connecting).signUpEmail,(activity as connecting).signuppass)
-                        val call2 = retrofitApi.login(user)
-
-                        call2.enqueue(object : Callback<LoginResponse> {
-                            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                                if (response.code() == 200) {
-                                    Toast.makeText(view?.context, "Otp Verified", Toast.LENGTH_SHORT).show()
-//                                    runBlocking { view?.let { UserDetails(it.context).storeUserData(
-//                                        LogInInfo(response.body()?.authToken.toString(),true)
-//                                    ) } }
-
-                                    GlobalScope.launch(Dispatchers.IO) {
-                                        val dataStoreManager = UserDetails(view.context)
-                                        dataStoreManager.storeUserData(LogInInfo(response.body()?.authToken.toString(), true))
-                                    }
-
-                                    requireActivity().run{
-                                        startActivity(
-                                            Intent(context,
-                                                activity_Dashboard::class.java)
-                                        )
-                                        finish()
-                                    }
-                                    Log.i("Naman", response.code().toString().toString())
-                                } else {
-                                    Toast.makeText(view?.context, "Incorrect otp", Toast.LENGTH_SHORT).show()
-
-                                }
-                            }
-
-                            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                                Toast.makeText(
-                                    view?.context,
-                                    "Please check your internet connection",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                                Log.i("Naman", "Please check your internet connection")
-                            }
-                        })
-                    }
-
-                    else{
-                        Toast.makeText(view.context, (activity as connecting).signUpEmail,Toast.LENGTH_SHORT).show()
-                    }
-                }
-                override fun onFailure(call: Call<VerifyOtpResponse>, t:Throwable){
-                    Toast.makeText(view.context, "Failed", Toast.LENGTH_LONG).show()
-                }
-            })
-        }
+//        verifybtn=view.findViewById(R.id.button2n)
+//        verifybtn.setOnClickListener {
+//            val verifyOtp = VerifyOtp((activity as connecting).signUpEmail,otp_input.text.toString())
+//            Log.d("Naman", "Hello")
+//            Log.d("Naman", (activity as connecting).signUpEmail)
+//            val retrofitApi = ServiceBuilder.buildService(RetrofitApi::class.java)
+//            val call = retrofitApi.verifyotp(verifyOtp)
+//
+//            call.enqueue(object: Callback<VerifyOtpResponse> {
+//                override fun onResponse(call: Call<VerifyOtpResponse>, response: Response<VerifyOtpResponse>){
+//                    if (response.code()==200){
+//                        Toast.makeText(view.context, response.body()?.toString(), Toast.LENGTH_SHORT).show()
+//                        Log.i("Naman", response.body().toString())
+//
+//                        val user = User(null, null, (activity as connecting).signUpEmail,(activity as connecting).signuppass)
+//                        val call2 = retrofitApi.login(user)
+//
+//                        call2.enqueue(object : Callback<LoginResponse> {
+//                            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+//                                if (response.code() == 200) {
+//                                    Toast.makeText(view?.context, "Otp Verified", Toast.LENGTH_SHORT).show()
+////                                    runBlocking { view?.let { UserDetails(it.context).storeUserData(
+////                                        LogInInfo(response.body()?.authToken.toString(),true)
+////                                    ) } }
+//
+//                                    GlobalScope.launch(Dispatchers.IO) {
+//                                        val dataStoreManager = UserDetails(view.context)
+//                                        dataStoreManager.storeUserData(LogInInfo(response.body()?.authToken.toString(), true))
+//                                    }
+//
+//                                    requireActivity().run{
+//                                        startActivity(
+//                                            Intent(context,
+//                                                activity_Dashboard::class.java)
+//                                        )
+//                                        finish()
+//                                    }
+//                                    Log.i("Naman", response.code().toString().toString())
+//                                } else {
+//                                    Toast.makeText(view?.context, "Incorrect otp", Toast.LENGTH_SHORT).show()
+//
+//                                }
+//                            }
+//
+//                            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+//                                Toast.makeText(
+//                                    view?.context,
+//                                    "Please check your internet connection",
+//                                    Toast.LENGTH_SHORT
+//                                ).show()
+//                                Log.i("Naman", "Please check your internet connection")
+//                            }
+//                        })
+//                    }
+//
+//                    else{
+//                        Toast.makeText(view.context, (activity as connecting).signUpEmail,Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//                override fun onFailure(call: Call<VerifyOtpResponse>, t:Throwable){
+//                    Toast.makeText(view.context, "Failed", Toast.LENGTH_LONG).show()
+//                }
+//            })
+//        }
         return view
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -118,23 +118,98 @@ class Verification_signUp_fragment : Fragment() {
         otp_input = requireView().findViewById(R.id.otp_inputn)
         otp_btn = requireView().findViewById(R.id.button2n)
         otp_cont = requireView().findViewById(R.id.otp_contn)
-        otp_input.addTextChangedListener(object: TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-            override fun afterTextChanged(p0: Editable?) {
-                if(otp_input.text?.length == 6){
-                    otp_btn.isEnabled = true
-                    otp_cont.helperText = null
-                }
-                else{
-                    otp_btn.isEnabled = false
-                    otp_cont.helperText = "Required"
 
-                }
+
+
+        otp_btn.setOnClickListener{
+            if(otp_input.text.toString()==""){
+                otp_cont.helperText = "Required"
             }
-        })
+            else if(otp_input.text?.length!! <6){
+                otp_cont.helperText= "Pease enter 6 digit OTP."
+            }
+            else{
+                val verifyOtp = VerifyOtp((activity as connecting).signUpEmail,otp_input.text.toString())
+                Log.d("Naman", "Hello")
+                Log.d("Naman", (activity as connecting).signUpEmail)
+                val retrofitApi = ServiceBuilder.buildService(RetrofitApi::class.java)
+                val call = retrofitApi.verifyotp(verifyOtp)
+
+                call.enqueue(object: Callback<VerifyOtpResponse> {
+                    override fun onResponse(call: Call<VerifyOtpResponse>, response: Response<VerifyOtpResponse>){
+                        if (response.code()==200){
+                            Toast.makeText(view.context, response.body()?.toString(), Toast.LENGTH_SHORT).show()
+                            Log.i("Naman", response.body().toString())
+
+                            val user = User(null, null, (activity as connecting).signUpEmail,(activity as connecting).signuppass)
+                            val call2 = retrofitApi.login(user)
+
+                            call2.enqueue(object : Callback<LoginResponse> {
+                                override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                                    if (response.code() == 200) {
+                                        Toast.makeText(view?.context, "Otp Verified", Toast.LENGTH_SHORT).show()
+//                                    runBlocking { view?.let { UserDetails(it.context).storeUserData(
+//                                        LogInInfo(response.body()?.authToken.toString(),true)
+//                                    ) } }
+
+                                        GlobalScope.launch(Dispatchers.IO) {
+                                            val dataStoreManager = UserDetails(view.context)
+                                            dataStoreManager.storeUserData(LogInInfo(response.body()?.authToken.toString(), true))
+                                        }
+
+                                        requireActivity().run{
+                                            startActivity(
+                                                Intent(context,
+                                                    activity_Dashboard::class.java)
+                                            )
+                                            finish()
+                                        }
+                                        Log.i("Naman", response.code().toString().toString())
+                                    } else {
+                                        Toast.makeText(view?.context, "Incorrect otp", Toast.LENGTH_SHORT).show()
+
+                                    }
+                                }
+
+                                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                                    Toast.makeText(
+                                        view?.context,
+                                        "Please check your internet connection",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                    Log.i("Naman", "Please check your internet connection")
+                                }
+                            })
+                        }
+
+                        else{
+                            Toast.makeText(view.context, (activity as connecting).signUpEmail,Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    override fun onFailure(call: Call<VerifyOtpResponse>, t:Throwable){
+                        Toast.makeText(view.context, "Failed", Toast.LENGTH_LONG).show()
+                    }
+                })
+
+            }
+        }
+//        otp_input.addTextChangedListener(object: TextWatcher {
+//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//            }
+//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//            }
+//            override fun afterTextChanged(p0: Editable?) {
+//                if(otp_input.text?.length == 6){
+//                    otp_btn.isEnabled = true
+//                    otp_cont.helperText = null
+//                }
+//                else{
+//                    otp_btn.isEnabled = false
+//                    otp_cont.helperText = "Required"
+//
+//                }
+//            }
+//        })
     }
 
     private fun replaceFrag(fragment : Fragment,name: String){

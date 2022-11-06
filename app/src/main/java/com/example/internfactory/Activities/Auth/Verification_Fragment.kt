@@ -46,30 +46,30 @@ lateinit var verifybtn: Button
 //        reset_otp=view.findViewById(R.id.textView8)
 //        reset_otp.setOnClickListener()
 
-        verifybtn=view.findViewById(R.id.button2)
-        verifybtn.setOnClickListener {
-            val verifyOtp = VerifyOtp((activity as connecting).email,otp_input.text.toString())
-            Log.d("Naman", "Hello")
-            Log.d("Naman", (activity as connecting).email)
-            val retrofitApi = ServiceBuilder.buildService(RetrofitApi::class.java)
-            val call = retrofitApi.verifyotp(verifyOtp)
+//        verifybtn=view.findViewById(R.id.button2)
+//        verifybtn.setOnClickListener {
+//            val verifyOtp = VerifyOtp((activity as connecting).email,otp_input.text.toString())
+//            Log.d("Naman", "Hello")
+//            Log.d("Naman", (activity as connecting).email)
+//            val retrofitApi = ServiceBuilder.buildService(RetrofitApi::class.java)
+//            val call = retrofitApi.verifyotp(verifyOtp)
+//
+//            call.enqueue(object: Callback<VerifyOtpResponse> {
+//                override fun onResponse(call: Call<VerifyOtpResponse>, response: Response<VerifyOtpResponse>){
+//                    if (response.code()==200){
+//                        Toast.makeText(view.context, "Otp Verified", Toast.LENGTH_SHORT).show()
+//                        reset_pass()
+//                        Log.i("Naman", response.body().toString())
+//                    }
+//                    else{
+//                        Toast.makeText(view.context, "Incorrect otp",Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//                override fun onFailure(call: Call<VerifyOtpResponse>, t:Throwable){
+//                    Toast.makeText(view.context, "Failed", Toast.LENGTH_LONG).show()
+//                }
+//            })
 
-            call.enqueue(object: Callback<VerifyOtpResponse> {
-                override fun onResponse(call: Call<VerifyOtpResponse>, response: Response<VerifyOtpResponse>){
-                    if (response.code()==200){
-                        Toast.makeText(view.context, "Otp Verified", Toast.LENGTH_SHORT).show()
-                        reset_pass()
-                        Log.i("Naman", response.body().toString())
-                    }
-                    else{
-                        Toast.makeText(view.context, "Incorrect otp",Toast.LENGTH_SHORT).show()
-                    }
-                }
-                override fun onFailure(call: Call<VerifyOtpResponse>, t:Throwable){
-                    Toast.makeText(view.context, "Failed", Toast.LENGTH_LONG).show()
-                }
-            })
-        }
         return view
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -77,23 +77,54 @@ lateinit var verifybtn: Button
         otp_input = requireView().findViewById(R.id.otp_input)
         otp_btn = requireView().findViewById(R.id.button2)
         otp_cont = requireView().findViewById(R.id.otp_cont)
-        otp_input.addTextChangedListener(object: TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        otp_btn.setOnClickListener{
+            if(otp_input.text.toString()==""){
+                otp_cont.helperText = "Required"
             }
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            else if(otp_input.text?.length!! <6){
+                otp_cont.helperText= "Pease enter 6 digit OTP."
             }
-            override fun afterTextChanged(p0: Editable?) {
-                if(otp_input.text?.length == 6){
-                    otp_btn.isEnabled = true
-                    otp_cont.helperText = null
-                }
-                else{
-                    otp_btn.isEnabled = false
-                    otp_cont.helperText = "Required"
+            else{
+                val verifyOtp = VerifyOtp((activity as connecting).email,otp_input.text.toString())
+                Log.d("Naman", "Hello")
+                Log.d("Naman", (activity as connecting).email)
+                val retrofitApi = ServiceBuilder.buildService(RetrofitApi::class.java)
+                val call = retrofitApi.verifyotp(verifyOtp)
 
-                }
+                call.enqueue(object: Callback<VerifyOtpResponse> {
+                    override fun onResponse(call: Call<VerifyOtpResponse>, response: Response<VerifyOtpResponse>){
+                        if (response.code()==200){
+                            Toast.makeText(view.context, "Otp Verified", Toast.LENGTH_SHORT).show()
+                            reset_pass()
+                            Log.i("Naman", response.body().toString())
+                        }
+                        else{
+                            Toast.makeText(view.context, "Incorrect otp",Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    override fun onFailure(call: Call<VerifyOtpResponse>, t:Throwable){
+                        Toast.makeText(view.context, "Failed", Toast.LENGTH_LONG).show()
+                    }
+                })
             }
-        })
+        }
+//        otp_input.addTextChangedListener(object: TextWatcher {
+//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//            }
+//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//            }
+//            override fun afterTextChanged(p0: Editable?) {
+//                if(otp_input.text?.length == 6){
+//                    otp_btn.isEnabled = true
+//                    otp_cont.helperText = null
+//                }
+//                else{
+//                    otp_btn.isEnabled = false
+//                    otp_cont.helperText = "Required"
+//
+//                }
+//            }
+//        })
     }
 
     private fun replaceFrag(fragment : Fragment,name: String){

@@ -43,17 +43,91 @@ class SignUp_Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view: View= inflater.inflate(R.layout.fragment_sign_up_, container, false)
-
         val fm : FragmentManager = parentFragmentManager
         val ft : FragmentTransaction = fm.beginTransaction()
-
         firstname_inp=view.findViewById(R.id.first_name_inp)
         lastname_inp=view.findViewById(R.id.last_name_inp)
         email_inp = view.findViewById(R.id.email_inp)
         password_inp = view.findViewById(R.id.password_form_inp)
         signupbtn=view.findViewById(R.id.sign_up_btn)
-        signupbtn.setOnClickListener{
-            val firstname =firstname_inp.text.toString()
+
+//        signupbtn.setOnClickListener{
+//            val firstname =firstname_inp.text.toString()
+//            val lastname = lastname_inp.text.toString()
+//            val emaiil = email_inp.text.toString()
+//            val password= password_inp.text.toString()
+//
+//            val checkfirstname= isValidName(firstname)
+//            val checklastname= isValidName(lastname)
+//            val checkemail= isValidEmail(emaiil)
+//            (activity as connecting).signUpEmail=email_inp.text.toString()
+//            (activity as connecting).signuppass=password_inp.text.toString()
+//
+//
+//            if(checkfirstname){
+//                if(checklastname){
+//                    if(checkemail){
+//                        val msg= isValidPassword(password)
+//                        if (msg=="true"){
+//                            val user = User(firstname,lastname,emaiil,password)
+//                            val retrofitAPI = ServiceBuilder.buildService(RetrofitApi::class.java)
+//                            val call = retrofitAPI.signIn(user)
+//
+//                            call.enqueue(object: Callback<SignUpResponse> {
+//                                override fun onResponse(call: Call<SignUpResponse>, response: Response<SignUpResponse>) {
+//                                    if (response.isSuccessful && response.body()!=null){
+//                                        Toast.makeText(view.context, "Otp Sent Succesfully", Toast.LENGTH_SHORT).show()
+//                                        signupotpVerificationFrag()
+//                                        Log.i("Naman", response.body().toString())
+//                                    }
+//                                    else{
+//                                        android.widget.Toast.makeText(view.context,"Already Registered Email", android.widget.Toast.LENGTH_SHORT).show()
+//                                    }
+//                                }
+//
+//                                override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
+//                                    Toast.makeText(view.context, "Please check your internet connection", Toast.LENGTH_SHORT).show()
+//                                    Log.i("Naman", "Please check your internet connection")
+//                                }
+//                            })
+//                        }
+//                        else{
+//                            Toast.makeText(view.context, msg, Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//                    else{
+//                        Toast.makeText(view.context, "Enter a valid email", Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//                else{
+//                    Toast.makeText(view.context, "Enter a valid last name", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//            else{
+//                Toast.makeText(view.context, "Enter valid first name", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        firstname_inp = requireView().findViewById(R.id.first_name_inp)
+        lastname_inp = requireView().findViewById(R.id.last_name_inp)
+        email_inp = requireView().findViewById(R.id.email_inp)
+        password_inp = requireView().findViewById(R.id.password_form_inp)
+        button = requireView().findViewById<Button>(R.id.sign_up_btn)
+        lastname = requireView().findViewById(R.id.last_name)
+        firstname = requireView().findViewById(R.id.first_name)
+        email_box = requireView().findViewById(R.id.email_box)
+        password = requireView().findViewById(R.id.password)
+
+        button.setOnClickListener{
+            email_box.helperText = validemail()
+            password.helperText = validPass()
+            firstname.helperText = validfirstname()
+            lastname.helperText = validlastname()
+            if(email_box.helperText == null && password.helperText == null && firstname.helperText == null && lastname.helperText == null){ val firstname =firstname_inp.text.toString()
             val lastname = lastname_inp.text.toString()
             val emaiil = email_inp.text.toString()
             val password= password_inp.text.toString()
@@ -63,6 +137,7 @@ class SignUp_Fragment : Fragment() {
             val checkemail= isValidEmail(emaiil)
             (activity as connecting).signUpEmail=email_inp.text.toString()
             (activity as connecting).signuppass=password_inp.text.toString()
+
 
             if(checkfirstname){
                 if(checklastname){
@@ -107,42 +182,29 @@ class SignUp_Fragment : Fragment() {
                 Toast.makeText(view.context, "Enter valid first name", Toast.LENGTH_SHORT).show()
             }
         }
-        return view
+            }
+
+        }
+
+
+    private fun validfirstname():String?{
+        val txt = firstname_inp.text.toString()
+        if(txt==null){
+            return "Required"
+        }
+        if(txt.contains(Regex("[1234567890]"))){
+            return "Must contain only alphabets"
+        }
+        return null
+    }
+    private fun validlastname():String?{
+        val txt = lastname_inp.text.toString()
+        if(txt.contains(Regex("[1234567890]"))){
+            return "Must contain only alphabets"
+        }
+        return null
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        firstname_inp = requireView().findViewById(R.id.first_name_inp)
-        lastname_inp = requireView().findViewById(R.id.last_name_inp)
-        email_inp = requireView().findViewById(R.id.email_inp)
-        password_inp = requireView().findViewById(R.id.password_form_inp)
-        button = requireView().findViewById<Button>(R.id.sign_up_btn)
-        lastname = requireView().findViewById(R.id.last_name)
-        firstname = requireView().findViewById(R.id.first_name)
-        email_box = requireView().findViewById(R.id.email_box)
-        password = requireView().findViewById(R.id.password)
-
-        email_inp.addTextChangedListener {
-            email_box.helperText = validemail()
-            button.isEnabled =
-                (email_box.helperText == null) and (password.helperText == null) and (firstname.helperText == null)
-        }
-        password_inp.addTextChangedListener {
-            password.helperText = validPass()
-            button.isEnabled =
-                (email_box.helperText == null) and (password.helperText == null) and (firstname.helperText == null)
-        }
-        firstname_inp.addTextChangedListener {
-            if(firstname_inp.text.toString() != "") {
-                firstname.helperText = null
-            }
-            else{
-                firstname.helperText = "Required"
-            }
-            button.isEnabled =
-                (email_box.helperText == null) and (password.helperText == null) and (firstname.helperText == null)
-        }
-    }
     private fun validPass(): String? {
         val pass_txt = password_inp.text.toString()
         if(pass_txt.length<8){
@@ -238,7 +300,6 @@ class SignUp_Fragment : Fragment() {
         ft.add(R.id.container, fragment)
         ft.commit()
     }
-
     fun signupotpVerificationFrag(){
         val signupotpVerificationFrag = Verification_signUp_fragment()
         replaceFrag(signupotpVerificationFrag,"SignUpOtpPage")

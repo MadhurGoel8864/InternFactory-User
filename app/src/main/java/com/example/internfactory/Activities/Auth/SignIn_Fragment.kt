@@ -89,6 +89,7 @@ class SignIn_Fragment : Fragment() {
 //        }
 //    }
 
+
         login_btn.setOnClickListener{
 
             email_cont.helperText = validemail()
