@@ -6,8 +6,5 @@
     tools:context=".Activities.search_page">
 
     <!-- TODO: Update blank fragment layout -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width=""
-        android:layout_height=""
 
 </FrameLayout>

@@ -38,7 +38,6 @@ class SignUp_Fragment : Fragment() {
 
     lateinit var signupbtn: Button
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
