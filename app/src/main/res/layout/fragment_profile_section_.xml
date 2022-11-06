@@ -43,6 +43,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/custom_profile_page_button"
         android:text="Edit Profile"
+        android:onClick="editprofileFrag"
         android:textColor="#212427"
         android:fontFamily="@font/montserrat_medium"
         android:paddingTop="8dp"

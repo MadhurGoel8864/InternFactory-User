@@ -31,6 +31,11 @@ class activity_Dashboard : AppCompatActivity() {
         replaceFrag(trendingFrag,"trending")
     }
 
+    fun editprofileFrag(view:View){
+        val edit_profile_Frag =Edit_profile_Fragment()
+        replaceFrag(edit_profile_Frag,"editprofile")
+    }
+
     fun categoryFrag(view : View){
         val categoryFrag = CategoriesSeeAll()
         replaceFrag(categoryFrag,"category")
