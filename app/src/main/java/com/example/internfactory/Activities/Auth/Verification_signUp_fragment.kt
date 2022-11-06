@@ -67,7 +67,7 @@ class Verification_signUp_fragment : Fragment() {
                         call2.enqueue(object : Callback<LoginResponse> {
                             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                                 if (response.code() == 200) {
-                                    Toast.makeText(view?.context, response.body()?.toString(), Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(view?.context, "Otp Verified", Toast.LENGTH_SHORT).show()
 //                                    runBlocking { view?.let { UserDetails(it.context).storeUserData(
 //                                        LogInInfo(response.body()?.authToken.toString(),true)
 //                                    ) } }
@@ -86,7 +86,7 @@ class Verification_signUp_fragment : Fragment() {
                                     }
                                     Log.i("Naman", response.code().toString().toString())
                                 } else {
-                                    Toast.makeText(view?.context, response.code().toString(), Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(view?.context, "Incorrect otp", Toast.LENGTH_SHORT).show()
 
                                 }
                             }

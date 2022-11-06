@@ -56,7 +56,7 @@ class ResetPassword_Fragment : Fragment() {
                     response: Response<ResetPasswordResponse>
                 ) {
                     if (response.code() == 200) {
-                        Toast.makeText(view?.context, response.body()?.toString(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(view?.context, "Password Changed Successfully", Toast.LENGTH_SHORT).show()
                         logInFrag()
                         Log.i("Naman", response.code().toString().toString())
                     } else {

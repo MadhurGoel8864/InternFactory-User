@@ -145,7 +145,7 @@ class SignIn_Fragment : Fragment() {
         call.enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.code() == 200) {
-                    Toast.makeText(view?.context, response.body()?.toString(), Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(view?.context, "", Toast.LENGTH_SHORT).show()
 //                    runBlocking { view?.let { UserDetails(it.context).storeUserData(
 //                        LogInInfo(response.body()?.authToken.toString(),true)
 //                    ) } }
@@ -161,7 +161,7 @@ class SignIn_Fragment : Fragment() {
                     }
                     Log.i("Naman", response.code().toString().toString())
                 } else {
-                    Toast.makeText(view?.context, response.code().toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(view?.context, "Incorrect password/email", Toast.LENGTH_SHORT).show()
 
                 }
             }

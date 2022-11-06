@@ -57,12 +57,12 @@ lateinit var verifybtn: Button
             call.enqueue(object: Callback<VerifyOtpResponse> {
                 override fun onResponse(call: Call<VerifyOtpResponse>, response: Response<VerifyOtpResponse>){
                     if (response.code()==200){
-                        Toast.makeText(view.context, response.body()?.toString(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(view.context, "Otp Verified", Toast.LENGTH_SHORT).show()
                         reset_pass()
                         Log.i("Naman", response.body().toString())
                     }
                     else{
-                        Toast.makeText(view.context, (activity as connecting).email,Toast.LENGTH_SHORT).show()
+                        Toast.makeText(view.context, "Incorrect otp",Toast.LENGTH_SHORT).show()
                     }
                 }
                 override fun onFailure(call: Call<VerifyOtpResponse>, t:Throwable){

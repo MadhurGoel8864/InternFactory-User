@@ -69,7 +69,7 @@
             android:id="@+id/otp_contn"
             app:hintTextColor="#212427"
             android:textColorHint="#212427"
-            app:helperText="Required"
+            app:helperText=""
             app:helperTextTextColor="#FB2A2A"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"

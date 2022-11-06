@@ -85,7 +85,7 @@ class ForgotPassword_Fragment : Fragment() {
                 call.enqueue(object: Callback<ForgotPassResponse>{
                     override fun onResponse(call: Call<ForgotPassResponse>, response: Response<ForgotPassResponse>){
                         if (response.code()==200){
-                            Toast.makeText(view.context,(activity as connecting).email, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(view.context,"OTP Sent To Registered Email", Toast.LENGTH_SHORT).show()
                             otpVerificationFrag()
                             Log.i("Naman", response.body().toString())
                         }
