@@ -79,8 +79,10 @@
     <Button
         android:id="@+id/login_btn"
         android:layout_width="320dp"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:background="@drawable/custom_login_btn"
+        android:textAllCaps="false"
         android:backgroundTint="@color/color"
         android:onClick="connect"
         android:text="Get Started"
