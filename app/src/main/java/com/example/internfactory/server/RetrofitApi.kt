@@ -22,4 +22,8 @@ interface RetrofitApi {
 
     @POST("api/auth/resetpass")
     fun resetPassRequest(@Body resetPassRequest: ResetPassRequest) : Call<ResetPasswordResponse>
+
+    @GET("/api/getCategory")
+    fun getcategories() : Call<MutableList<category_seeall_response>>
+
 }
