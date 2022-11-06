@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,14 +46,23 @@ class ProfileSection_Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         edit_profile_btn = view.findViewById(R.id.edit_profile_btn)
-        edit_profile_btn.setOnClickListener{
-            requireActivity().run{
-                startActivity(Intent(this, activity_EditProfile::class.java))
-                finish()
-            }
-        }
+//        edit_profile_btn.setOnClickListener{
+
+//            requireActivity().run{
+//                startActivity(Intent(this, activity_EditProfile::class.java))
+//                finish()
+//            }
+//        }
 
 
+    }
+
+    private fun replaceFrag(fragment : Fragment,name: String){
+        val fm : FragmentManager = parentFragmentManager
+        val ft : FragmentTransaction = fm.beginTransaction()
+        ft.addToBackStack(name)
+        ft.add(R.id.container, fragment)
+        ft.commit()
     }
 
 

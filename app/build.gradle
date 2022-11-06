@@ -92,4 +92,7 @@ dependencies {
 
     // Rounded image view
     implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    // Coil Implementation
+    implementation("io.coil-kt:coil:0.13.0")
 }
