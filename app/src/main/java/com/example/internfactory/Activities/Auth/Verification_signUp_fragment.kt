@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -35,6 +36,9 @@ class Verification_signUp_fragment : Fragment() {
     private lateinit var otp_cont : TextInputLayout
     private lateinit var otp_btn : Button
 
+    private lateinit var resend_btn:TextView
+    lateinit var timer: CountDownTimer
+
 
     lateinit var verifybtn: Button
 
@@ -61,6 +65,20 @@ class Verification_signUp_fragment : Fragment() {
         val fm : FragmentManager = parentFragmentManager
         val ft : FragmentTransaction = fm.beginTransaction()
 
+
+        resend_btn = view.findViewById(R.id.resendSignup_btn)
+        timer = object : CountDownTimer(30000,1000){
+            override fun onTick(millisUntilFinished: Long) {
+                val x = millisUntilFinished/1000
+                resend_btn.text = "You can resend OTP in "+ "${x.toString()}" + " sec"
+                resend_btn.isEnabled = false
+            }
+
+            override fun onFinish() {
+                resend_btn.text = "Resend OTP"
+                resend_btn.isEnabled = true
+            }
+        }
 
 //        verifybtn=view.findViewById(R.id.button2n)
 //        verifybtn.setOnClickListener {
@@ -157,7 +175,7 @@ class Verification_signUp_fragment : Fragment() {
                 call.enqueue(object: Callback<VerifyOtpResponse> {
                     override fun onResponse(call: Call<VerifyOtpResponse>, response: Response<VerifyOtpResponse>){
                         if (response.code()==200){
-                            Toast.makeText(view.context, response.body()?.toString(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(view.context, "Welcome", Toast.LENGTH_SHORT).show()
                             Log.i("Naman", response.body().toString())
 
                             val user = User(null, null, (activity as connecting).signUpEmail,(activity as connecting).signuppass)
@@ -205,7 +223,7 @@ class Verification_signUp_fragment : Fragment() {
                         }
 
                         else{
-                            Toast.makeText(view.context, (activity as connecting).signUpEmail,Toast.LENGTH_SHORT).show()
+                            Toast.makeText(view.context, "Invalid Otp",Toast.LENGTH_SHORT).show()
                         }
                     }
                     override fun onFailure(call: Call<VerifyOtpResponse>, t:Throwable){
@@ -214,6 +232,36 @@ class Verification_signUp_fragment : Fragment() {
                 })
 
             }
+        }
+
+        resend_btn.setOnClickListener {
+            progressBar.show()
+            val email = Email((activity as connecting).signUpEmail.toString())
+            val retrofitApi = ServiceBuilder.buildService(RetrofitApi::class.java)
+            val call = retrofitApi.forgotPassword(email)
+
+            call.enqueue(object : Callback<ForgotPassResponse> {
+                override fun onResponse(
+                    call: Call<ForgotPassResponse>,
+                    response: Response<ForgotPassResponse>
+                ) {
+                    if (response.code() == 200) {
+                        Toast.makeText(view.context, "OTP Sent To Registered Email", Toast.LENGTH_SHORT).show()
+                        Log.i("Naman", response.body().toString())
+                        progressBar.dismiss()
+                    } else {
+                        Toast.makeText(view.context,"Incorrect Password", Toast.LENGTH_SHORT)
+                            .show()
+                        Log.i("Naman", response.body().toString())
+                        progressBar.dismiss()
+                    }
+                }
+
+                override fun onFailure(call: Call<ForgotPassResponse>, t: Throwable) {
+                    Toast.makeText(view.context, "Failed", Toast.LENGTH_LONG).show()
+                    progressBar.dismiss()
+                }
+            })
         }
 //        otp_input.addTextChangedListener(object: TextWatcher {
 //            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {

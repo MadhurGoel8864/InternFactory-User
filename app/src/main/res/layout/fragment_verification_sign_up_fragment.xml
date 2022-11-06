@@ -111,10 +111,9 @@
             app:layout_constraintTop_toBottomOf="@+id/otp_contn" />
 
         <TextView
-            android:id="@+id/textView8n"
+            android:id="@+id/resendSignup_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="otpVerificationFrag"
             android:text="Resend OTP"
             android:layout_marginTop="8dp"
             android:textColor="#212427"

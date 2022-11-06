@@ -3,6 +3,7 @@ import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -16,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.internfactory.Activities.connecting
 import com.example.internfactory.R
 import com.example.internfactory.modules.Email
+import com.example.internfactory.modules.ForgotPassResponse
 import com.example.internfactory.modules.VerifyOtp
 import com.example.internfactory.modules.VerifyOtpResponse
 import com.example.internfactory.server.RetrofitApi
@@ -30,6 +32,8 @@ class Verification_Fragment : Fragment() {
 private lateinit var otp_input : TextInputEditText
 private lateinit var otp_cont : TextInputLayout
 private lateinit var otp_btn : Button
+private lateinit var resend_btn:TextView
+lateinit var timer: CountDownTimer
 
 
 private lateinit var reset_otp:TextView
@@ -59,6 +63,19 @@ lateinit var verifybtn: Button
         val fm : FragmentManager = parentFragmentManager
         val ft : FragmentTransaction = fm.beginTransaction()
 
+        resend_btn = view.findViewById(R.id.resend_btn)
+        timer = object : CountDownTimer(30000,1000){
+            override fun onTick(millisUntilFinished: Long) {
+                val x = millisUntilFinished/1000
+                resend_btn.text = "You can resend OTP in "+ "${x.toString()}" + " sec"
+                resend_btn.isEnabled = false
+            }
+
+            override fun onFinish() {
+                resend_btn.text = "Resend OTP"
+                resend_btn.isEnabled = true
+            }
+        }
 //        reset_otp=view.findViewById(R.id.textView8)
 //        reset_otp.setOnClickListener()
 
@@ -94,9 +111,9 @@ lateinit var verifybtn: Button
         otp_btn = requireView().findViewById(R.id.button2)
         otp_cont = requireView().findViewById(R.id.otp_cont)
 
-        val progressBar = getDialogueProgressBar(view).create()
-        progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        progressBar.setCanceledOnTouchOutside(false)
+            val progressBar = getDialogueProgressBar(view).create()
+            progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            progressBar.setCanceledOnTouchOutside(false)
 
 
         otp_btn.setOnClickListener{
@@ -134,6 +151,38 @@ lateinit var verifybtn: Button
                 })
             }
         }
+
+        resend_btn.setOnClickListener {
+            progressBar.show()
+            val email = Email((activity as connecting).email.toString())
+            val retrofitApi = ServiceBuilder.buildService(RetrofitApi::class.java)
+            val call = retrofitApi.forgotPassword(email)
+
+            call.enqueue(object : Callback<ForgotPassResponse> {
+                override fun onResponse(
+                    call: Call<ForgotPassResponse>,
+                    response: Response<ForgotPassResponse>
+                ) {
+                    if (response.code() == 200) {
+                        Toast.makeText(view.context, "OTP Sent To Registered Email", Toast.LENGTH_SHORT).show()
+                        Log.i("Naman", response.body().toString())
+                        progressBar.dismiss()
+                    } else {
+                        Toast.makeText(view.context, "Wrong Otp", Toast.LENGTH_SHORT)
+                            .show()
+                        Log.i("Naman", response.body().toString())
+                        progressBar.dismiss()
+                    }
+                }
+
+                override fun onFailure(call: Call<ForgotPassResponse>, t: Throwable) {
+                    Toast.makeText(view.context, "Failed", Toast.LENGTH_LONG).show()
+                    progressBar.dismiss()
+                }
+            })
+        }
+
+
 //        otp_input.addTextChangedListener(object: TextWatcher {
 //            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 //            }
@@ -164,5 +213,15 @@ lateinit var verifybtn: Button
     fun reset_pass(){
         val reset_pass = ResetPassword_Fragment()
         replaceFrag(reset_pass,"reset_pass")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        timer.start()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        timer.cancel()
     }
 }

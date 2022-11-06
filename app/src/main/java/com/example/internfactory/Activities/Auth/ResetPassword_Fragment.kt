@@ -134,17 +134,13 @@ class ResetPassword_Fragment : Fragment() {
                             Log.i("Naman", response.code().toString().toString())
                             progressBar.dismiss()
                         } else {
-                            Toast.makeText(view?.context, response.code().toString(), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(view?.context,"Incorrect Password", Toast.LENGTH_SHORT).show()
                             progressBar.dismiss()
                         }
                     }
 
                     override fun onFailure(call: Call<ResetPasswordResponse>, t: Throwable) {
-                        Toast.makeText(
-                            view?.context,
-                            "Please check your internet connection",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(view?.context, "Please check your internet connection", Toast.LENGTH_SHORT).show()
                         Log.i("Naman", "Please check your internet connection")
                         progressBar.dismiss()
                     }
