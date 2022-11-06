@@ -19,7 +19,7 @@
             android:layout_width="217dp"
             android:layout_height="211dp"
             android:layout_marginTop="65dp"
-            android:src="@drawable/verificationimage"
+            android:src="@drawable/forgot_password_logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -31,6 +31,7 @@
             android:text="Verification"
             android:layout_marginTop="65dp"
             android:textStyle="bold"
+            android:fontFamily="@font/montserrat"
             android:textColor="#212427"
             android:textSize="40sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,8 +43,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Enter 6 digit OTP send to your Email Id"
+            android:fontFamily="@font/montserrat"
             android:layout_marginTop="5dp"
-            android:textColor="#212427"
+            android:textColor="#CC212427"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewn" />
@@ -68,7 +71,7 @@
             android:layout_width="330dp"
             android:id="@+id/otp_contn"
             app:hintTextColor="#212427"
-            android:textColorHint="#212427"
+            android:textColorHint="#B3212427"
             app:helperText=""
             app:helperTextTextColor="#FB2A2A"
             android:layout_height="wrap_content"
@@ -84,7 +87,6 @@
             app:layout_constraintTop_toBottomOf="@+id/textView7n">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/otp_inputn"
-                android:lines="1"
                 android:maxLength="6"
                 android:layout_width="match_parent"
                 android:textCursorDrawable="@color/black"
@@ -97,10 +99,10 @@
         <Button
             android:id="@+id/button2n"
             android:layout_width="330dp"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:text="Continue"
             android:onClick="ResetPassword"
-            android:enabled="false"
+            android:background="@drawable/custom_login_btn"
             android:layout_marginTop="40dp"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"

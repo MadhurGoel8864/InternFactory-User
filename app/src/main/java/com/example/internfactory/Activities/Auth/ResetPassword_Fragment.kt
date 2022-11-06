@@ -26,7 +26,6 @@ import retrofit2.Response
 class ResetPassword_Fragment : Fragment() {
 
     lateinit var btn:Button
-
     private lateinit var pass_input: TextInputEditText
     private lateinit var pass : TextInputLayout
     private lateinit var conf_pass : TextInputLayout
@@ -37,7 +36,6 @@ class ResetPassword_Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view= inflater.inflate(R.layout.fragement_reset_password, container, false)
-
         pass_input = view.findViewById(R.id.password_form_inp)
         conf_pass_inp= view.findViewById(R.id.conf_password_form_inp)
         btn= view.findViewById(R.id.reset_btn)
@@ -45,7 +43,53 @@ class ResetPassword_Fragment : Fragment() {
         val fm : FragmentManager = parentFragmentManager
         val ft : FragmentTransaction = fm.beginTransaction()
 
-        btn.setOnClickListener {
+//        btn.setOnClickListener {
+//            val resetpass=ResetPassRequest((activity as connecting).email,pass_input.text.toString(),conf_pass_inp.text.toString())
+//            val retrofitAPI = ServiceBuilder.buildService(RetrofitApi::class.java)
+//            val call = retrofitAPI.resetPassRequest(resetpass)
+//
+//            call.enqueue(object : Callback<ResetPasswordResponse> {
+//                override fun onResponse(
+//                    call: Call<ResetPasswordResponse>,
+//                    response: Response<ResetPasswordResponse>
+//                ) {
+//                    if (response.code() == 200) {
+//                        Toast.makeText(view?.context, "Password Changed Successfully", Toast.LENGTH_SHORT).show()
+//                        logInFrag()
+//                        Log.i("Naman", response.code().toString().toString())
+//                    } else {
+//                        Toast.makeText(view?.context, response.code().toString(), Toast.LENGTH_SHORT).show()
+//
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<ResetPasswordResponse>, t: Throwable) {
+//                    Toast.makeText(view?.context, "Please check your internet connection", Toast.LENGTH_SHORT).show()
+//                    Log.i("Naman", "Please check your internet connection")
+//                }
+//            })
+//        }
+
+        return view
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        pass_input = requireView().findViewById(R.id.password_form_inp)
+        pass = requireView().findViewById(R.id.password_inp)
+        conf_pass= requireView().findViewById(R.id.conf_pass)
+        conf_pass_inp= requireView().findViewById(R.id.conf_password_form_inp)
+        reset_btn= requireView().findViewById(R.id.reset_btn)
+
+        reset_btn.setOnClickListener{
+            pass.helperText = validPass()
+            if(conf_pass_inp.text.toString()!=pass_input.text.toString()){
+                conf_pass.helperText = "Password and confirm passowrd must be same."
+            }
+            else{
+                conf_pass.helperText =null
+            }
+        }
+        if(pass.helperText==null && conf_pass.helperText==null){
             val resetpass=ResetPassRequest((activity as connecting).email,pass_input.text.toString(),conf_pass_inp.text.toString())
             val retrofitAPI = ServiceBuilder.buildService(RetrofitApi::class.java)
             val call = retrofitAPI.resetPassRequest(resetpass)
@@ -72,31 +116,21 @@ class ResetPassword_Fragment : Fragment() {
             })
         }
 
-        return view
-    }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        pass_input = requireView().findViewById(R.id.password_form_inp)
-        pass = requireView().findViewById(R.id.password_inp)
-        conf_pass= requireView().findViewById(R.id.conf_pass)
-        conf_pass_inp= requireView().findViewById(R.id.conf_password_form_inp)
-        reset_btn= requireView().findViewById(R.id.reset_btn)
-
-        pass_input.addTextChangedListener {
-            pass.helperText = validPass()
-            reset_btn.isEnabled = (pass.helperText == null) and (conf_pass.helperText == null)
-        }
-
-        conf_pass_inp.addTextChangedListener {
-            if(conf_pass_inp.text.toString() == pass_input.text.toString()){
-                conf_pass.helperText = null
-                reset_btn.isEnabled = true
-            }
-            else{
-                conf_pass.helperText = "Password and Confirm Password Must be Same"
-                reset_btn.isEnabled = false
-            }
-        }
+//        pass_input.addTextChangedListener {
+//            pass.helperText = validPass()
+//            reset_btn.isEnabled = (pass.helperText == null) and (conf_pass.helperText == null)
+//        }
+//
+//        conf_pass_inp.addTextChangedListener {
+//            if(conf_pass_inp.text.toString() == pass_input.text.toString()){
+//                conf_pass.helperText = null
+//                reset_btn.isEnabled = true
+//            }
+//            else{
+//                conf_pass.helperText = "Password and Confirm Password Must be Same"
+//                reset_btn.isEnabled = false
+//            }
+//        }
     }
 
     private fun validPass(): String? {

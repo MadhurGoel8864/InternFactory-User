@@ -101,11 +101,11 @@ class ForgotPassword_Fragment : Fragment() {
             }
 
         }
-
-        email_inp.addTextChangedListener {
-            email_cont.helperText = validEmail()
-            button.isEnabled = (email_cont.helperText == null)
-        }
+//
+//        email_inp.addTextChangedListener {
+//            email_cont.helperText = validEmail()
+//            button.isEnabled = (email_cont.helperText == null)
+//        }
     }
 
 
