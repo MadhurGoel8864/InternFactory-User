@@ -1,6 +1,9 @@
 package com.example.internfactory.Activities.Auth
 
+import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -9,6 +12,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.FragmentManager
@@ -39,12 +44,29 @@ class SignIn_Fragment : Fragment() {
     private lateinit var buttonin:Button
     private lateinit var userDetails: UserDetails
 
+    var builder : AlertDialog.Builder? = null
+
 
     private lateinit var password_text : TextInputEditText
     private lateinit var password_cont : TextInputLayout
     private lateinit var ed1 : TextInputEditText
     private lateinit var email_cont : TextInputLayout
     private lateinit var login_btn : Button
+
+    fun getDialogueProgressBar(view : View) : AlertDialog.Builder{
+        if(builder==null){
+            builder = AlertDialog.Builder(view.context)
+            val progressBar = ProgressBar(view.context)
+            val lp = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            progressBar.layoutParams = lp
+            builder!!.setView(progressBar)
+        }
+        return builder as AlertDialog.Builder
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -90,13 +112,59 @@ class SignIn_Fragment : Fragment() {
 //    }
 
 
+        val progressBar = getDialogueProgressBar(view).create()
+        progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        progressBar.setCanceledOnTouchOutside(false)
+
+
+
         login_btn.setOnClickListener{
 
             email_cont.helperText = validemail()
             password_cont.helperText = validPass()
 
             if(email_cont.helperText == null && password_cont.helperText == null){
-                apicalling(view)
+                progressBar.show()
+                val user = User(null, null, emailin.text.toString(), passwordin.text.toString())
+                val retrofitAPI = ServiceBuilder.buildService(RetrofitApi::class.java)
+                val call = retrofitAPI.login(user)
+
+                call.enqueue(object : Callback<LoginResponse> {
+                    override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                        if (response.code() == 200) {
+//                    Toast.makeText(view?.context, "", Toast.LENGTH_SHORT).show()
+//                    runBlocking { view?.let { UserDetails(it.context).storeUserData(
+//                        LogInInfo(response.body()?.authToken.toString(),true)
+//                    ) } }
+
+                            GlobalScope.launch(Dispatchers.IO) {
+                                val dataStoreManage = UserDetails(view.context)
+                                dataStoreManage.storeUserData(LogInInfo(response.body()?.authToken.toString(), true))
+                            }
+
+                            requireActivity().run{
+                                startActivity(Intent(context,activity_Dashboard::class.java))
+                                finish()
+                            }
+                            Log.i("Naman", response.code().toString().toString())
+                            progressBar.dismiss()
+                        } else {
+                            Toast.makeText(view?.context, response.code().toString(), Toast.LENGTH_SHORT).show()
+                            progressBar.dismiss()
+
+                        }
+                    }
+
+                    override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                        Toast.makeText(
+                            view?.context,
+                            "Please check your internet connection",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        Log.i("Naman", "Please check your internet connection")
+                        progressBar.dismiss()
+                    }
+                })
             }
         }
         }
@@ -138,45 +206,7 @@ class SignIn_Fragment : Fragment() {
         replaceFrag(otpVerificationFrag,"otppage")
     }
 
-    fun apicalling(view: View) {
-        val user = User(null, null, emailin.text.toString(), passwordin.text.toString())
-        val retrofitAPI = ServiceBuilder.buildService(RetrofitApi::class.java)
-        val call = retrofitAPI.login(user)
 
-        call.enqueue(object : Callback<LoginResponse> {
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                if (response.code() == 200) {
-//                    Toast.makeText(view?.context, "", Toast.LENGTH_SHORT).show()
-//                    runBlocking { view?.let { UserDetails(it.context).storeUserData(
-//                        LogInInfo(response.body()?.authToken.toString(),true)
-//                    ) } }
-
-                    GlobalScope.launch(Dispatchers.IO) {
-                        val dataStoreManage = UserDetails(view.context)
-                        dataStoreManage.storeUserData(LogInInfo(response.body()?.authToken.toString(), true))
-                    }
-
-                    requireActivity().run{
-                        startActivity(Intent(context,activity_Dashboard::class.java))
-                        finish()
-                    }
-                    Log.i("Naman", response.code().toString().toString())
-                } else {
-                    Toast.makeText(view?.context, "Incorrect password/email", Toast.LENGTH_SHORT).show()
-
-                }
-            }
-
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Toast.makeText(
-                    view?.context,
-                    "Please check your internet connection",
-                    Toast.LENGTH_SHORT
-                ).show()
-                Log.i("Naman", "Please check your internet connection")
-            }
-        })
-    }
 
 
 }

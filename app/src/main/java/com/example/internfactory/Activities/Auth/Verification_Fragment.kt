@@ -1,4 +1,7 @@
 package com.example.internfactory.Activities.Auth
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -7,10 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.internfactory.Activities.connecting
@@ -34,6 +34,22 @@ private lateinit var otp_btn : Button
 
 private lateinit var reset_otp:TextView
 lateinit var verifybtn: Button
+
+    var builder : AlertDialog.Builder? = null
+    fun getDialogueProgressBar(view : View) : AlertDialog.Builder{
+        if(builder==null){
+            builder = AlertDialog.Builder(view.context)
+            val progressBar = ProgressBar(view.context)
+            val lp = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            progressBar.layoutParams = lp
+            builder!!.setView(progressBar)
+        }
+        return builder as AlertDialog.Builder
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,7 +93,14 @@ lateinit var verifybtn: Button
         otp_input = requireView().findViewById(R.id.otp_input)
         otp_btn = requireView().findViewById(R.id.button2)
         otp_cont = requireView().findViewById(R.id.otp_cont)
+
+        val progressBar = getDialogueProgressBar(view).create()
+        progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        progressBar.setCanceledOnTouchOutside(false)
+
+
         otp_btn.setOnClickListener{
+            progressBar.show()
             if(otp_input.text.toString()==""){
                 otp_cont.helperText = "Required"
             }
@@ -97,13 +120,16 @@ lateinit var verifybtn: Button
                             Toast.makeText(view.context, "Otp Verified", Toast.LENGTH_SHORT).show()
                             reset_pass()
                             Log.i("Naman", response.body().toString())
+                            progressBar.dismiss()
                         }
                         else{
                             Toast.makeText(view.context, "Incorrect otp",Toast.LENGTH_SHORT).show()
+                            progressBar.dismiss()
                         }
                     }
                     override fun onFailure(call: Call<VerifyOtpResponse>, t:Throwable){
                         Toast.makeText(view.context, "Failed", Toast.LENGTH_LONG).show()
+                        progressBar.dismiss()
                     }
                 })
             }

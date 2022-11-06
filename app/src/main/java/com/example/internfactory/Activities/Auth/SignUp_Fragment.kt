@@ -1,5 +1,8 @@
 package com.example.internfactory.Activities.Auth
 
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -8,6 +11,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.FragmentManager
@@ -34,6 +39,21 @@ class SignUp_Fragment : Fragment() {
     private lateinit var email_box : TextInputLayout
     private lateinit var password : TextInputLayout
     private lateinit var button : Button
+
+    var builder : AlertDialog.Builder? = null
+    fun getDialogueProgressBar(view : View) : AlertDialog.Builder{
+        if(builder==null){
+            builder = AlertDialog.Builder(view.context)
+            val progressBar = ProgressBar(view.context)
+            val lp = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            progressBar.layoutParams = lp
+            builder!!.setView(progressBar)
+        }
+        return builder as AlertDialog.Builder
+    }
 
 
     lateinit var signupbtn: Button
@@ -122,7 +142,13 @@ class SignUp_Fragment : Fragment() {
         email_box = requireView().findViewById(R.id.email_box)
         password = requireView().findViewById(R.id.password)
 
+        val progressBar = getDialogueProgressBar(view).create()
+        progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        progressBar.setCanceledOnTouchOutside(false)
+
         button.setOnClickListener{
+            progressBar.show()
+
             email_box.helperText = validemail()
             password.helperText = validPass()
             firstname.helperText = validfirstname()
@@ -154,15 +180,18 @@ class SignUp_Fragment : Fragment() {
                                         Toast.makeText(view.context, "Otp Sent Succesfully", Toast.LENGTH_SHORT).show()
                                         signupotpVerificationFrag()
                                         Log.i("Naman", response.body().toString())
+                                        progressBar.dismiss()
                                     }
                                     else{
                                         android.widget.Toast.makeText(view.context,"Already Registered Email", android.widget.Toast.LENGTH_SHORT).show()
+                                        progressBar.dismiss()
                                     }
                                 }
 
                                 override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
                                     Toast.makeText(view.context, "Please check your internet connection", Toast.LENGTH_SHORT).show()
                                     Log.i("Naman", "Please check your internet connection")
+                                    progressBar.dismiss()
                                 }
                             })
                         }

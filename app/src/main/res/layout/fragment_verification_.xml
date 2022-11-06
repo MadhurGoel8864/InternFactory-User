@@ -84,6 +84,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/otp_input"
             android:maxLength="6"
@@ -151,5 +152,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1:00"
+        android:layout_marginTop="8dp"
+        android:textColor="#212427"
+        app:layout_constraintStart_toStartOf="@+id/otp_cont"
+        app:layout_constraintTop_toBottomOf="@+id/otp_cont" />
 
 </androidx.constraintlayout.widget.ConstraintLayout></ScrollView>

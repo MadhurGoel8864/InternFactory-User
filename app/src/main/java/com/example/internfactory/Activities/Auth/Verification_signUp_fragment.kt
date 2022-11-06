@@ -1,5 +1,8 @@
 package com.example.internfactory.Activities.Auth
+import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,10 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.internfactory.Activities.connecting
@@ -37,6 +37,21 @@ class Verification_signUp_fragment : Fragment() {
 
 
     lateinit var verifybtn: Button
+
+    var builder : AlertDialog.Builder? = null
+    fun getDialogueProgressBar(view : View) : AlertDialog.Builder{
+        if(builder==null){
+            builder = AlertDialog.Builder(view.context)
+            val progressBar = ProgressBar(view.context)
+            val lp = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            progressBar.layoutParams = lp
+            builder!!.setView(progressBar)
+        }
+        return builder as AlertDialog.Builder
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -119,9 +134,13 @@ class Verification_signUp_fragment : Fragment() {
         otp_btn = requireView().findViewById(R.id.button2n)
         otp_cont = requireView().findViewById(R.id.otp_contn)
 
+        val progressBar = getDialogueProgressBar(view).create()
+        progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        progressBar.setCanceledOnTouchOutside(false)
 
 
         otp_btn.setOnClickListener{
+            progressBar.show()
             if(otp_input.text.toString()==""){
                 otp_cont.helperText = "Required"
             }
@@ -165,8 +184,10 @@ class Verification_signUp_fragment : Fragment() {
                                             finish()
                                         }
                                         Log.i("Naman", response.code().toString().toString())
+                                        progressBar.dismiss()
                                     } else {
                                         Toast.makeText(view?.context, "Incorrect otp", Toast.LENGTH_SHORT).show()
+                                        progressBar.dismiss()
 
                                     }
                                 }
@@ -178,6 +199,7 @@ class Verification_signUp_fragment : Fragment() {
                                         Toast.LENGTH_SHORT
                                     ).show()
                                     Log.i("Naman", "Please check your internet connection")
+                                    progressBar.dismiss()
                                 }
                             })
                         }
