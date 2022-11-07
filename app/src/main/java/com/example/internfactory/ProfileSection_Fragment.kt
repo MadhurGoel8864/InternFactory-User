@@ -41,11 +41,11 @@ class ProfileSection_Fragment : Fragment() {
         return inflater.inflate(R.layout.fragment_profile_section_, container, false)
     }
 
-    lateinit var edit_profile_btn : TextView
+//    lateinit var edit_profile_btn : TextView
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        edit_profile_btn = view.findViewById(R.id.edit_profile_btn)
+//        edit_profile_btn = view.findViewById(R.id.edit_profile_btn)
 //        edit_profile_btn.setOnClickListener{
 
 //            requireActivity().run{
