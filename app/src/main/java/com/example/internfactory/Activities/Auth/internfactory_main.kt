@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import com.example.internfactory.Activities.Auth.Home_page
+import com.example.internfactory.Activities.Internship_details_activity
+import com.example.internfactory.Activities.internship_deatils_fragement
 import com.example.internfactory.modules.UserDetails
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -17,7 +19,7 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
         Handler().postDelayed({
-            val Intent = Intent(this@MainActivity, activity_Dashboard::class.java)
+            val Intent = Intent(this@MainActivity, Internship_details_activity::class.java)
             startActivity(Intent)
             finish()
         }, 3000)
