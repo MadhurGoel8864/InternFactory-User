@@ -9,6 +9,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.internfactory.Activities.Applied_Internships_Fragment
 import com.example.internfactory.Activities.Auth.SignIn_Fragment
 import com.example.internfactory.Activities.search_page
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -73,7 +74,7 @@ class activity_Dashboard : AppCompatActivity() {
                 R.id.Home ->  replaceFrag(DashBoard_Fragment(),"Home")
                 R.id.Profile -> replaceFrag(ProfileSection_Fragment(),"Profile")
                 R.id.Search -> replaceFrag(search_page(),"Search")
-                R.id.Applied -> replaceFrag(CategoriesSeeAll(),"Applied")
+                R.id.Applied -> replaceFrag(Applied_Internships_Fragment(),"Applied")
                 else->{
                 }
             }
