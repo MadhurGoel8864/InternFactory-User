@@ -197,22 +197,28 @@ class SignUp_Fragment : Fragment() {
                         }
                         else{
                             Toast.makeText(view.context, msg, Toast.LENGTH_SHORT).show()
+                            progressBar.dismiss()
                         }
                     }
                     else{
                         Toast.makeText(view.context, "Enter a valid email", Toast.LENGTH_SHORT).show()
+                        progressBar.dismiss()
                     }
                 }
                 else{
                     Toast.makeText(view.context, "Enter a valid last name", Toast.LENGTH_SHORT).show()
+                    progressBar.dismiss()
                 }
             }
             else{
                 Toast.makeText(view.context, "Enter valid first name", Toast.LENGTH_SHORT).show()
+                progressBar.dismiss()
             }
+//                progressBar.dismiss()
+            }
+//            progressBar.dismiss()
         }
-            }
-
+//        progressBar.dismiss()
         }
 
 

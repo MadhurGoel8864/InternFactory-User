@@ -44,6 +44,7 @@ class ResetPassword_Fragment : Fragment() {
             val progressBar = ProgressBar(view.context)
             val lp = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
+
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
             progressBar.layoutParams = lp
