@@ -29,4 +29,6 @@ interface RetrofitApi {
     @GET("/api/getTrending")
     fun gettrends(): Call<MutableList<trending_seeall_response>>
 
+    @GET("/api/getUserInfo")
+    fun editPofile(): Call<EditProfileResponse>
 }
