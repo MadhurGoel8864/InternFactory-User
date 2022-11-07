@@ -66,14 +66,14 @@ class Edit_profile_Fragment : Fragment() {
         email_inp = view.findViewById(R.id.email_inp)
         phone_no_inp = view.findViewById(R.id.phone_no_inp)
 
-        submit_button = view.findViewById(R.id.submit_bn)
-
-        submit_button.setOnClickListener{
-            first_name_cont.helperText = validfirstname()
-            last_name_cont.helperText = validlastname()
-            email_cont.helperText = validemail()
-            phone_no_cont.helperText = validnumber()
-        }
+//        submit_button = view.findViewById(R.id.submit_bn)
+//
+//        submit_button.setOnClickListener{
+//            first_name_cont.helperText = validfirstname()
+//            last_name_cont.helperText = validlastname()
+//            email_cont.helperText = validemail()
+//            phone_no_cont.helperText = validnumber()
+//        }
 
         // Inflate the layout for this fragment
         return view
