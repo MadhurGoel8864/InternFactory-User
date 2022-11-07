@@ -39,6 +39,8 @@ import retrofit2.Response
 
 class SignIn_Fragment : Fragment() {
 
+    lateinit var progressBar:AlertDialog
+
     private lateinit var emailin: TextInputEditText
     private lateinit var passwordin:TextInputEditText
     private lateinit var buttonin:Button
@@ -112,19 +114,18 @@ class SignIn_Fragment : Fragment() {
 //    }
 
 
-        val progressBar = getDialogueProgressBar(view).create()
+         progressBar = getDialogueProgressBar(view).create()
         progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressBar.setCanceledOnTouchOutside(false)
 
 
 
         login_btn.setOnClickListener{
-
+            progressBar.show()
             email_cont.helperText = validemail()
             password_cont.helperText = validPass()
 
             if(email_cont.helperText == null && password_cont.helperText == null){
-                progressBar.show()
                 val user = User(null, null, emailin.text.toString(), passwordin.text.toString())
                 val retrofitAPI = ServiceBuilder.buildService(RetrofitApi::class.java)
                 val call = retrofitAPI.login(user)
@@ -166,22 +167,26 @@ class SignIn_Fragment : Fragment() {
                     }
                 })
             }
-            progressBar.dismiss()
+//            progressBar.dismiss()
         }
         }
 
     private fun validPass(): String? {
         val pass_txt = password_text.text.toString()
         if(pass_txt.length<8){
+            progressBar.dismiss()
             return "Minimum 8 characters Required"
         }
         if(!pass_txt.contains(Regex("[A-Z]"))){
+            progressBar.dismiss()
             return "At least 1 UpperCase Alphabet Required"
         }
         if(!pass_txt.contains(Regex("[a-z]"))){
+            progressBar.dismiss()
             return "At least 1 LowerCase Alphabet Required"
         }
         if(!pass_txt.contains(Regex("[@#\$%^&*+=]"))){
+            progressBar.dismiss()
             return "At least 1  Special Character Required"
         }
         return null
@@ -189,6 +194,7 @@ class SignIn_Fragment : Fragment() {
     private fun validemail(): String? {
         val email_text = ed1.text.toString()
         if(!Patterns.EMAIL_ADDRESS.matcher(email_text).matches()){
+            progressBar.dismiss()
             return "Invalid Email Address"
         }
         return null

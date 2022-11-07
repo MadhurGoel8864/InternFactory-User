@@ -30,6 +30,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class SignUp_Fragment : Fragment() {
+
+    lateinit var progressBar:AlertDialog
+
     private lateinit var firstname_inp : TextInputEditText
     private lateinit var lastname_inp : TextInputEditText
     private lateinit var email_inp : TextInputEditText
@@ -142,7 +145,7 @@ class SignUp_Fragment : Fragment() {
         email_box = requireView().findViewById(R.id.email_box)
         password = requireView().findViewById(R.id.password)
 
-        val progressBar = getDialogueProgressBar(view).create()
+        progressBar = getDialogueProgressBar(view).create()
         progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressBar.setCanceledOnTouchOutside(false)
 
@@ -225,9 +228,11 @@ class SignUp_Fragment : Fragment() {
     private fun validfirstname():String?{
         val txt = firstname_inp.text.toString()
         if(txt==null){
+            progressBar.dismiss()
             return "Required"
         }
         if(txt.contains(Regex("[1234567890]"))){
+            progressBar.dismiss()
             return "Must contain only alphabets"
         }
         return null
@@ -235,6 +240,7 @@ class SignUp_Fragment : Fragment() {
     private fun validlastname():String?{
         val txt = lastname_inp.text.toString()
         if(txt.contains(Regex("[1234567890]"))){
+            progressBar.dismiss()
             return "Must contain only alphabets"
         }
         return null
@@ -243,15 +249,19 @@ class SignUp_Fragment : Fragment() {
     private fun validPass(): String? {
         val pass_txt = password_inp.text.toString()
         if(pass_txt.length<8){
+            progressBar.dismiss()
             return "Minimum 8 characters Required"
         }
         if(!pass_txt.contains(Regex("[A-Z]"))){
+            progressBar.dismiss()
             return "At least 1 UpperCase Alphabet Required"
         }
         if(!pass_txt.contains(Regex("[a-z]"))){
+            progressBar.dismiss()
             return "At least 1 LowerCase Alphabet Required"
         }
         if(!pass_txt.contains(Regex("[@#\$%^&*+=]"))){
+            progressBar.dismiss()
             return "At least 1  Special Character Required"
         }
         return null
@@ -259,6 +269,7 @@ class SignUp_Fragment : Fragment() {
     private fun validemail(): String? {
         val email_text = email_inp.text.toString()
         if(!Patterns.EMAIL_ADDRESS.matcher(email_text).matches()){
+            progressBar.dismiss()
             return "Invalid Email Address"
         }
         return null
@@ -282,6 +293,7 @@ class SignUp_Fragment : Fragment() {
 
 
         if(password.length < 8){
+            progressBar.dismiss()
             return "Password must contain at least 8 characters"
         }
 
@@ -308,15 +320,19 @@ class SignUp_Fragment : Fragment() {
         }
 
         if(!hasUpperCase){
+            progressBar.dismiss()
             return "Password must contain at least one uppercase character"
         }
         if(!hasLowerCase){
+            progressBar.dismiss()
             return "Password must contain at least one lowercase character"
         }
         if(!hasNumber){
+            progressBar.dismiss()
             return "Password must contain at least one number"
         }
         if(!hasSpecialSymbol){
+            progressBar.dismiss()
             return "Password must contain at least one special symbol"
         }
         return "true"

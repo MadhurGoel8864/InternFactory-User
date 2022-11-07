@@ -30,6 +30,8 @@ import retrofit2.Response
 
 class ResetPassword_Fragment : Fragment() {
 
+    private lateinit var progressBar:AlertDialog
+
     lateinit var btn:Button
     private lateinit var pass_input: TextInputEditText
     private lateinit var pass : TextInputLayout
@@ -103,7 +105,7 @@ class ResetPassword_Fragment : Fragment() {
         conf_pass_inp= requireView().findViewById(R.id.conf_password_form_inp)
         reset_btn= requireView().findViewById(R.id.reset_btn)
 
-        val progressBar = getDialogueProgressBar(view).create()
+        progressBar = getDialogueProgressBar(view).create()
         progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressBar.setCanceledOnTouchOutside(false)
 
@@ -168,15 +170,19 @@ class ResetPassword_Fragment : Fragment() {
     private fun validPass(): String? {
         val pass_txt = pass_input.text.toString()
         if(pass_txt.length<8){
+            progressBar.dismiss()
             return "Minimum 8 characters Required"
         }
         if(!pass_txt.contains(Regex("[A-Z]"))){
+            progressBar.dismiss()
             return "At least 1 UpperCase Alphabet Required"
         }
         if(!pass_txt.contains(Regex("[a-z]"))){
+            progressBar.dismiss()
             return "At least 1 LowerCase Alphabet Required"
         }
         if(!pass_txt.contains(Regex("[@#\$%^&*+=]"))){
+            progressBar.dismiss()
             return "At least 1  Special Character Required"
         }
         return null

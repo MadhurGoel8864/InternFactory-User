@@ -53,6 +53,12 @@ class activity_Dashboard : AppCompatActivity() {
     }
 
     fun dashboardFrag(view : View){
+        val fm : FragmentManager = supportFragmentManager
+        if(fm.backStackEntryCount>0){
+            fm.popBackStackImmediate()
+            return
+        }
+
         val dashboardFrag = DashBoard_Fragment()
         replaceFrag(dashboardFrag,"mainScreen")
     }

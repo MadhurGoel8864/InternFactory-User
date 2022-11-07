@@ -31,6 +31,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ForgotPassword_Fragment : Fragment() {
+
+    private  lateinit var progressBar:AlertDialog
+    
     lateinit var email_in:TextInputEditText
     private lateinit var email_inp: TextInputEditText
     private lateinit var email_cont: TextInputLayout
@@ -94,7 +97,7 @@ class ForgotPassword_Fragment : Fragment() {
         email_cont = requireView().findViewById(R.id.ed1)
         email_inp = requireView().findViewById(R.id.forgot_email_inp)
 
-        val progressBar = getDialogueProgressBar(view).create()
+        progressBar = getDialogueProgressBar(view).create()
         progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressBar.setCanceledOnTouchOutside(false)
 
@@ -141,6 +144,7 @@ class ForgotPassword_Fragment : Fragment() {
     private fun validEmail(): String? {
         val email_text = email_inp.text.toString()
         if (!Patterns.EMAIL_ADDRESS.matcher(email_text).matches()) {
+            progressBar.dismiss()
             return "Invalid Email Address "
         }
         return null

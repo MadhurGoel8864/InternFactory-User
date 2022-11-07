@@ -32,6 +32,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class Verification_signUp_fragment : Fragment() {
+    lateinit var progressBar:AlertDialog
+
     private lateinit var otp_input : TextInputEditText
     private lateinit var otp_cont : TextInputLayout
     private lateinit var otp_btn : Button
@@ -152,7 +154,7 @@ class Verification_signUp_fragment : Fragment() {
         otp_btn = requireView().findViewById(R.id.button2n)
         otp_cont = requireView().findViewById(R.id.otp_contn)
 
-        val progressBar = getDialogueProgressBar(view).create()
+        progressBar = getDialogueProgressBar(view).create()
         progressBar.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressBar.setCanceledOnTouchOutside(false)
 
@@ -193,6 +195,7 @@ class Verification_signUp_fragment : Fragment() {
                                             val dataStoreManager = UserDetails(view.context)
                                             dataStoreManager.storeUserData(LogInInfo(response.body()?.authToken.toString(), true))
                                         }
+
 
                                         requireActivity().run{
                                             startActivity(
