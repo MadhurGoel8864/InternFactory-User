@@ -26,4 +26,7 @@ interface RetrofitApi {
     @GET("/api/getCategory")
     fun getcategories() : Call<MutableList<category_seeall_response>>
 
+    @GET("/api/getTrending")
+    fun gettrends(): Call<MutableList<trending_seeall_response>>
+
 }

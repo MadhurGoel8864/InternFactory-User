@@ -4,6 +4,7 @@ import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract.Profile
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -36,6 +37,16 @@ class activity_Dashboard : AppCompatActivity() {
         replaceFrag(edit_profile_Frag,"editprofile")
     }
 
+    fun aboutFrag(view:View){
+        Log.d("Hello","about page")
+        val aboutfrag = About_Fragment()
+        replaceFrag(aboutfrag,"about")
+    }
+
+    fun helpFrag(view:View){
+        val helpfrag = Help_Fragment()
+        replaceFrag(helpfrag,"help")
+    }
     fun categoryFrag(view : View){
         val categoryFrag = CategoriesSeeAll()
         replaceFrag(categoryFrag,"category")
