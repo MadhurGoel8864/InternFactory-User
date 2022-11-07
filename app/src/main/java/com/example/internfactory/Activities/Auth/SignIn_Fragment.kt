@@ -166,6 +166,7 @@ class SignIn_Fragment : Fragment() {
                     }
                 })
             }
+            progressBar.dismiss()
         }
         }
 
