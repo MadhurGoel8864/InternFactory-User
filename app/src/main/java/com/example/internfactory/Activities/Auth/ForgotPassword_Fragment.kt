@@ -33,7 +33,7 @@ import retrofit2.Response
 class ForgotPassword_Fragment : Fragment() {
 
     private  lateinit var progressBar:AlertDialog
-    
+
     lateinit var email_in:TextInputEditText
     private lateinit var email_inp: TextInputEditText
     private lateinit var email_cont: TextInputLayout
