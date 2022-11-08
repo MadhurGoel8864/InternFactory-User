@@ -193,7 +193,7 @@ class Verification_signUp_fragment : Fragment() {
 
                                         GlobalScope.launch(Dispatchers.IO) {
                                             val dataStoreManager = UserDetails(view.context)
-                                            dataStoreManager.storeUserData(LogInInfo(response.body()?.authToken.toString(), true))
+                                            dataStoreManager.storeUserData(LogInInfo(response.body()?.authToken.toString(), true,(activity as connecting).signUpEmail))
                                         }
 
 

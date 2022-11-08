@@ -18,19 +18,20 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
+
+        val Intent = Intent(this@MainActivity, Home_page::class.java)
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val userDetails=UserDetails(this@MainActivity)
+            userDetails.getToken().collect{
+                if(it.logInState){
+                    intent=Intent(this@MainActivity,activity_Dashboard::class.java)
+                }
+            }
+        }
         Handler().postDelayed({
-            val Intent = Intent(this@MainActivity, activity_Dashboard::class.java)
             startActivity(Intent)
             finish()
         }, 3000)
-
-//        GlobalScope.launch(Dispatchers.IO) {
-//            val userDetails=UserDetails(this@MainActivity)
-//            userDetails.getToken().collect{
-//                if(it.logInState){
-//                    intent=Intent(this@MainActivity,activity_Dashboard::class.java)
-//                }
-//            }
-//        }
     }
 }

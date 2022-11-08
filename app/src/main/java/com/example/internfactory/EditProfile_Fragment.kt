@@ -1,59 +1,78 @@
 package com.example.internfactory
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import com.example.internfactory.Activities.connecting
+import com.example.internfactory.modules.EditProfileRequest
+import com.example.internfactory.modules.EditProfileResponse
+import com.example.internfactory.modules.UserDetails
+import com.example.internfactory.modules.trending_seeall_response
+import com.example.internfactory.server.CommunicatorEmail
+import com.example.internfactory.server.RetrofitApi
+import com.example.internfactory.server.ServiceBuilder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Response
+import java.lang.reflect.GenericArrayType
+import javax.security.auth.callback.Callback
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [EditProfile_Fragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class EditProfile_Fragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var firstname_inp:TextView
+    private lateinit var lastname_inp:TextView
+    private lateinit var email_inp: TextView
+    private lateinit var gender_inp:TextView
+    private lateinit var number_inp:TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_profile, container, false)
-    }
+        val view= inflater.inflate(R.layout.fragment_edit_profile, container, false)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment EditProfile_Fragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            EditProfile_Fragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        var email:String=""
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val userDetails= UserDetails(view.context)
+            userDetails.getToken().collect{
+                email=it.signInemail
+                Log.d("naman",email)
+            }
+        }
+
+        firstname_inp=view.findViewById(R.id.textView2)
+        lastname_inp=view.findViewById(R.id.textView4)
+        email_inp=view.findViewById(R.id.textView6)
+        number_inp=view.findViewById(R.id.textView8)
+        gender_inp=view.findViewById(R.id.textView10)
+
+        val editProfileRequest=EditProfileRequest(email)
+        val serviceBuilder = ServiceBuilder.buildService(RetrofitApi::class.java)
+        val Call = serviceBuilder.viewProfile(editProfileRequest)
+
+        Call.enqueue(object : Callback,
+            retrofit2.Callback<EditProfileResponse> {
+            override fun onResponse(call: Call<EditProfileResponse>, response: Response<EditProfileResponse>) {
+                TODO("Not yet implemented")
+                if(response.isSuccessful){
+                    firstname_inp.text= response.body()?.firstname
+                    lastname_inp.text=response.body()?.lastname
                 }
             }
+
+            override fun onFailure(call: Call<EditProfileResponse>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+            })
+        return view
     }
 }

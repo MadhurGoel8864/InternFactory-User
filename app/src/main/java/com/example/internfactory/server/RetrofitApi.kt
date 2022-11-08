@@ -8,6 +8,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface RetrofitApi {
+    //Auth
     @POST("/api/auth/login/")
     fun login(@Body userSend: User) : Call<LoginResponse>
 
@@ -23,12 +24,14 @@ interface RetrofitApi {
     @POST("api/auth/resetpass")
     fun resetPassRequest(@Body resetPassRequest: ResetPassRequest) : Call<ResetPasswordResponse>
 
+    //DashBoard
     @GET("/api/getCategory")
     fun getcategories() : Call<MutableList<category_seeall_response>>
 
     @GET("/api/getTrending")
     fun gettrends(): Call<MutableList<trending_seeall_response>>
 
+    //Profile
     @GET("/api/getUserInfo")
-    fun editPofile(): Call<EditProfileResponse>
+    fun viewProfile(@Body editProfileRequest: EditProfileRequest): Call<EditProfileResponse>
 }
