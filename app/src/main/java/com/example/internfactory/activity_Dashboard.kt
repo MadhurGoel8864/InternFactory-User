@@ -9,6 +9,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.internfactory.Activities.All_internship_list_fragment
 import com.example.internfactory.Activities.Applied_Internships_Fragment
 import com.example.internfactory.Activities.Auth.SignIn_Fragment
 import com.example.internfactory.Activities.search_page
@@ -43,6 +44,11 @@ class activity_Dashboard : AppCompatActivity() {
     fun editprofileFrag(view:View){
         val editProfile_Frag =Edit_profile_Fragment()
         replaceFrag(editProfile_Frag,"editprofile")
+    }
+
+    fun all_internship_list_Frage(view: View){
+        val all_inten_list =All_internship_list_fragment()
+        replaceFrag(all_inten_list,"editprofile")
     }
 
     fun aboutFrag(view:View){

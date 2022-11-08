@@ -29,29 +29,39 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:fontFamily="@font/montserrat_medium"
-        android:text="Edit Profile"
+        android:text="Profile"
         android:textColor="#212427"
         android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView9"
         app:layout_constraintTop_toTopOf="@+id/imageView9" />
 
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="5dp"
-        android:src="@drawable/edit_logo"
-        android:onClick="editprofileFrag"
-        app:layout_constraintStart_toStartOf="@id/txtedt"
-        app:layout_constraintTop_toBottomOf="@+id/txtedt" />
+        <ImageView
+            android:id="@+id/imageView13"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:onClick="editprofileFrag"
+            android:src="@drawable/edit_logo"
+            app:layout_constraintStart_toStartOf="@id/txtedt"
+            app:layout_constraintTop_toBottomOf="@+id/txtedt" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            android:fontFamily="@font/montserrat"
+            android:textColor="#212427"
+            android:layout_marginStart="10dp"
+            android:textSize="24dp"
+            app:layout_constraintStart_toEndOf="@+id/imageView13"
+            app:layout_constraintTop_toTopOf="@+id/imageView13" />
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="4dp"
-        android:layout_marginStart="35dp"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="35dp"
+        android:layout_marginHorizontal="30dp"
         android:background="#1A212427"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +70,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:text="First Name"
         android:textColor="#000000"
         android:textSize="18sp"
@@ -70,9 +80,10 @@
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="30dp"
             android:background="@drawable/custom_editprofile"
             android:text="Naman"
             android:paddingTop="10dp"
@@ -81,8 +92,7 @@
             android:textColor="#000000"
             android:fontFamily="@font/montserrat"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView1"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView1" />
 
         <TextView
@@ -99,19 +109,19 @@
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/custom_editprofile"
-            android:text="Bansal"
+            android:fontFamily="@font/montserrat"
+            android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
+            android:text="Bansal"
             android:textColor="#000000"
-            android:fontFamily="@font/montserrat"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView3"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
@@ -122,25 +132,24 @@
             android:text="Email"
             android:textColor="#000000"
             android:textSize="18sp"
-            android:layout_marginBottom="10dp"
             app:layout_constraintStart_toStartOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <TextView
             android:id="@+id/textView6"
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="30dp"
             android:background="@drawable/custom_editprofile"
-            android:text="abcd@gmail.com"
+            android:fontFamily="@font/montserrat"
+            android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
+            android:text="abcd@gmail.com"
             android:textColor="#000000"
-            android:fontFamily="@font/montserrat"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView5"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
         <TextView
@@ -157,19 +166,19 @@
 
         <TextView
             android:id="@+id/textView8"
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="30dp"
             android:background="@drawable/custom_editprofile"
-            android:text="1234567890"
+            android:fontFamily="@font/montserrat"
+            android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
+            android:text="1234567890"
             android:textColor="#000000"
-            android:fontFamily="@font/montserrat"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView7"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
         <TextView
@@ -186,19 +195,19 @@
 
         <TextView
             android:id="@+id/textView10"
-            android:layout_width="330dp"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="30dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/custom_editprofile"
-            android:text="Male/Female"
+            android:fontFamily="@font/montserrat"
+            android:paddingLeft="10dp"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
+            android:text="Male/Female"
             android:textColor="#000000"
-            android:fontFamily="@font/montserrat"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView9"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
 

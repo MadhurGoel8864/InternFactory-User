@@ -34,4 +34,6 @@ interface RetrofitApi {
     //Profile
     @GET("/api/getUserInfo")
     fun viewProfile(@Body editProfileRequest: EditProfileRequest): Call<EditProfileResponse>
+
+
 }

@@ -1,14 +1,19 @@
 package com.example.internfactory
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.internfactory.Activities.Adapters.category_ViewHolder
 import com.example.internfactory.Activities.Adapters.category_adapter
+import com.example.internfactory.Activities.All_internship_list_fragment
 import com.example.internfactory.modules.category_seeall_request
 import com.example.internfactory.modules.category_seeall_response
 import com.example.internfactory.server.RetrofitApi
@@ -19,11 +24,19 @@ import javax.security.auth.callback.Callback
 
 class CategoriesSeeAll : Fragment() {
 
+    private fun replaceFrag(fragment : Fragment, name: String){
+        val fm : FragmentManager =supportFragmentManager
+        val ft : FragmentTransaction = fm.beginTransaction()
+        ft.addToBackStack(name)
+        ft.add(R.id.dashboard, fragment)
+        ft.commit()
+    }
+
+    private lateinit var categadap: category_adapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_categories_see_all, container, false)
     }
 
@@ -45,6 +58,8 @@ class CategoriesSeeAll : Fragment() {
                     recyclerView.apply {
                         layoutManager = LinearLayoutManager(context)
                         adapter = category_adapter(response.body()!!)
+
+
                     }
 //                    recyclerView.apply {
 //                        layoutManager = LinearLayoutManager(this@CategoriesSeeAll)
