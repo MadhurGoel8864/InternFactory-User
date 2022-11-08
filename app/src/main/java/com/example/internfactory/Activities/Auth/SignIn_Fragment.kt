@@ -140,7 +140,7 @@ class SignIn_Fragment : Fragment() {
 
                             GlobalScope.launch(Dispatchers.IO) {
                                 val dataStoreManage = UserDetails(view.context)
-                                dataStoreManage.storeUserData(LogInInfo(response.body()?.authToken.toString(), true))
+                                dataStoreManage.storeUserData(LogInInfo(response.body()?.authToken.toString(), true,emailin.text.toString()))
                             }
 
                             requireActivity().run{

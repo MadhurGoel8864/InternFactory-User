@@ -16,6 +16,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class activity_Dashboard : AppCompatActivity() {
 
+    lateinit var email:String
+
     private lateinit var bottom_nav: BottomNavigationView
 
     var count=1;
