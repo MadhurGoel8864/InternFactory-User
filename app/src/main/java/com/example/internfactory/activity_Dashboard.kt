@@ -33,9 +33,14 @@ class activity_Dashboard : AppCompatActivity() {
         replaceFrag(trendingFrag,"trending")
     }
 
+    fun profileFrag(view:View){
+        val Profile_Frag =EditProfile_Fragment()
+        replaceFrag(Profile_Frag,"profile")
+    }
+
     fun editprofileFrag(view:View){
-        val edit_profile_Frag =Edit_profile_Fragment()
-        replaceFrag(edit_profile_Frag,"editprofile")
+        val editProfile_Frag =Edit_profile_Fragment()
+        replaceFrag(editProfile_Frag,"editprofile")
     }
 
     fun aboutFrag(view:View){

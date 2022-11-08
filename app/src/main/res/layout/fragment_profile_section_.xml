@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:onClick="editprofileFrag"
+            android:onClick="profileFrag"
             android:fontFamily="@font/montserrat"
             android:text="Profile"
             android:textColor="#212427"
