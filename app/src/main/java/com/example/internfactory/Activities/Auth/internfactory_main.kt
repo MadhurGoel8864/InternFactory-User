@@ -19,7 +19,7 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
 
-        val Intent = Intent(this@MainActivity, Home_page::class.java)
+        val Intent = Intent(this@MainActivity, activity_Dashboard::class.java)
 
         GlobalScope.launch(Dispatchers.IO) {
             val userDetails=UserDetails(this@MainActivity)
