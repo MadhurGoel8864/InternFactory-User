@@ -24,13 +24,13 @@ class MainActivity : Activity() {
             finish()
         }, 3000)
 
-        GlobalScope.launch(Dispatchers.IO) {
-            val userDetails=UserDetails(this@MainActivity)
-            userDetails.getToken().collect{
-                if(it.logInState){
-                    intent=Intent(this@MainActivity,activity_Dashboard::class.java)
-                }
-            }
-        }
+//        GlobalScope.launch(Dispatchers.IO) {
+//            val userDetails=UserDetails(this@MainActivity)
+//            userDetails.getToken().collect{
+//                if(it.logInState){
+//                    intent=Intent(this@MainActivity,activity_Dashboard::class.java)
+//                }
+//            }
+//        }
     }
 }
