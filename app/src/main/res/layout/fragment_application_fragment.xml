@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.application_fragment">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="22dp"
+                android:src="@drawable/back_btn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/montserrat"
+                android:text="Application"
+                android:textColor="#212427"
+                android:textSize="26dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                app:layout_constraintTop_toTopOf="@+id/imageView6" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/view6"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:background="@drawable/details_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView16">
+
+            <ImageView
+                android:id="@+id/imageView12"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/twitter_logo"
+                app:layout_constraintStart_toStartOf="@+id/view6"
+                app:layout_constraintTop_toTopOf="@+id/view6" />
+
+            <TextView
+                android:id="@+id/textView17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/montserrat"
+                android:text="UI/UX Design"
+                android:textColor="#212427"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/imageView12"
+                app:layout_constraintTop_toTopOf="@+id/imageView12" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:text="Twitter"
+                android:textColor="#99212427"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/textView17"
+                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+
+
+            <View
+                android:id="@+id/view7"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="27dp"
+                android:background="#D9D9D9"
+                app:layout_constraintEnd_toEndOf="@+id/view6"
+                app:layout_constraintStart_toStartOf="@+id/view6"
+                app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+            <TextView
+                android:id="@+id/head_resume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginHorizontal="30dp"
+                android:fontFamily="@font/montserrat"
+                android:text="Resume"
+                android:textColor="#212427"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/view7"
+                app:layout_constraintTop_toTopOf="@+id/view7" />
+
+            <TextView
+                android:id="@+id/Applier_Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aman Singh"
+                android:fontFamily="@font/montserrat"
+                android:layout_marginTop="4dp"
+                android:textColor="#CC000000"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/head_resume"
+                app:layout_constraintTop_toBottomOf="@+id/head_resume" />
+            <TextView
+                android:id="@+id/Applier_email"
+                android:fontFamily="@font/montserrat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="aman@mail.com"
+                android:layout_marginTop="4dp"
+                android:textColor="#CC000000"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/Applier_Name"
+                app:layout_constraintStart_toStartOf="@id/Applier_Name"/>
+
+            <TextView
+                android:id="@+id/Applier_college"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:text="B.Tech from AKGEC,Ghaziabad"
+                android:layout_marginTop="4dp"
+                android:textColor="#CC000000"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/Applier_email"
+                app:layout_constraintStart_toStartOf="@id/Applier_email"/>
+
+            <View
+                android:id="@+id/view8"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:background="#D9D9D9"
+                app:layout_constraintEnd_toEndOf="@+id/view6"
+                app:layout_constraintStart_toStartOf="@+id/view6"
+                app:layout_constraintTop_toBottomOf="@+id/Applier_college" />
+            <TextView
+                android:id="@+id/head_assessment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginHorizontal="30dp"
+                android:fontFamily="@font/montserrat"
+                android:text="Assessment"
+                android:textColor="#212427"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/view8"
+                app:layout_constraintTop_toTopOf="@+id/view8" />
+            <TextView
+                android:id="@+id/ques1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:text="Why should we hire you?"
+                android:layout_marginTop="10dp"
+                android:textColor="#CC000000"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/head_assessment"
+                app:layout_constraintStart_toStartOf="@id/head_assessment"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ques1_box"
+                app:layout_constraintTop_toBottomOf="@id/ques1"
+                app:layout_constraintStart_toStartOf="@id/ques1"
+                android:layout_marginHorizontal="30dp"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                android:layout_marginTop="10dp"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/ques1_text"
+                    android:fontFamily="@font/montserrat"
+                    android:textCursorDrawable="@drawable/cursor_custom"
+                    android:inputType="textMultiLine"
+                    android:textColor="#212427"
+                    android:background="@drawable/custom_text_input_box"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/ques2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:text="Share Your work"
+                android:layout_marginTop="18dp"
+                android:layout_marginHorizontal="30dp"
+                android:textColor="#CC000000"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/ques1_box"
+                app:layout_constraintStart_toStartOf="@id/view6"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ques2_box"
+                app:layout_constraintTop_toBottomOf="@id/ques2"
+                app:layout_constraintStart_toStartOf="@id/ques2"
+                android:layout_marginHorizontal="30dp"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                android:layout_marginTop="10dp"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/ques2_text"
+                    android:textCursorDrawable="@drawable/cursor_custom"
+                    android:inputType="textMultiLine"
+                    android:fontFamily="@font/montserrat"
+                        android:textColor="#212427"
+                    android:background="@drawable/custom_text_input_box"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/ques3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:text="Have you worked in team projects"
+                android:layout_marginTop="18dp"
+                android:layout_marginHorizontal="30dp"
+                android:textColor="#CC000000"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/ques2_box"
+                app:layout_constraintStart_toStartOf="@id/view6"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ques3_box"
+                app:layout_constraintTop_toBottomOf="@id/ques3"
+                app:layout_constraintStart_toStartOf="@id/ques3"
+                android:layout_marginHorizontal="30dp"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                android:layout_marginTop="10dp"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/ques3_text"
+                    android:fontFamily="@font/montserrat"
+                    android:textCursorDrawable="@drawable/cursor_custom"
+                    android:inputType="textMultiLine"
+                    android:textColor="#212427"
+                    android:background="@drawable/custom_text_input_box"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <TextView
+                android:id="@+id/ques4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:text="What are your strengths?"
+                android:layout_marginTop="18dp"
+                android:layout_marginHorizontal="30dp"
+                android:textColor="#CC000000"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/ques3_box"
+                app:layout_constraintStart_toStartOf="@id/view6"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ques4_box"
+                app:layout_constraintTop_toBottomOf="@id/ques4"
+                app:layout_constraintStart_toStartOf="@id/ques4"
+                android:layout_marginHorizontal="30dp"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                android:layout_marginTop="10dp"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/ques4_text"
+                    android:fontFamily="@font/montserrat"
+                    android:textCursorDrawable="@drawable/cursor_custom"
+                    android:inputType="textMultiLine"
+                    android:textColor="#212427"
+                    android:background="@drawable/custom_text_input_box"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+            <TextView
+                android:id="@+id/ques5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:text="What are your weaknesses?"
+                android:layout_marginTop="18dp"
+                android:layout_marginHorizontal="30dp"
+                android:textColor="#CC000000"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/ques4_box"
+                app:layout_constraintStart_toStartOf="@id/view6"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ques5_box"
+                app:layout_constraintTop_toBottomOf="@id/ques5"
+                app:layout_constraintStart_toStartOf="@id/ques5"
+                android:layout_marginHorizontal="30dp"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                android:layout_marginTop="10dp"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/ques5_text"
+                    android:fontFamily="@font/montserrat"
+                    android:textCursorDrawable="@drawable/cursor_custom"
+                    android:inputType="textMultiLine"
+                    android:textColor="#212427"
+                    android:background="@drawable/custom_text_input_box"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/ques6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:text="What are your hobbies?"
+                android:layout_marginTop="18dp"
+                android:layout_marginHorizontal="30dp"
+                android:textColor="#CC000000"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/ques5_box"
+                app:layout_constraintStart_toStartOf="@id/view6"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/ques6_box"
+                app:layout_constraintTop_toBottomOf="@id/ques6"
+                app:layout_constraintStart_toStartOf="@id/ques6"
+                android:layout_marginHorizontal="30dp"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp"
+                android:layout_marginTop="10dp"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/ques6_text"
+                    android:fontFamily="@font/montserrat"
+                    android:textCursorDrawable="@drawable/cursor_custom"
+                    android:inputType="textMultiLine"
+                    android:textColor="#212427"
+                    android:background="@drawable/custom_text_input_box"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/montserrat"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Submit"
+                android:layout_marginBottom="80dp"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintTop_toBottomOf="@id/ques6_box" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</FrameLayout>

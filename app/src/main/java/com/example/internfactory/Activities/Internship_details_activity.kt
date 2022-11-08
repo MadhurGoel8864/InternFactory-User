@@ -2,9 +2,11 @@ package com.example.internfactory.Activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.internfactory.CategoriesSeeAll
 import com.example.internfactory.DashBoard_Fragment
 import com.example.internfactory.R
 
@@ -16,17 +18,19 @@ class Internship_details_activity : AppCompatActivity() {
         val fm : FragmentManager =supportFragmentManager
         val ft : FragmentTransaction = fm.beginTransaction()
         ft.addToBackStack(name)
-        ft.add(R.id.dashboard, fragment)
+        ft.add(R.id.internship_det, fragment)
         ft.commit()
     }
 
+    fun application_fragment(view:View){
+        val applicationFrag = application_fragment()
+        replaceFrag(applicationFrag,"application")
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_internship_details)
-
-
 
 
         val fm : FragmentManager = supportFragmentManager
