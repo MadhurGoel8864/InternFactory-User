@@ -55,24 +55,24 @@ class EditProfile_Fragment : Fragment() {
         number_inp=view.findViewById(R.id.textView8)
         gender_inp=view.findViewById(R.id.textView10)
 
-        val editProfileRequest=EditProfileRequest(email)
-        val serviceBuilder = ServiceBuilder.buildService(RetrofitApi::class.java)
-        val Call = serviceBuilder.viewProfile(editProfileRequest)
-
-        Call.enqueue(object : Callback,
-            retrofit2.Callback<EditProfileResponse> {
-            override fun onResponse(call: Call<EditProfileResponse>, response: Response<EditProfileResponse>) {
-                TODO("Not yet implemented")
-                if(response.isSuccessful){
-                    firstname_inp.text= response.body()?.firstname
-                    lastname_inp.text=response.body()?.lastname
-                }
-            }
-
-            override fun onFailure(call: Call<EditProfileResponse>, t: Throwable) {
-                TODO("Not yet implemented")
-            }
-            })
+//        val editProfileRequest=EditProfileRequest(email)
+//        val serviceBuilder = ServiceBuilder.buildService(RetrofitApi::class.java)
+//        val Call = serviceBuilder.viewProfile(editProfileRequest)
+//
+//        Call.enqueue(object : Callback,
+//            retrofit2.Callback<EditProfileResponse> {
+//            override fun onResponse(call: Call<EditProfileResponse>, response: Response<EditProfileResponse>) {
+//                TODO("Not yet implemented")
+//                if(response.isSuccessful){
+//                    firstname_inp.text= response.body()?.firstname
+//                    lastname_inp.text=response.body()?.lastname
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<EditProfileResponse>, t: Throwable) {
+//                TODO("Not yet implemented")
+//            }
+//            })
         return view
     }
 }
