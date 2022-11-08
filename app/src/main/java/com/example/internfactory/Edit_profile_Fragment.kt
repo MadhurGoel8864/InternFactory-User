@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.widget.AdapterView.OnItemSelectedListener
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.*
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.textfield.TextInputEditText
@@ -15,7 +16,7 @@ import com.google.android.material.textfield.TextInputLayout
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-class Edit_profile_Fragment : Fragment() {
+class Edit_profile_Fragment : Fragment(),OnItemSelectedListener {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -34,9 +35,12 @@ class Edit_profile_Fragment : Fragment() {
     private lateinit var submit_button: Button
 
 
+    var dropDownList = arrayOf<String>("Male","Female")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
@@ -50,8 +54,21 @@ class Edit_profile_Fragment : Fragment() {
     ): View? {
                 val view = inflater.inflate(R.layout.fragment_edit_profile_, container, false)
 
+
+        val spin = view.findViewById<Spinner>(R.id.statusfiller)
+        spin.onItemSelectedListener = this
+//        val ad = ArrayAdapter<Any?>(this,android.R.layout.simple_spinner_item,dropDownList)
+        val ad = activity.let {
+            ArrayAdapter(it!!.applicationContext,android.R.layout.simple_spinner_item,dropDownList)
+        }
+
+        ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        spin.adapter = ad
         val fm : FragmentManager = parentFragmentManager
         val ft : FragmentTransaction = fm.beginTransaction()
+
+
 
 
 //        first_name_cont = requireView().findViewById(R.id.first_name_cont)
@@ -77,6 +94,13 @@ class Edit_profile_Fragment : Fragment() {
 
         // Inflate the layout for this fragment
         return view
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        Toast.makeText(requireContext(),dropDownList[position],Toast.LENGTH_LONG).show()
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
     }
 
     companion object {
