@@ -4,24 +4,34 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.example.internfactory.Activities.Adapters.ImageAdapter
+import com.example.internfactory.Activities.Adapters.category_adapter
+import com.example.internfactory.modules.category_seeall_response
+import com.example.internfactory.modules.trending_seeall_response
+import com.example.internfactory.server.RetrofitApi
+import com.example.internfactory.server.ServiceBuilder
+import retrofit2.Call
+import retrofit2.Response
 import java.util.Locale.Category
+import javax.security.auth.callback.Callback
 import kotlin.math.abs
 
 class DashBoard_Fragment : Fragment() {
 
     lateinit var viewpager2 : ViewPager2
     lateinit var handler: Handler
-    lateinit var imageList: ArrayList<Int>
+    lateinit var imageList: ArrayList<String>
     lateinit var categ_seeall_btn: TextView
     lateinit var trending_seeall_btn: TextView
 
@@ -88,23 +98,42 @@ class DashBoard_Fragment : Fragment() {
         handler = Handler(Looper.myLooper()!!)
         imageList = ArrayList()
 
-        imageList.add(R.drawable.t_logo)
-        imageList.add(R.drawable.t_logo)
-        imageList.add(R.drawable.t_logo)
-        imageList.add(R.drawable.t_logo)
+        val serviceBuilder = ServiceBuilder.buildService(RetrofitApi::class.java)
+        val Call = serviceBuilder.gettrends("Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZWFtaW50ZXJuZmFjdG9yeUBnbWFpbC5jb20iLCJleHAiOjE2NjgwODk3MjYsImlhdCI6MTY2ODAwMzMyNn0.Jc4mGv6FLdrgRzFmaxGyKDQsdmpcEAlw1XgdjwhGrwwBH0pInGuG9KPoTMix0PXUzU6PtxbpMx-DRCf4yBSxzg" )
 
-
-        adapter = ImageAdapter(imageList,viewpager2)
-        viewpager2.adapter = adapter
-        viewpager2.offscreenPageLimit = 3
-        viewpager2.clipToPadding = false
-        viewpager2.clipChildren = false
-        viewpager2.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-
-    }
+        Call.enqueue(object : Callback,retrofit2.Callback<MutableList<trending_seeall_response>> {
+            override fun onResponse(
+                call: Call<MutableList<trending_seeall_response>>,
+                response: Response<MutableList<trending_seeall_response>>
+            ) {
+                val t = (activity as activity_Dashboard).token
+                Log.d("resp",t)
+                if (response.isSuccessful) {
+                    for (i in response.body() as MutableList<trending_seeall_response>){
+                        val url = "https://internfactory.herokuapp.com/file/images/"+i.imageName
+                        imageList.add(url)
+                    }
+                    adapter = ImageAdapter(imageList,viewpager2)
+                    viewpager2.adapter = adapter
+                    viewpager2.offscreenPageLimit = 3
+                    viewpager2.clipToPadding = false
+                    viewpager2.clipChildren = false
+                    viewpager2.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+                    }
+                    Log.e("success", response.body().toString())
+                }
+            override fun onFailure(
+                call: Call<MutableList<trending_seeall_response>>,
+                t: Throwable
+            ) {
+                t.printStackTrace()
+                Log.e("failure", t.message.toString())
+            }
+        }
+        )
 
     fun Dashboardconnect(view : View){
         val intent= Intent(view.context, activity_Dashboard::class.java)
         startActivity(intent)
     }
-    }
+    }}

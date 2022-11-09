@@ -25,14 +25,6 @@ import javax.security.auth.callback.Callback
 
 class CategoriesSeeAll : Fragment() {
 
-//    private fun replaceFrag(fragment : Fragment, name: String){
-//        val fm : FragmentManager =supportFragmentManager
-//        val ft : FragmentTransaction = fm.beginTransaction()
-//        ft.addToBackStack(name)
-//        ft.add(R.id.dashboard, fragment)
-//        ft.commit()
-//    }
-
     private lateinit var categadap: category_adapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,7 +39,7 @@ class CategoriesSeeAll : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.myrecycleView)
 
         val serviceBuilder = ServiceBuilder.buildService(RetrofitApi::class.java)
-        val Call = serviceBuilder.getcategories("Bearer " + (activity as activity_Dashboard).token)
+        val Call = serviceBuilder.getcategories("Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZWFtaW50ZXJuZmFjdG9yeUBnbWFpbC5jb20iLCJleHAiOjE2NjgwODk3MjYsImlhdCI6MTY2ODAwMzMyNn0.Jc4mGv6FLdrgRzFmaxGyKDQsdmpcEAlw1XgdjwhGrwwBH0pInGuG9KPoTMix0PXUzU6PtxbpMx-DRCf4yBSxzg" )
 
 
         Call.enqueue(object : Callback,retrofit2.Callback<MutableList<category_seeall_response>> {
@@ -55,17 +47,18 @@ class CategoriesSeeAll : Fragment() {
                 call: Call<MutableList<category_seeall_response>>,
                 response: Response<MutableList<category_seeall_response>>
             ) {
+                val t = (activity as activity_Dashboard).token
+
+//                    val x = response.body().toString()
+                Log.d("resp",t)
                 if (response.isSuccessful) {
                     recyclerView.apply {
                         layoutManager = LinearLayoutManager(context)
+                        Log.d("Madhur","Hello")
                         adapter = category_adapter(response.body()!!)
 
 
                     }
-//                    recyclerView.apply {
-//                        layoutManager = LinearLayoutManager(this@CategoriesSeeAll)
-//                        adapter = category_adapter(response.body()!!)
-//                    }
                     Log.e("success", response.body().toString())
                 }
             }

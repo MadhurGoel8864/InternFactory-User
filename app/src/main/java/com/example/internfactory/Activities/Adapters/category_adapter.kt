@@ -36,12 +36,12 @@ class category_ViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
     private val categorytitle:TextView = itemView.findViewById(R.id.category_title)
     var onItemClick: ((category_seeall_response)->Unit)? =null
 
-    private val categoryheading:TextView = itemView.findViewById(R.id.category_heading)
+//    private val categoryheading:TextView = itemView.findViewById(R.id.category_heading)
     private val categotyimage:ImageView = itemView.findViewById(R.id.category_image)
 
     fun bindview(categorySeeallResponse: category_seeall_response){
         categorytitle.text = categorySeeallResponse.categoryName
-        categoryheading.text = categorySeeallResponse.imageName
+//        categoryheading.text = categorySeeallResponse.imageName
         itemView.setOnClickListener{
             onItemClick?.invoke(categorySeeallResponse)
         }
