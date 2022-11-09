@@ -28,12 +28,10 @@ class category_adapter(val categoriesSeeAll: MutableList<category_seeall_respons
 
 class category_ViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
     private val categorytitle:TextView = itemView.findViewById(R.id.category_title)
-    private val categoryheading:TextView = itemView.findViewById(R.id.category_heading)
     private val categotyimage:ImageView = itemView.findViewById(R.id.category_image)
 
     fun bindview(categorySeeallResponse: category_seeall_response){
         categorytitle.text = categorySeeallResponse.categoryName
-        categoryheading.text = categorySeeallResponse.imageName
         val x = "https://internfactory.herokuapp.com/file/images/" + categorySeeallResponse.imageName
         categotyimage.load(x)
     }
