@@ -36,7 +36,7 @@ class trendingSeeAll : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.Myrecyclerview)
 
         val serviceBuilder = ServiceBuilder.buildService(RetrofitApi::class.java)
-        val Call = serviceBuilder.gettrends()
+        val Call = serviceBuilder.gettrends("Bearer " + (activity as activity_Dashboard).token)
 
         Call.enqueue(object :Callback,
             retrofit2.Callback<MutableList<trending_seeall_response>> {

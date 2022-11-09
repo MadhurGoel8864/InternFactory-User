@@ -19,7 +19,7 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
 
-        val Intent = Intent(this@MainActivity, activity_Dashboard::class.java)
+        var intent = Intent(this@MainActivity, Home_page::class.java)
 
         GlobalScope.launch(Dispatchers.IO) {
             val userDetails=UserDetails(this@MainActivity)
@@ -30,7 +30,7 @@ class MainActivity : Activity() {
             }
         }
         Handler().postDelayed({
-            startActivity(Intent)
+            startActivity(intent)
             finish()
         }, 3000)
     }

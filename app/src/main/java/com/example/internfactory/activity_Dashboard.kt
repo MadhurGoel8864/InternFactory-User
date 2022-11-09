@@ -1,6 +1,7 @@
 package com.example.internfactory
 
 import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract.Profile
@@ -13,11 +14,17 @@ import com.example.internfactory.Activities.All_internship_list_fragment
 import com.example.internfactory.Activities.Applied_Internships_Fragment
 import com.example.internfactory.Activities.Auth.SignIn_Fragment
 import com.example.internfactory.Activities.search_page
+import com.example.internfactory.modules.UserDetails
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class activity_Dashboard : AppCompatActivity() {
 
     lateinit var email:String
+    lateinit var token:String
 
     private lateinit var bottom_nav: BottomNavigationView
 
@@ -80,6 +87,13 @@ class activity_Dashboard : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
+
+        GlobalScope.launch(Dispatchers.IO) {
+            val userDetails=UserDetails(this@activity_Dashboard)
+            userDetails.getToken().collect{
+                token=it.token
+            }
+        }
 
         bottom_nav = findViewById(R.id.bottomnavbar)
         bottom_nav.setOnItemSelectedListener {

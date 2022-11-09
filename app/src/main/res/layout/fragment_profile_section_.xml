@@ -187,6 +187,7 @@
             app:layout_constraintStart_toStartOf="@+id/view5"
             app:layout_constraintTop_toBottomOf="@+id/view5" />
         <TextView
+            android:id="@+id/signOut_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"

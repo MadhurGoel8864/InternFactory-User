@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.internfactory.Activities.Adapters.category_ViewHolder
 import com.example.internfactory.Activities.Adapters.category_adapter
 import com.example.internfactory.Activities.All_internship_list_fragment
+import com.example.internfactory.modules.UserDetails.Companion.token
 import com.example.internfactory.modules.category_seeall_request
 import com.example.internfactory.modules.category_seeall_response
 import com.example.internfactory.server.RetrofitApi
@@ -24,13 +25,13 @@ import javax.security.auth.callback.Callback
 
 class CategoriesSeeAll : Fragment() {
 
-    private fun replaceFrag(fragment : Fragment, name: String){
-        val fm : FragmentManager =supportFragmentManager
-        val ft : FragmentTransaction = fm.beginTransaction()
-        ft.addToBackStack(name)
-        ft.add(R.id.dashboard, fragment)
-        ft.commit()
-    }
+//    private fun replaceFrag(fragment : Fragment, name: String){
+//        val fm : FragmentManager =supportFragmentManager
+//        val ft : FragmentTransaction = fm.beginTransaction()
+//        ft.addToBackStack(name)
+//        ft.add(R.id.dashboard, fragment)
+//        ft.commit()
+//    }
 
     private lateinit var categadap: category_adapter
     override fun onCreateView(
@@ -46,7 +47,7 @@ class CategoriesSeeAll : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.myrecycleView)
 
         val serviceBuilder = ServiceBuilder.buildService(RetrofitApi::class.java)
-        val Call = serviceBuilder.getcategories()
+        val Call = serviceBuilder.getcategories("Bearer " + (activity as activity_Dashboard).token)
 
 
         Call.enqueue(object : Callback,retrofit2.Callback<MutableList<category_seeall_response>> {

@@ -9,28 +9,25 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.internfactory.Activities.Auth.Home_page
+import com.example.internfactory.modules.LogInInfo
+import com.example.internfactory.modules.UserDetails
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileSection_Fragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfileSection_Fragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    lateinit var signOutBtn : TextView
+
+    fun signOut(view: View){
+        GlobalScope.launch(Dispatchers.IO) {
+            val userDetails = UserDetails(view.context)
+            userDetails.storeUserData(LogInInfo("", false,""))
         }
+        val intent = Intent(view.context, Home_page::class.java)
+        startActivity(intent)
+        activity?.finish()
     }
 
     override fun onCreateView(
@@ -38,7 +35,13 @@ class ProfileSection_Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile_section_, container, false)
+        val view= inflater.inflate(R.layout.fragment_profile_section_, container, false)
+
+        signOutBtn = view.findViewById(R.id.signOut_btn)
+        signOutBtn.setOnClickListener{
+            signOut(view)
+        }
+        return view
     }
 
 //    lateinit var edit_profile_btn : TextView
@@ -54,7 +57,6 @@ class ProfileSection_Fragment : Fragment() {
 //            }
 //        }
 
-
     }
 
     private fun replaceFrag(fragment : Fragment,name: String){
@@ -63,26 +65,5 @@ class ProfileSection_Fragment : Fragment() {
         ft.addToBackStack(name)
         ft.add(R.id.container, fragment)
         ft.commit()
-    }
-
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileSection_Fragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileSection_Fragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }
