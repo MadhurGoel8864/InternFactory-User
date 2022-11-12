@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.internfactory.Activities.Adapters.Trending_adapter
@@ -36,8 +37,7 @@ class trendingSeeAll : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.Myrecyclerview)
 
         val serviceBuilder = ServiceBuilder.buildService(RetrofitApi::class.java)
-        val Call = serviceBuilder.gettrends("Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZWFtaW50ZXJuZmFjdG9yeUBnbWFpbC5jb20iLCJleHAiOjE2NjgwODk3MjYsImlhdCI6MTY2ODAwMzMyNn0.Jc4mGv6FLdrgRzFmaxGyKDQsdmpcEAlw1XgdjwhGrwwBH0pInGuG9KPoTMix0PXUzU6PtxbpMx-DRCf4yBSxzg")
-
+        val Call = serviceBuilder.gettrends("Bearer " + (activity as activity_Dashboard).token)
         Call.enqueue(object :Callback,
             retrofit2.Callback<MutableList<trending_seeall_response>> {
             override fun onResponse(
@@ -49,6 +49,18 @@ class trendingSeeAll : Fragment() {
                             layoutManager = LinearLayoutManager(context)
                             adapter = trending_seeall_adapters(response.body()!!)
                         }
+                        recyclerView.setOnClickListener(object :trending_seeall_adapters.onItemClickListner,
+                            View.OnClickListener {
+                            override fun onItemClick(position: Int) {
+
+                                Toast.makeText(view?.context,"click done", Toast.LENGTH_SHORT).show()
+                            }
+
+                            override fun onClick(v: View?) {
+                                TODO("Not yet implemented")
+                            }
+
+                        })
                     }
             }
 
@@ -79,7 +91,6 @@ class trendingSeeAll : Fragment() {
 //            val imageat = Trending_dataclass(imageId[i])
 //            newArrayList.add(imageat)
 //        }
-//        newRecyclerView.adapter = Trending_adapter(newArrayList)
 //
 //    }
 }

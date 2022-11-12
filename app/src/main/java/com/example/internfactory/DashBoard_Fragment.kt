@@ -99,7 +99,7 @@ class DashBoard_Fragment : Fragment() {
         imageList = ArrayList()
 
         val serviceBuilder = ServiceBuilder.buildService(RetrofitApi::class.java)
-        val Call = serviceBuilder.gettrends("Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZWFtaW50ZXJuZmFjdG9yeUBnbWFpbC5jb20iLCJleHAiOjE2NjgwODk3MjYsImlhdCI6MTY2ODAwMzMyNn0.Jc4mGv6FLdrgRzFmaxGyKDQsdmpcEAlw1XgdjwhGrwwBH0pInGuG9KPoTMix0PXUzU6PtxbpMx-DRCf4yBSxzg" )
+        val Call = serviceBuilder.gettrends("Bearer " + (activity as activity_Dashboard).token )
 
         Call.enqueue(object : Callback,retrofit2.Callback<MutableList<trending_seeall_response>> {
             override fun onResponse(

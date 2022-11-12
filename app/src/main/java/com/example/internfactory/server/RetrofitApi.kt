@@ -8,6 +8,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Path
 
 interface RetrofitApi {
     //Auth
@@ -39,5 +40,15 @@ interface RetrofitApi {
 
     @PUT("/api/editUserInfo")
     fun editProfile(@Body viewProfile: ViewProfile,@Header ("Authorization") token :String): Call<ViewProfileResponse>
+
+    @POST("/api/user/{email}/internships/{id}/apply")
+    fun applyinternship(@Path("email") email:String,@Path("id") id:Int
+                        ,@Body applyInternshipRequest: ApplyInternshipRequest
+                        ,@Header ("Authorization") token :String):Call<ApplyInternshipResponses>
+
+    @POST("/api/internships/search/{searchtext}")
+    fun searchapi(@Path("searchtext") searchtext:String
+                  ,@Body searchingRequest: SearchingRequest
+                  ,@Header ("Authorization") token :String): Call<SearchingResponse>
 
 }

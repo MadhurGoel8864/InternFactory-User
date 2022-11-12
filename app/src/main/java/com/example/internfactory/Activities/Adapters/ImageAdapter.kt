@@ -20,8 +20,6 @@ class ImageAdapter(private val imageList: ArrayList<String>, private val viewPag
 val view = LayoutInflater.from(parent.context).inflate(R.layout.image_container,parent,false)
         return Imageviewholder(view)
 
-
-
     }
 
     override fun onBindViewHolder(holder: Imageviewholder, position: Int) {

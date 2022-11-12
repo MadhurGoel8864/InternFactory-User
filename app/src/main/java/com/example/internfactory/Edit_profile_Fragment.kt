@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import com.example.internfactory.modules.*
 import com.example.internfactory.server.RetrofitApi
 import com.example.internfactory.server.ServiceBuilder
@@ -55,7 +57,7 @@ class Edit_profile_Fragment : Fragment(),OnItemSelectedListener {
         gender = view.findViewById(R.id.statusfiller)
         submit_button = view.findViewById(R.id.submit_bn)
 
-        GlobalScope.launch(Dispatchers.IO) {
+        lifecycleScope.launch(Dispatchers.IO) {
             val userDetails = UserDetails(view.context)
             userDetails.getToken().collect {
                 email = it.signInemail
@@ -164,7 +166,7 @@ class Edit_profile_Fragment : Fragment(),OnItemSelectedListener {
 
     fun apicalling() {
         submit_button.setOnClickListener {
-            val newemail = firstname_inp.text.toString()
+            val newemail = emailinp.text.toString()
             val firstname = firstname_inp.text.toString()
             val lastname = lastname_inp.text.toString()
 //        val gen=gender.selectedItem.toString()
@@ -174,7 +176,7 @@ class Edit_profile_Fragment : Fragment(),OnItemSelectedListener {
             val retrofitAPI = ServiceBuilder.buildService(RetrofitApi::class.java)
             val call = retrofitAPI.editProfile(viewProfile, "Bearer " + (activity as activity_Dashboard).token)
 
-            Log.d("bansal",(activity as activity_Dashboard).token)
+            Log.d("bansal",email+" "+firstname+" "+lastname+" "+newemail+" " +gen+" "+mobile)
             call.enqueue(object : Callback<ViewProfileResponse> {
                 override fun onResponse(
                     call: Call<ViewProfileResponse>,

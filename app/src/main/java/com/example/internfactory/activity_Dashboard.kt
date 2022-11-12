@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.internfactory.Activities.All_internship_list_fragment
 import com.example.internfactory.Activities.Applied_Internships_Fragment
 import com.example.internfactory.Activities.Auth.SignIn_Fragment
+import com.example.internfactory.Activities.application_fragment
 import com.example.internfactory.Activities.search_page
 import com.example.internfactory.modules.UserDetails
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -92,6 +93,7 @@ class activity_Dashboard : AppCompatActivity() {
             val userDetails=UserDetails(this@activity_Dashboard)
             userDetails.getToken().collect{
                 token=it.token
+                email=it.signInemail
             }
         }
 

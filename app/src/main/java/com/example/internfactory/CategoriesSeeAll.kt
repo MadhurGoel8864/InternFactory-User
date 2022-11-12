@@ -39,7 +39,7 @@ class CategoriesSeeAll : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.myrecycleView)
 
         val serviceBuilder = ServiceBuilder.buildService(RetrofitApi::class.java)
-        val Call = serviceBuilder.getcategories("Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZWFtaW50ZXJuZmFjdG9yeUBnbWFpbC5jb20iLCJleHAiOjE2NjgwODk3MjYsImlhdCI6MTY2ODAwMzMyNn0.Jc4mGv6FLdrgRzFmaxGyKDQsdmpcEAlw1XgdjwhGrwwBH0pInGuG9KPoTMix0PXUzU6PtxbpMx-DRCf4yBSxzg" )
+        val Call = serviceBuilder.getcategories("Bearer " + (activity as activity_Dashboard).token )
 
 
         Call.enqueue(object : Callback,retrofit2.Callback<MutableList<category_seeall_response>> {
