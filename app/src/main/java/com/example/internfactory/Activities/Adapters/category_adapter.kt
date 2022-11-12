@@ -16,11 +16,18 @@ class category_adapter(val categoriesSeeAll: MutableList<category_seeall_respons
 
     var onItemClick: ((category_seeall_response)->Unit)? =null
 
+    private lateinit var mListner:onItemClickListner
+    interface onItemClickListner{
+        fun onItemClick(position: Int)
+    }
 
+    fun setOnItemClickListner(listner:onItemClickListner){
 
+        mListner=listner
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): category_ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.card_categoryseeall,parent,false)
-        return category_ViewHolder(view)
+        return category_ViewHolder(view,mListner)
     }
 
     override fun onBindViewHolder(holder: category_ViewHolder, position: Int) {
@@ -32,7 +39,7 @@ class category_adapter(val categoriesSeeAll: MutableList<category_seeall_respons
     }
 }
 
-class category_ViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
+class category_ViewHolder(itemView:View,listner: category_adapter.onItemClickListner):RecyclerView.ViewHolder(itemView){
     private val categorytitle:TextView = itemView.findViewById(R.id.category_title)
     var onItemClick: ((category_seeall_response)->Unit)? =null
 
@@ -41,11 +48,18 @@ class category_ViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
 
     fun bindview(categorySeeallResponse: category_seeall_response){
         categorytitle.text = categorySeeallResponse.categoryName
-//        categoryheading.text = categorySeeallResponse.imageName
-        itemView.setOnClickListener{
-            onItemClick?.invoke(categorySeeallResponse)
-        }
+//        itemView.setOnClickListener{
+//            onItemClick?.invoke(categorySeeallResponse)
+//        }
         val x = "https://internfactory.herokuapp.com/file/images/" + categorySeeallResponse.imageName
         categotyimage.load(x)
+    }
+
+    init{
+
+        itemView.setOnClickListener {
+
+            listner.onItemClick(adapterPosition)
+        }
     }
 }

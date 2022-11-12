@@ -51,4 +51,9 @@ interface RetrofitApi {
                   ,@Body searchingRequest: SearchingRequest
                   ,@Header ("Authorization") token :String): Call<SearchingResponse>
 
+    @POST("/api/category/{id}/allinternships")
+    fun allinternship(@Path("id") id:Int
+                      ,@Body internshipRequest: Internship_request
+                      ,@Header ("Authorization") token :String): Call<Internship_response>
+
 }

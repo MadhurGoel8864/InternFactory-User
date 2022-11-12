@@ -19,20 +19,15 @@ import retrofit2.Call
 import retrofit2.Response
 import javax.security.auth.callback.Callback
 
-// TODO: Rename parameter arguments, choose names that match
 class trendingSeeAll : Fragment() {
 
-    private lateinit var newRecyclerView: RecyclerView
-    private lateinit var newArrayList: ArrayList<Trending_dataclass>
-    lateinit var imageId: Array<Int>
+    lateinit var adapter:trending_seeall_adapters
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_trending_see_all, container, false)
-//        imageId = arrayOf(R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo,R.drawable.t_logo)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.Myrecyclerview)
 
@@ -44,22 +39,14 @@ class trendingSeeAll : Fragment() {
                 call: Call<MutableList<trending_seeall_response>>,
                 response: Response<MutableList<trending_seeall_response>>
             ) {
-                    if(response.isSuccessful){
-                        recyclerView.apply {
-                            layoutManager = LinearLayoutManager(context)
-                            adapter = trending_seeall_adapters(response.body()!!)
-                        }
-                        recyclerView.setOnClickListener(object :trending_seeall_adapters.onItemClickListner,
-                            View.OnClickListener {
+                    if(response.isSuccessful) {
+                        recyclerView.layoutManager=LinearLayoutManager(requireContext())
+                        adapter= trending_seeall_adapters(response.body()!!)
+                        recyclerView.adapter=adapter
+                        adapter.setOnItemClickListner(object : trending_seeall_adapters.onItemClickListner {
                             override fun onItemClick(position: Int) {
-
-                                Toast.makeText(view?.context,"click done", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(view?.context,"Clicked Item", Toast.LENGTH_SHORT).show()
                             }
-
-                            override fun onClick(v: View?) {
-                                TODO("Not yet implemented")
-                            }
-
                         })
                     }
             }
@@ -72,25 +59,6 @@ class trendingSeeAll : Fragment() {
             }
 
         })
-
-
-
-
-//        newRecyclerView = view.findViewById(R.id.recyclerview)
-//
-//        newRecyclerView.layoutManager = LinearLayoutManager(view.context)
-//        newRecyclerView.setHasFixedSize(true)
-//
-//        newArrayList = arrayListOf<Trending_dataclass>()
-//        getUserdata()
         return view
     }
-
-//    private fun getUserdata() {
-//        for(i in imageId.indices){
-//            val imageat = Trending_dataclass(imageId[i])
-//            newArrayList.add(imageat)
-//        }
-//
-//    }
 }

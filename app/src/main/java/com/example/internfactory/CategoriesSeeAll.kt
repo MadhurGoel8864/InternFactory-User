@@ -7,12 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.internfactory.Activities.Adapters.category_ViewHolder
 import com.example.internfactory.Activities.Adapters.category_adapter
+import com.example.internfactory.Activities.Adapters.trending_seeall_adapters
 import com.example.internfactory.Activities.All_internship_list_fragment
 import com.example.internfactory.modules.UserDetails.Companion.token
 import com.example.internfactory.modules.category_seeall_request
@@ -25,7 +27,7 @@ import javax.security.auth.callback.Callback
 
 class CategoriesSeeAll : Fragment() {
 
-    private lateinit var categadap: category_adapter
+    lateinit var adapter:category_adapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,17 +51,15 @@ class CategoriesSeeAll : Fragment() {
             ) {
                 val t = (activity as activity_Dashboard).token
 
-//                    val x = response.body().toString()
-                Log.d("resp",t)
                 if (response.isSuccessful) {
-                    recyclerView.apply {
-                        layoutManager = LinearLayoutManager(context)
-                        Log.d("Madhur","Hello")
-                        adapter = category_adapter(response.body()!!)
-
-
-                    }
-                    Log.e("success", response.body().toString())
+                    recyclerView.layoutManager=LinearLayoutManager(requireContext())
+                    adapter= category_adapter(response.body()!!)
+                    recyclerView.adapter=adapter
+                    adapter.setOnItemClickListner(object : category_adapter.onItemClickListner {
+                        override fun onItemClick(position: Int) {
+                            Toast.makeText(view?.context,"Clicked Item", Toast.LENGTH_SHORT).show()
+                        }
+                    })
                 }
             }
 

@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import androidx.recyclerview.widget.RecyclerView
 import com.example.internfactory.R
 import com.example.internfactory.activity_Dashboard
 import com.example.internfactory.modules.SearchingRequest
@@ -27,7 +28,7 @@ import retrofit2.Response
 class search_page : Fragment() {
     private lateinit var Search:TextInputEditText
     private lateinit var SearchText:TextInputLayout
-    private lateinit var SearchResult:TextView
+    private lateinit var SearchResult:RecyclerView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,7 +37,7 @@ class search_page : Fragment() {
         val view= inflater.inflate(R.layout.fragment_search_page, container, false)
         Search=view.findViewById(R.id.search_box_input)
         SearchText=view.findViewById(R.id.search_box)
-//        SearchResult=view.findViewById(R.id.Search_result)
+        SearchResult=view.findViewById(R.id.searchResult)
 
         val search=Search.text.toString()
         val pagenumber:Int=0
