@@ -51,7 +51,7 @@ class category_ViewHolder(itemView:View,listner: category_adapter.onItemClickLis
 //        itemView.setOnClickListener{
 //            onItemClick?.invoke(categorySeeallResponse)
 //        }
-        val x = "https://internfactory.herokuapp.com/file/images/" + categorySeeallResponse.imageName
+        val x = "https://internfactory.herokuapp.com/file/" + categorySeeallResponse.imageName
         categotyimage.load(x)
     }
 

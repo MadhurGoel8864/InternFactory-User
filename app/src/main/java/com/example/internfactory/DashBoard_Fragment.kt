@@ -110,7 +110,7 @@ class DashBoard_Fragment : Fragment() {
                 Log.d("resp",t)
                 if (response.isSuccessful) {
                     for (i in response.body() as MutableList<trending_seeall_response>){
-                        val url = "https://internfactory.herokuapp.com/file/images/"+i.imageName
+                        val url = "https://internfactory.herokuapp.com/file/"+i.imageName
                         imageList.add(url)
                     }
                     adapter = ImageAdapter(imageList,viewpager2)

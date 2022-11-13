@@ -227,10 +227,12 @@ class Verification_signUp_fragment : Fragment() {
 
                         else{
                             Toast.makeText(view.context, "Invalid Otp",Toast.LENGTH_SHORT).show()
+                            progressBar.dismiss()
                         }
                     }
                     override fun onFailure(call: Call<VerifyOtpResponse>, t:Throwable){
                         Toast.makeText(view.context, "Failed", Toast.LENGTH_LONG).show()
+                        progressBar.dismiss()
                     }
                 })
 

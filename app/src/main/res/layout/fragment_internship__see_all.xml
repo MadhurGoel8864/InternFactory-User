@@ -15,6 +15,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:paddingTop="10dp"
+        android:onClick="trendingFrag"
         android:id="@+id/internship_back_btn"
         android:layout_marginStart="25dp"
         android:layout_marginTop="22dp"

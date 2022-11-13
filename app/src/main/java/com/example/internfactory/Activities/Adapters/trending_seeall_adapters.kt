@@ -43,7 +43,7 @@ class trendingViewHolder(itemView: View,listner: trending_seeall_adapters.onItem
 
     fun bindView(trendingSeeallResponse: trending_seeall_response){
         trending_title.text = trendingSeeallResponse.categoryName
-        val x =  "https://internfactory.herokuapp.com/file/images/" + trendingSeeallResponse.imageName
+        val x =  "https://internfactory.herokuapp.com/file/" + trendingSeeallResponse.imageName
         trending_image.load(x)
     }
 

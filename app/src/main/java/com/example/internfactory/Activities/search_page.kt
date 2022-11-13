@@ -59,17 +59,17 @@ class search_page : Fragment() {
 //        })
 
         Search.setOnClickListener {
-            val searching=SearchingRequest(pagenumber,"5","id","asc")
+            val searching=SearchingRequest(pagenumber,5,"id","asc")
             val retrofitAPI = ServiceBuilder.buildService(RetrofitApi::class.java)
             val call = retrofitAPI.searchapi(Search.text.toString(),searching,"Bearer " + (activity as activity_Dashboard).token)
 
-            Log.d("boom",Search.text.toString()+" "+" ")
+            Log.d("boom",Search.text.toString()+" "+pagenumber+" "+(activity as activity_Dashboard).token)
             call.enqueue(object : Callback<SearchingResponse> {
                 override fun onResponse(
                     call: Call<SearchingResponse>,
                     response: Response<SearchingResponse>
                 ) {
-                    if (response.isSuccessful && response.body() != null) {
+                    if (response.isSuccessful) {
                         Toast.makeText(view?.context, "Succesfully Saved", Toast.LENGTH_SHORT)
                             .show()
                         Log.i("Naman", response.body().toString())
