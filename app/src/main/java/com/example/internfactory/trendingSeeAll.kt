@@ -8,9 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.internfactory.Activities.Adapters.Trending_adapter
-import com.example.internfactory.Activities.Adapters.Trending_dataclass
-import com.example.internfactory.Activities.Adapters.category_adapter
 import com.example.internfactory.Activities.Adapters.trending_seeall_adapters
 import com.example.internfactory.modules.trending_seeall_response
 import com.example.internfactory.server.RetrofitApi
@@ -50,7 +47,6 @@ class trendingSeeAll : Fragment() {
                         })
                     }
             }
-
             override fun onFailure(
                 call: Call<MutableList<trending_seeall_response>>,
                 t: Throwable
