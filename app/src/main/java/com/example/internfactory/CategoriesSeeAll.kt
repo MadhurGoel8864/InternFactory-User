@@ -52,6 +52,10 @@ class CategoriesSeeAll : Fragment() {
                 val t = (activity as activity_Dashboard).token
 
                 if (response.isSuccessful) {
+
+                    (activity as activity_Dashboard).xid = response.body()?.get(0)?.categoryId!!
+                    Log.d("cat", (activity as activity_Dashboard).xid.toString())
+
                     recyclerView.layoutManager=LinearLayoutManager(requireContext())
                     adapter= category_adapter(response.body()!!)
                     recyclerView.adapter=adapter

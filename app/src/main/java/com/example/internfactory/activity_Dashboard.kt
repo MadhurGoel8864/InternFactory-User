@@ -26,6 +26,7 @@ class activity_Dashboard : AppCompatActivity() {
 
     lateinit var email:String
     lateinit var token:String
+    var xid:Int = -1
 
     private lateinit var bottom_nav: BottomNavigationView
 
@@ -72,6 +73,11 @@ class activity_Dashboard : AppCompatActivity() {
     fun categoryFrag(view : View){
         val categoryFrag = CategoriesSeeAll()
         replaceFrag(categoryFrag,"category")
+    }
+
+    fun internship_see_all_frag(view : View){
+        val internship_see_all_frag = Internship_See_all()
+        replaceFrag(internship_see_all_frag,"internship")
     }
 
     fun dashboardFrag(view : View){

@@ -179,7 +179,13 @@ class SignUp_Fragment : Fragment() {
 
                             call.enqueue(object: Callback<SignUpResponse> {
                                 override fun onResponse(call: Call<SignUpResponse>, response: Response<SignUpResponse>) {
-                                    if (response.isSuccessful && response.body()!=null){
+                                    if (response.code()==201){
+                                        Toast.makeText(view.context, "Otp Sent Succesfully", Toast.LENGTH_SHORT).show()
+                                        signupotpVerificationFrag()
+                                        Log.i("Naman", response.body().toString())
+                                        progressBar.dismiss()
+                                    }
+                                    else if(response.code()==200){
                                         Toast.makeText(view.context, "Otp Sent Succesfully", Toast.LENGTH_SHORT).show()
                                         signupotpVerificationFrag()
                                         Log.i("Naman", response.body().toString())

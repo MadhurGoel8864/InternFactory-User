@@ -1,6 +1,7 @@
 package com.example.internfactory
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.internfactory.Activities.Adapters.internship_adapter
 import com.example.internfactory.modules.Internship_request
 import com.example.internfactory.modules.Internship_response
+import com.example.internfactory.modules.category_seeall_response
 import com.example.internfactory.modules.trending_seeall_response
 import com.example.internfactory.server.RetrofitApi
 import com.example.internfactory.server.ServiceBuilder
@@ -32,8 +34,9 @@ class Internship_See_all : Fragment() {
 
         val internshipRequest=Internship_request("0","5","id","asc")
         val serviceBuilder = ServiceBuilder.buildService(RetrofitApi::class.java)
-        val Call = serviceBuilder.allinternship(1,internshipRequest,"Bearer " + (activity as activity_Dashboard).token)
+        val Call = serviceBuilder.allinternship((activity as activity_Dashboard).xid,internshipRequest,"Bearer " + (activity as activity_Dashboard).token)
 
+        Log.d("id", (activity as activity_Dashboard).xid.toString())
         Call.enqueue(object : Callback,
             retrofit2.Callback<Internship_response> {
             override fun onResponse(
@@ -62,4 +65,5 @@ class Internship_See_all : Fragment() {
         })
         return view
     }
+
 }

@@ -149,8 +149,17 @@ class SignIn_Fragment : Fragment() {
                             }
                             Log.i("Naman", response.code().toString().toString())
                             progressBar.dismiss()
-                        } else {
-                            Toast.makeText(view?.context,"Invalid Email/Password", Toast.LENGTH_SHORT).show()
+                        }
+                        else if(response.code()==404){
+                            Toast.makeText(view?.context,"User does not exits", Toast.LENGTH_SHORT).show()
+                            progressBar.dismiss()
+                        }
+                        else if(response.code()==406){
+                            Toast.makeText(view?.context,"Verify your OTP First", Toast.LENGTH_SHORT).show()
+                            progressBar.dismiss()
+                        }
+                        else {
+                            Toast.makeText(view?.context,"Inavalid Password", Toast.LENGTH_SHORT).show()
                             progressBar.dismiss()
 
                         }
