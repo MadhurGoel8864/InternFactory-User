@@ -38,7 +38,7 @@ class internship_adapter(val internshipResponse: Internship_response):
         return internshipResponse.pageSize
     }
 
-    class internshipViewHolder(itemView: View,listner: internship_adapter.onItemClickListner): RecyclerView.ViewHolder(itemView){
+    class internshipViewHolder(itemView: View,listner: onItemClickListner): RecyclerView.ViewHolder(itemView){
 
         private val trending_title: TextView = itemView.findViewById(R.id.trending_title)
         private val trending_image: ImageView = itemView.findViewById(R.id.trending_image)

@@ -36,7 +36,7 @@ class Internship_See_all : Fragment() {
         val serviceBuilder = ServiceBuilder.buildService(RetrofitApi::class.java)
         val Call = serviceBuilder.allinternship((activity as activity_Dashboard).xid,internshipRequest,"Bearer " + (activity as activity_Dashboard).token)
 
-        Log.d("id", (activity as activity_Dashboard).xid.toString())
+        Log.d("id", (activity as activity_Dashboard).xid.toString()+" "+"token: "+(activity as activity_Dashboard).token)
         Call.enqueue(object : Callback,
             retrofit2.Callback<Internship_response> {
             override fun onResponse(

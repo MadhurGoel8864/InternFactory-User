@@ -106,8 +106,6 @@ class DashBoard_Fragment : Fragment() {
                 call: Call<MutableList<trending_seeall_response>>,
                 response: Response<MutableList<trending_seeall_response>>
             ) {
-                val t = (activity as activity_Dashboard).token
-                Log.d("resp",t)
                 if (response.isSuccessful) {
                     for (i in response.body() as MutableList<trending_seeall_response>){
                         val url = "https://internfactory.herokuapp.com/file/"+i.imageName

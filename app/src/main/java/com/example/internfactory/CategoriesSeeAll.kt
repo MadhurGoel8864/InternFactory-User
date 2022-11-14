@@ -1,6 +1,5 @@
 package com.example.internfactory
 
-import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,12 +11,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.internfactory.Activities.Adapters.category_ViewHolder
 import com.example.internfactory.Activities.Adapters.category_adapter
-import com.example.internfactory.Activities.Adapters.trending_seeall_adapters
-import com.example.internfactory.Activities.All_internship_list_fragment
-import com.example.internfactory.modules.UserDetails.Companion.token
-import com.example.internfactory.modules.category_seeall_request
 import com.example.internfactory.modules.category_seeall_response
 import com.example.internfactory.server.RetrofitApi
 import com.example.internfactory.server.ServiceBuilder
@@ -37,6 +31,8 @@ class CategoriesSeeAll : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val fm : FragmentManager = parentFragmentManager
+        val ft : FragmentTransaction = fm.beginTransaction()
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.myrecycleView)
 
@@ -49,19 +45,17 @@ class CategoriesSeeAll : Fragment() {
                 call: Call<MutableList<category_seeall_response>>,
                 response: Response<MutableList<category_seeall_response>>
             ) {
-                val t = (activity as activity_Dashboard).token
-
                 if (response.isSuccessful) {
-
-                    (activity as activity_Dashboard).xid = response.body()?.get(0)?.categoryId!!
-                    Log.d("cat", (activity as activity_Dashboard).xid.toString())
 
                     recyclerView.layoutManager=LinearLayoutManager(requireContext())
                     adapter= category_adapter(response.body()!!)
                     recyclerView.adapter=adapter
                     adapter.setOnItemClickListner(object : category_adapter.onItemClickListner {
                         override fun onItemClick(position: Int) {
-                            Toast.makeText(view?.context,"Clicked Item", Toast.LENGTH_SHORT).show()
+                            (activity as activity_Dashboard).xid = adapter.categoriesSeeAll[position].categoryId!!
+                            internship_see_all_frag()
+                            Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
+                            Log.d("tech",(activity as activity_Dashboard).xid.toString())
                         }
                     })
                 }
@@ -76,5 +70,17 @@ class CategoriesSeeAll : Fragment() {
             }
         }
         )
+    }
+
+    private fun replaceFrag(fragment : Fragment,name: String){
+        val fm : FragmentManager = parentFragmentManager
+        val ft : FragmentTransaction = fm.beginTransaction()
+        ft.addToBackStack(name)
+        ft.add(R.id.container, fragment)
+        ft.commit()
+    }
+    fun internship_see_all_frag(){
+        val internship_see_all_frag = Internship_See_all()
+        replaceFrag(internship_see_all_frag,"internship")
     }
 }
