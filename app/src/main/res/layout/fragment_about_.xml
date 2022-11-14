@@ -12,18 +12,29 @@
         android:background="#e2ebf8"
         >
 
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:paddingTop="10dp"
+            android:onClick="dashboardFrag"
+            android:id="@+id/trending_back_btn"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="22dp"
+            android:src="@drawable/back_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:fontFamily="@font/montserrat_medium"
             android:text="About"
             android:textColor="#212427"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/trending_back_btn" />
 
 <!--        <View-->
 <!--            android:layout_width="match_parent"-->
