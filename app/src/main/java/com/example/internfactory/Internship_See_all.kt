@@ -32,6 +32,7 @@ class Internship_See_all : Fragment() {
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.MyInternshiprecyclerview)
 
+        Log.d("id", (activity as activity_Dashboard).xid.toString())
         val internshipRequest=Internship_request("0","5","id","asc")
         val serviceBuilder = ServiceBuilder.buildService(RetrofitApi::class.java)
         val Call = serviceBuilder.allinternship((activity as activity_Dashboard).xid,internshipRequest,"Bearer " + (activity as activity_Dashboard).token)

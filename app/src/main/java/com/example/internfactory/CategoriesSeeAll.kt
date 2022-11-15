@@ -76,7 +76,7 @@ class CategoriesSeeAll : Fragment() {
         val fm : FragmentManager = parentFragmentManager
         val ft : FragmentTransaction = fm.beginTransaction()
         ft.addToBackStack(name)
-        ft.add(R.id.container, fragment)
+        ft.add(R.id.dashboard, fragment)
         ft.commit()
     }
     fun internship_see_all_frag(){
