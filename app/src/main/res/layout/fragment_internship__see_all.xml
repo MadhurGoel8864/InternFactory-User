@@ -48,5 +48,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
+<!--        <TextView-->
+<!--            android:id="@+id/textView31"-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="15dp"-->
+<!--            android:layout_marginTop="200dp"-->
+<!--            android:layout_marginBottom="15dp"-->
+<!--            android:text="View More"-->
+<!--            android:textColor="#2D81F7"-->
+<!--            android:textSize="15sp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/MyInternshiprecyclerview" />-->
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

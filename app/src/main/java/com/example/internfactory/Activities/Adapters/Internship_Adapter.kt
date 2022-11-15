@@ -1,6 +1,7 @@
 package com.example.internfactory.Activities.Adapters
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,13 +37,11 @@ class internship_adapter(val internshipResponse: Internship_response):
     }
 
     override fun getItemCount(): Int {
-        return internshipResponse.pageSize
+        return internshipResponse.content.size
     }
 
     class internshipViewHolder(itemView: View,listner: onItemClickListner): RecyclerView.ViewHolder(itemView){
 
-//        private val trending_title: TextView = itemView.findViewById(R.id.trending_title)
-//        private val trending_image: ImageView = itemView.findViewById(R.id.trending_image)
         private val company_logo:ImageView = itemView.findViewById(R.id.imageView14)
         private val internship_domain:TextView = itemView.findViewById(R.id.textView26)
         private val company_name:TextView = itemView.findViewById(R.id.textView27)
@@ -54,13 +53,12 @@ class internship_adapter(val internshipResponse: Internship_response):
 
 
         fun bindView(internshipSeeallResponse: Internship_response){
-//            trending_title.text = internshipSeeallResponse.content[0].title
-            internship_domain.text = internshipSeeallResponse.content[0].title
-            company_name.text = internshipSeeallResponse.content[0].category.categoryName
-            remote_location.text = internshipSeeallResponse.content[0].type
-            internship_timeline.text = internshipSeeallResponse.content[0].tenure
-            amount.text = internshipSeeallResponse.content[0].stipend
-            val x = "https://internfactory.herokuapp.com/file/" + internshipSeeallResponse.content[0].imageUrl
+            internship_domain.text = internshipSeeallResponse.content[adapterPosition].displayName
+            company_name.text = internshipSeeallResponse.content[adapterPosition].provider
+            remote_location.text = internshipSeeallResponse.content[adapterPosition].type
+            internship_timeline.text = internshipSeeallResponse.content[adapterPosition].tenure
+            amount.text = internshipSeeallResponse.content[adapterPosition].stipend
+            val x = "https://internfactory.herokuapp.com/file/" + internshipSeeallResponse.content[adapterPosition].imageUrl
             company_logo.load(x)
         }
 

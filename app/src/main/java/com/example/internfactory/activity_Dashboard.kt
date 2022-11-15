@@ -10,11 +10,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import com.example.internfactory.Activities.All_internship_list_fragment
-import com.example.internfactory.Activities.Applied_Internships_Fragment
+import com.example.internfactory.Activities.*
 import com.example.internfactory.Activities.Auth.SignIn_Fragment
-import com.example.internfactory.Activities.application_fragment
-import com.example.internfactory.Activities.search_page
 import com.example.internfactory.modules.UserDetails
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers
@@ -57,7 +54,12 @@ class activity_Dashboard : AppCompatActivity() {
 
     fun all_internship_list_Frage(view: View) {
         val all_inten_list = Internship_See_all()
-        replaceFrag(all_inten_list, "editprofile")
+        replaceFrag(all_inten_list, "internship_seeAll")
+    }
+
+    fun internship_details(view: View) {
+        val internship_details = internship_deatils_fragement()
+        replaceFrag(internship_details,"internship_details")
     }
 
     fun aboutFrag(view: View) {

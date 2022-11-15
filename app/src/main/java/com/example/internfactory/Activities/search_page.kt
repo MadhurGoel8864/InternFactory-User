@@ -37,7 +37,7 @@ class search_page : Fragment() {
         val view= inflater.inflate(R.layout.fragment_search_page, container, false)
         Search=view.findViewById(R.id.search_box_input)
         SearchText=view.findViewById(R.id.search_box)
-        SearchResult=view.findViewById(R.id.searchResult)
+//        SearchResult=view.findViewById(R.id.searchResult)
 
         val search=Search.text.toString()
         val pagenumber:Int=0
@@ -59,7 +59,7 @@ class search_page : Fragment() {
 //        })
 
         Search.setOnClickListener {
-            val searching=SearchingRequest(pagenumber,5,"id","asc")
+            val searching=SearchingRequest(pagenumber,5,"title","asc")
             val retrofitAPI = ServiceBuilder.buildService(RetrofitApi::class.java)
             val call = retrofitAPI.searchapi(Search.text.toString(),searching,"Bearer " + (activity as activity_Dashboard).token)
 
@@ -70,8 +70,7 @@ class search_page : Fragment() {
                     response: Response<SearchingResponse>
                 ) {
                     if (response.isSuccessful) {
-                        Toast.makeText(view?.context, "Succesfully Saved", Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(view?.context, "Succesfully Saved", Toast.LENGTH_SHORT).show()
                         Log.i("Naman", response.body().toString())
                     } else {
                         android.widget.Toast.makeText(view?.context, response.code().toString(), android.widget.Toast.LENGTH_SHORT).show()
@@ -79,8 +78,8 @@ class search_page : Fragment() {
                 }
 
                 override fun onFailure(call: Call<SearchingResponse>, t: Throwable) {
-                    Toast.makeText(view?.context, "Please check your internet connection", Toast.LENGTH_SHORT).show()
-                    Log.i("Naman", "Please check your internet connection")
+                    Toast.makeText(view?.context,"Please check your internet connection", Toast.LENGTH_SHORT).show()
+                    Log.i("Naman", t.stackTraceToString())
                 }
             })
         }
