@@ -52,6 +52,11 @@ class activity_Dashboard : AppCompatActivity() {
         replaceFrag(editProfile_Frag, "editprofile")
     }
 
+    fun internshipdetails(view: View) {
+        val internshipdetails = internship_deatils_fragement()
+        replaceFrag(internshipdetails, "internshipdetails")
+    }
+
     fun all_internship_list_Frage(view: View) {
         val all_inten_list = Internship_See_all()
         replaceFrag(all_inten_list, "internship_seeAll")

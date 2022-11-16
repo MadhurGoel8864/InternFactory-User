@@ -8,8 +8,12 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.internfactory.Activities.internship_deatils_fragement
 import com.example.internfactory.R
 import com.example.internfactory.modules.Internship_response
 
@@ -60,6 +64,10 @@ class internship_adapter(val internshipResponse: Internship_response):
             amount.text = internshipSeeallResponse.content[adapterPosition].stipend
             val x = "https://internfactory.herokuapp.com/file/" + internshipSeeallResponse.content[adapterPosition].imageUrl
             company_logo.load(x)
+
+            apply_btn.setOnClickListener {
+                internship_deatils_fragement()
+            }
         }
 
         init{
@@ -70,5 +78,17 @@ class internship_adapter(val internshipResponse: Internship_response):
             }
         }
     }
+
+//    private fun replaceFrag(fragment : Fragment, name: String){
+//        val fm : FragmentManager = parentFragmentManager
+//        val ft : FragmentTransaction = fm.beginTransaction()
+//        ft.addToBackStack(name)
+//        ft.add(R.id.dashboard, fragment)
+//        ft.commit()
+//    }
+//    fun internshipdetails(view: View) {
+//        val internshipdetails = internship_deatils_fragement()
+//        replaceFrag(internshipdetails, "internshipdetails")
+//    }
 
 }
