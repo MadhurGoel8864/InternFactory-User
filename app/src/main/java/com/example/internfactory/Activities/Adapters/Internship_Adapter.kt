@@ -55,12 +55,12 @@ class internship_adapter(val internshipResponse: Internship_response):
 
         fun bindView(internshipSeeallResponse: Internship_response){
 //            trending_title.text = internshipSeeallResponse.content[0].title
-            internship_domain.text = internshipSeeallResponse.content[0].title
-            company_name.text = internshipSeeallResponse.content[0].category.categoryName
-            remote_location.text = internshipSeeallResponse.content[0].type
-            internship_timeline.text = internshipSeeallResponse.content[0].tenure
-            amount.text = internshipSeeallResponse.content[0].stipend
-            val x = "https://internfactory.herokuapp.com/file/" + internshipSeeallResponse.content[0].imageUrl
+//            internship_domain.text = internshipSeeallResponse.content[adapterPosition].title
+            company_name.text = internshipSeeallResponse.content[adapterPosition].category.categoryName
+            remote_location.text = internshipSeeallResponse.content[adapterPosition].type
+            internship_timeline.text = internshipSeeallResponse.content[adapterPosition].tenure
+            amount.text = internshipSeeallResponse.content[adapterPosition].stipend
+            val x = "https://internfactory.herokuapp.com/file/" + internshipSeeallResponse.content[adapterPosition].imageUrl
             company_logo.load(x)
         }
 
