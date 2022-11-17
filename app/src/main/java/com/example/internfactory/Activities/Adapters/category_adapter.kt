@@ -13,9 +13,6 @@ import com.example.internfactory.modules.category_seeall_response
 class category_adapter(val categoriesSeeAll: MutableList<category_seeall_response>): RecyclerView.Adapter<category_ViewHolder>() {
 
     private lateinit var mListner:onItemClickListner
-//    interface onItemClickListner : dashboard_category_adapter.onItemClickListner {
-//        override fun onItemClick(position: Int)
-//    }
 
     fun setOnItemClickListner(listner:onItemClickListner){
 

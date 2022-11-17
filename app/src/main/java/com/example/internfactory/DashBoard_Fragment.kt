@@ -85,19 +85,21 @@ class DashBoard_Fragment : Fragment() {
             ) {
                 if (response.isSuccessful) {
 
-                    recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
+                    recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
                     adapter1 = dashboard_category_adapter(response.body()!!)
                     recyclerView.adapter = adapter1
-//                    adapter1.setOnItemClickListner(object : dashboard_category_adapter.onItemClickListner {
-//                        override fun onItemClick(position: Int) {
-//                            (activity as activity_Dashboard).xid = adapter1.categoriesSeeAll[position].categoryId!!
-//                            internship_see_all_frag()
-//                            Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
-//                            Log.d("tech",(activity as activity_Dashboard).xid.toString())
-//                        }
-                }}
+                    adapter1.setOnItemClickListner1(object :
+                        dashboard_category_adapter.onItemClickListner1 {
+                        override fun onItemClick1(position: Int) {
+                            (activity as activity_Dashboard).xid =
+                                adapter1.categoriesSeeAll[position].categoryId!!
+                            Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
+                            Log.d("tech", (activity as activity_Dashboard).xid.toString())
+                        }
+                    })
+                }
 
-
+            }
 
 
             override fun onFailure(
