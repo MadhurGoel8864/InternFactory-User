@@ -1,5 +1,6 @@
 package com.example.internfactory
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -10,6 +11,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -17,7 +22,9 @@ import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.example.internfactory.Activities.Adapters.ImageAdapter
 import com.example.internfactory.Activities.Adapters.category_adapter
+import com.example.internfactory.Activities.Adapters.dashboard_category_adapter
 import com.example.internfactory.modules.category_seeall_response
+import com.example.internfactory.modules.main_screen_category_dataclass
 import com.example.internfactory.modules.trending_seeall_response
 import com.example.internfactory.server.RetrofitApi
 import com.example.internfactory.server.ServiceBuilder
@@ -37,6 +44,9 @@ class DashBoard_Fragment : Fragment() {
 
     lateinit var adapter: ImageAdapter
 
+
+    lateinit var adapter1:dashboard_category_adapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,16 +54,6 @@ class DashBoard_Fragment : Fragment() {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_dash_board_, container, false)
 
-//        categ_seeall_btn = view.findViewById(R.id.categories_seall)
-//        categ_seeall_btn.setOnClickListener{
-//            val intent = Intent(view.context,trendingSeeAll::class.java)
-//            startActivity(intent)
-//        }
-//        trending_seeall_btn = view.findViewById(R.id.trending_seeall)
-//        trending_seeall_btn.setOnClickListener{
-//            val intent = Intent(view.context,CategoriesSeeAll::class.java)
-//            startActivity(intent)
-//        }
 
         init(view)
         setUptransformer()
@@ -68,6 +68,58 @@ class DashBoard_Fragment : Fragment() {
         return view
 
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val fm : FragmentManager = parentFragmentManager
+        val ft : FragmentTransaction = fm.beginTransaction()
+
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recycle_view)
+
+        val serviceBuilder = ServiceBuilder.buildService(RetrofitApi::class.java)
+        val Call = serviceBuilder.getcategories1("Bearer " + (activity as activity_Dashboard).token )
+        Call.enqueue(object : Callback,retrofit2.Callback<MutableList<main_screen_category_dataclass>> {
+            override fun onResponse(
+                call: Call<MutableList<main_screen_category_dataclass>>,
+                response: Response<MutableList<main_screen_category_dataclass>>
+            ) {
+                if (response.isSuccessful) {
+
+                    recyclerView.layoutManager = GridLayoutManager(requireContext(),2)
+                    adapter1 = dashboard_category_adapter(response.body()!!)
+                    recyclerView.adapter = adapter1
+//                    adapter1.setOnItemClickListner(object : dashboard_category_adapter.onItemClickListner {
+//                        override fun onItemClick(position: Int) {
+//                            (activity as activity_Dashboard).xid = adapter1.categoriesSeeAll[position].categoryId!!
+//                            internship_see_all_frag()
+//                            Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
+//                            Log.d("tech",(activity as activity_Dashboard).xid.toString())
+//                        }
+                }}
+
+
+
+
+            override fun onFailure(
+                call: Call<MutableList<main_screen_category_dataclass>>,
+                t: Throwable
+            ) {
+                t.printStackTrace()
+                Log.e("failure", t.message.toString())
+            }
+        }
+        )
+    }
+
+
+
+
+
+
+
+
+
+
     override fun onPause() {
         super.onPause()
         handler.removeCallbacks(runnable)
@@ -94,6 +146,8 @@ class DashBoard_Fragment : Fragment() {
     }
 
     private fun init(view: View){
+
+
         viewpager2 = view.findViewById(R.id.viewpager2)
         handler = Handler(Looper.myLooper()!!)
         imageList = ArrayList()

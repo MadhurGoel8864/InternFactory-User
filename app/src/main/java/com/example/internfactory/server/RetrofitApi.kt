@@ -31,6 +31,12 @@ interface RetrofitApi {
     @GET("/api/getCategory")
     fun getcategories(@Header ("Authorization") token :String) : Call<MutableList<category_seeall_response>>
 
+
+    @GET("/api/getCategory")
+    fun getcategories1(@Header ("Authorization") token :String) : Call<MutableList<main_screen_category_dataclass>>
+
+
+
     @GET("/api/getTrending")
     fun gettrends(@Header ("Authorization") token :String): Call<MutableList<trending_seeall_response>>
 

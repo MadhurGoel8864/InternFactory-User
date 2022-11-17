@@ -57,8 +57,7 @@ class internship_adapter(val internshipResponse: Internship_response):
 
 
         fun bindView(internshipSeeallResponse: Internship_response){
-            internship_domain.text = internshipSeeallResponse.content[adapterPosition].displayName
-            company_name.text = internshipSeeallResponse.content[adapterPosition].provider
+
             remote_location.text = internshipSeeallResponse.content[adapterPosition].type
             internship_timeline.text = internshipSeeallResponse.content[adapterPosition].tenure
             amount.text = internshipSeeallResponse.content[adapterPosition].stipend
