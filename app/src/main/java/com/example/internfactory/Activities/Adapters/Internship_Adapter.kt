@@ -1,14 +1,19 @@
 package com.example.internfactory.Activities.Adapters
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.internfactory.Activities.internship_deatils_fragement
 import com.example.internfactory.R
 import com.example.internfactory.modules.Internship_response
 
@@ -36,13 +41,11 @@ class internship_adapter(val internshipResponse: Internship_response):
     }
 
     override fun getItemCount(): Int {
-        return internshipResponse.pageSize
+        return internshipResponse.content.size
     }
 
     class internshipViewHolder(itemView: View,listner: onItemClickListner): RecyclerView.ViewHolder(itemView){
 
-//        private val trending_title: TextView = itemView.findViewById(R.id.trending_title)
-//        private val trending_image: ImageView = itemView.findViewById(R.id.trending_image)
         private val company_logo:ImageView = itemView.findViewById(R.id.imageView14)
         private val internship_domain:TextView = itemView.findViewById(R.id.textView26)
         private val company_name:TextView = itemView.findViewById(R.id.textView27)
@@ -54,14 +57,16 @@ class internship_adapter(val internshipResponse: Internship_response):
 
 
         fun bindView(internshipSeeallResponse: Internship_response){
-//            trending_title.text = internshipSeeallResponse.content[0].title
-//            internship_domain.text = internshipSeeallResponse.content[adapterPosition].title
-            company_name.text = internshipSeeallResponse.content[adapterPosition].category.categoryName
+
             remote_location.text = internshipSeeallResponse.content[adapterPosition].type
             internship_timeline.text = internshipSeeallResponse.content[adapterPosition].tenure
             amount.text = internshipSeeallResponse.content[adapterPosition].stipend
             val x = "https://internfactory.herokuapp.com/file/" + internshipSeeallResponse.content[adapterPosition].imageUrl
             company_logo.load(x)
+
+            apply_btn.setOnClickListener {
+                internship_deatils_fragement()
+            }
         }
 
         init{
@@ -72,5 +77,17 @@ class internship_adapter(val internshipResponse: Internship_response):
             }
         }
     }
+
+//    private fun replaceFrag(fragment : Fragment, name: String){
+//        val fm : FragmentManager = parentFragmentManager
+//        val ft : FragmentTransaction = fm.beginTransaction()
+//        ft.addToBackStack(name)
+//        ft.add(R.id.dashboard, fragment)
+//        ft.commit()
+//    }
+//    fun internshipdetails(view: View) {
+//        val internshipdetails = internship_deatils_fragement()
+//        replaceFrag(internshipdetails, "internshipdetails")
+//    }
 
 }

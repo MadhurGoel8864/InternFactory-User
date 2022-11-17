@@ -81,6 +81,6 @@ class CategoriesSeeAll : Fragment() {
     }
     fun internship_see_all_frag(){
         val internship_see_all_frag = Internship_See_all()
-        replaceFrag(internship_see_all_frag,"internship")
+        replaceFrag(internship_see_all_frag,"internship_seeAll")
     }
 }

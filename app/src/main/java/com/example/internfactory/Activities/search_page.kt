@@ -1,5 +1,6 @@
 package com.example.internfactory.Activities
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,7 +12,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.internfactory.Activities.Adapters.SearchAdapter
+import com.example.internfactory.Activities.Adapters.category_adapter
 import com.example.internfactory.R
 import com.example.internfactory.activity_Dashboard
 import com.example.internfactory.modules.SearchingRequest
@@ -26,9 +30,13 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class search_page : Fragment() {
+
+    lateinit var adapter: SearchAdapter
+
     private lateinit var Search:TextInputEditText
     private lateinit var SearchText:TextInputLayout
     private lateinit var SearchResult:RecyclerView
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,23 +51,10 @@ class search_page : Fragment() {
         val pagenumber:Int=0
         Log.d("boom",search)
 
-//        Search.addTextChangedListener(object :TextWatcher{
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//                TODO("Not yet implemented")
-//            }
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//
-//            }
-//
-//            override fun afterTextChanged(s: Editable?) {
-//                TODO("Not yet implemented")
-//            }
-//
-//        })
+        val recyclerView = view.findViewById<RecyclerView>(R.id.searchResult)
 
         Search.setOnClickListener {
-            val searching=SearchingRequest(pagenumber,5,"id","asc")
+            val searching=SearchingRequest(pagenumber,5,"title","asc")
             val retrofitAPI = ServiceBuilder.buildService(RetrofitApi::class.java)
             val call = retrofitAPI.searchapi(Search.text.toString(),searching,"Bearer " + (activity as activity_Dashboard).token)
 
@@ -70,17 +65,26 @@ class search_page : Fragment() {
                     response: Response<SearchingResponse>
                 ) {
                     if (response.isSuccessful) {
-                        Toast.makeText(view?.context, "Succesfully Saved", Toast.LENGTH_SHORT)
-                            .show()
-                        Log.i("Naman", response.body().toString())
+
+                        recyclerView.layoutManager= LinearLayoutManager(requireContext())
+                        adapter= SearchAdapter(response.body()!!)
+                        recyclerView.adapter=adapter
+                        adapter.setOnItemClickListner(object : SearchAdapter.onItemClickListner {
+                            override fun onItemClick(position: Int) {
+                                Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
+                            }
+                        })
+
+                        Toast.makeText(view?.context, "Succesfully Saved", Toast.LENGTH_SHORT).show()
+                        Log.d("Naman", response.body().toString())
                     } else {
                         android.widget.Toast.makeText(view?.context, response.code().toString(), android.widget.Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<SearchingResponse>, t: Throwable) {
-                    Toast.makeText(view?.context, "Please check your internet connection", Toast.LENGTH_SHORT).show()
-                    Log.i("Naman", "Please check your internet connection")
+                    Toast.makeText(view?.context,"Please check your internet connection", Toast.LENGTH_SHORT).show()
+                    Log.i("Naman", t.stackTraceToString())
                 }
             })
         }
