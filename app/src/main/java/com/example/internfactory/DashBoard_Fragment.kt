@@ -74,6 +74,19 @@ class DashBoard_Fragment : Fragment() {
         val fm : FragmentManager = parentFragmentManager
         val ft : FragmentTransaction = fm.beginTransaction()
 
+         fun replaceFrag(fragment : Fragment,name: String){
+            val fm : FragmentManager = parentFragmentManager
+            val ft : FragmentTransaction = fm.beginTransaction()
+            ft.addToBackStack(name)
+            ft.add(R.id.dashboard, fragment)
+            ft.commit()
+        }
+
+        fun internship_see_all_frag(){
+            val internship_see_all_frag = Internship_See_all()
+            replaceFrag(internship_see_all_frag,"internship_seeAll")
+        }
+
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycle_view)
 
         val serviceBuilder = ServiceBuilder.buildService(RetrofitApi::class.java)
@@ -93,6 +106,7 @@ class DashBoard_Fragment : Fragment() {
                         override fun onItemClick1(position: Int) {
                             (activity as activity_Dashboard).xid =
                                 adapter1.categoriesSeeAll[position].categoryId!!
+                            internship_see_all_frag()
                             Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
                             Log.d("tech", (activity as activity_Dashboard).xid.toString())
                         }
@@ -190,4 +204,6 @@ class DashBoard_Fragment : Fragment() {
         val intent= Intent(view.context, activity_Dashboard::class.java)
         startActivity(intent)
     }
-    }}
+    }
+
+}
