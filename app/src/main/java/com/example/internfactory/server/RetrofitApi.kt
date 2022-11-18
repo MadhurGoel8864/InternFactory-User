@@ -42,11 +42,14 @@ interface RetrofitApi {
 
     //Profile
     @POST("/api/getUserInfo")
-    fun viewProfile(@Body editProfileRequest: EditProfileRequest,@Header ("Authorization") token :String): Call<EditProfileResponse>
+    fun viewProfile(@Body editProfileRequest: EditProfileRequest
+                    ,@Header ("Authorization") token :String): Call<EditProfileResponse>
 
     @PUT("/api/editUserInfo")
-    fun editProfile(@Body viewProfile: ViewProfile,@Header ("Authorization") token :String): Call<ViewProfileResponse>
+    fun editProfile(@Body viewProfile: ViewProfile
+                    ,@Header ("Authorization") token :String): Call<ViewProfileResponse>
 
+    //Internships
     @POST("/api/user/{email}/internships/{id}/apply")
     fun applyinternship(@Path("email") email:String,@Path("id") id:Int
                         ,@Body applyInternshipRequest: ApplyInternshipRequest
@@ -61,5 +64,13 @@ interface RetrofitApi {
     fun allinternship(@Path("id") id:Int
                       ,@Body internshipRequest: Internship_request
                       ,@Header ("Authorization") token :String): Call<Internship_response>
+
+    @GET("/api/getinternships/{InternshipID}")
+    fun internshipDetail(@Path("InternshipID") InternshipID:Int
+                         ,@Header ("Authorization") token :String):Call<InternshipDetail_response>
+
+    @GET("/api/getAssessment/internhip/{InternshipId}")
+    fun internshipquestion(@Path("InternshipId") InternshipId:Int
+                           ,@Header ("Authorization") token :String):Call<ApplyInternship_response>
 
 }

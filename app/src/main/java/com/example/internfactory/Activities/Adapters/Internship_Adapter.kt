@@ -1,7 +1,6 @@
 package com.example.internfactory.Activities.Adapters
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +22,7 @@ class internship_adapter(val internshipResponse: Internship_response):
     private lateinit var mListner:onItemClickListner
         interface onItemClickListner{
             fun onItemClick(position: Int)
+//            fun btnonItemClick(position: Button)
         }
 
         fun setOnItemClickListner(listner:onItemClickListner){
@@ -65,31 +65,26 @@ class internship_adapter(val internshipResponse: Internship_response):
             amount.text = internshipSeeallResponse.content[adapterPosition].stipend
             val x = "https://internfactory.herokuapp.com/file/" + internshipSeeallResponse.content[adapterPosition].imageUrl
             company_logo.load(x)
-
-            apply_btn.setOnClickListener {
-                internship_deatils_fragement()
-            }
         }
 
         init{
 
-            itemView.setOnClickListener {
+            apply_btn.setOnClickListener {
 
                 listner.onItemClick(adapterPosition)
             }
         }
     }
-
 //    private fun replaceFrag(fragment : Fragment, name: String){
 //        val fm : FragmentManager = parentFragmentManager
 //        val ft : FragmentTransaction = fm.beginTransaction()
 //        ft.addToBackStack(name)
-//        ft.add(R.id.dashboard, fragment)
+//        ft.add(R.id.container, fragment)
 //        ft.commit()
 //    }
+//
 //    fun internshipdetails(view: View) {
 //        val internshipdetails = internship_deatils_fragement()
 //        replaceFrag(internshipdetails, "internshipdetails")
 //    }
-
 }

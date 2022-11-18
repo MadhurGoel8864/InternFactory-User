@@ -43,6 +43,8 @@
                 android:id="@+id/view6"
                 android:layout_width="match_parent"
                 android:layout_marginTop="20dp"
+                android:paddingBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:background="@drawable/details_background"
@@ -62,7 +64,7 @@
 
                 <TextView
                     android:id="@+id/textView17"
-                    android:layout_width="wrap_content"
+                    android:layout_width="240dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="10dp"
@@ -76,7 +78,7 @@
 
                 <TextView
                     android:id="@+id/textView18"
-                    android:layout_width="wrap_content"
+                    android:layout_width="240dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat"
                     android:text="Twitter"
@@ -170,10 +172,9 @@
 
                 <TextView
                     android:id="@+id/about_text"
-                    android:layout_width="match_parent"
+                    android:layout_width="330dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:layout_marginHorizontal="30dp"
                     android:text="Twitter, Inc. is an American communications company based in San Francisco, California. The company operates the microblogging and social networking service Twitter. It previously operated the Vine short video app and Periscope livestreaming service."
                     android:textColor="#CC000000"
                     android:textSize="14sp"
@@ -206,7 +207,7 @@
 
                 <TextView
                     android:id="@+id/skills_list"
-                    android:layout_width="wrap_content"
+                    android:layout_width="330dp"
                     android:layout_height="wrap_content"
                     android:text="Adobe PhotoShop"
                     android:layout_marginTop="4dp"
@@ -241,7 +242,7 @@
 
                 <TextView
                     android:id="@+id/apply_criteria_list"
-                    android:layout_width="wrap_content"
+                    android:layout_width="330dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="Are available for 2 month duration."
@@ -276,7 +277,7 @@
 
                 <TextView
                     android:id="@+id/perks_list"
-                    android:layout_width="wrap_content"
+                    android:layout_width="330dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="Certificate"
@@ -286,16 +287,15 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView25" />
 
                 <Button
+                    android:id="@+id/apply"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="30dp"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/montserrat"
                     android:paddingTop="10dp"
-                    android:onClick="application_fragment"
                     android:paddingBottom="10dp"
                     android:text="Apply"
-                    android:layout_marginBottom="80dp"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textStyle="bold"

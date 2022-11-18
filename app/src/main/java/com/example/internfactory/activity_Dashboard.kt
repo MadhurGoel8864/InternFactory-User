@@ -24,6 +24,8 @@ class activity_Dashboard : AppCompatActivity() {
     lateinit var email: String
     lateinit var token: String
     var xid: Int=-1
+    var internshipId=-1
+    var name: String="Name"
 
     private lateinit var bottom_nav: BottomNavigationView
 
@@ -52,19 +54,14 @@ class activity_Dashboard : AppCompatActivity() {
         replaceFrag(editProfile_Frag, "editprofile")
     }
 
-    fun internshipdetails(view: View) {
-        val internshipdetails = internship_deatils_fragement()
-        replaceFrag(internshipdetails, "internshipdetails")
-    }
-
     fun all_internship_list_Frage(view: View) {
         val all_inten_list = Internship_See_all()
         replaceFrag(all_inten_list, "internship_seeAll")
     }
 
-    fun internship_details(view: View) {
-        val internship_details = internship_deatils_fragement()
-        replaceFrag(internship_details,"internship_details")
+    fun apply_internship() {
+        val apply_internship = application_fragment()
+        replaceFrag(apply_internship, "applyInternship")
     }
 
     fun aboutFrag(view: View) {
@@ -81,11 +78,6 @@ class activity_Dashboard : AppCompatActivity() {
     fun categoryFrag(view: View) {
         val categoryFrag = CategoriesSeeAll()
         replaceFrag(categoryFrag, "category")
-    }
-
-    fun internship_see_all_frag(view: View) {
-        val internship_see_all_frag = Internship_See_all()
-        replaceFrag(internship_see_all_frag, "internship")
     }
 
     fun dashboardFrag(view: View) {

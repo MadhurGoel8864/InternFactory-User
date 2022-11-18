@@ -18,16 +18,13 @@ import com.example.internfactory.Activities.Adapters.internship_adapter
 import com.example.internfactory.Activities.internship_deatils_fragement
 import com.example.internfactory.modules.Internship_request
 import com.example.internfactory.modules.Internship_response
-import com.example.internfactory.modules.category_seeall_response
-import com.example.internfactory.modules.trending_seeall_response
 import com.example.internfactory.server.RetrofitApi
 import com.example.internfactory.server.ServiceBuilder
 import retrofit2.Call
 import retrofit2.Response
-import java.nio.file.Files.find
 import javax.security.auth.callback.Callback
 
-class Internship_See_all : Fragment() {
+class Internship_See_all : Fragment(){
 
     lateinit var adapter: internship_adapter
     private lateinit var apply_btn: Button
@@ -65,9 +62,15 @@ class Internship_See_all : Fragment() {
                     recyclerView.adapter=adapter
                     adapter.setOnItemClickListner(object : internship_adapter.onItemClickListner {
                         override fun onItemClick(position: Int) {
-//                            internship_details()
-                            Toast.makeText(view?.context,"Clicked Item", Toast.LENGTH_SHORT).show()
+                            (activity as activity_Dashboard).internshipId = adapter.internshipResponse.content[position].id
+                            internship_details()
+                            Toast.makeText(view?.context,(activity as activity_Dashboard).internshipId.toString(), Toast.LENGTH_SHORT).show()
                         }
+//
+//                        override fun btnonItemClick(position: Button) {
+//                            internship_details()
+//                            Toast.makeText(context, position.toString(), Toast.LENGTH_SHORT).show()
+//                        }
                     })
                 }
             }
@@ -89,10 +92,7 @@ class Internship_See_all : Fragment() {
                 Log.d("page", pagenum.toString())
                 val serviceBuildert = ServiceBuilder.buildService(RetrofitApi::class.java)
                 val Call2 = serviceBuildert.allinternship(
-                    (activity as activity_Dashboard).xid,
-                    internshipRequestt,
-                    "Bearer " + (activity as activity_Dashboard).token
-                )
+                    (activity as activity_Dashboard).xid, internshipRequestt, "Bearer " + (activity as activity_Dashboard).token)
                 Call2.enqueue(object : Callback,
                     retrofit2.Callback<Internship_response> {
                     override fun onResponse(
@@ -106,12 +106,14 @@ class Internship_See_all : Fragment() {
                             adapter.setOnItemClickListner(object :
                                 internship_adapter.onItemClickListner {
                                 override fun onItemClick(position: Int) {
-                                    Toast.makeText(
-                                        view?.context,
-                                        "Clicked Item",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                                    internship_details()
+                                    Toast.makeText(view?.context, "Clicked Item", Toast.LENGTH_SHORT).show()
                                 }
+
+//                                override fun btnonItemClick(position: Button) {
+//                                    internship_details()
+//                                    Toast.makeText(context, position.toString(), Toast.LENGTH_SHORT).show()
+//                                }
                             })
                         }
                     }

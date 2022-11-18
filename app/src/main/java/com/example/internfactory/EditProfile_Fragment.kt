@@ -71,6 +71,7 @@ class EditProfile_Fragment : Fragment() {
         call.enqueue(object : Callback<EditProfileResponse> {
             override fun onResponse(call: Call<EditProfileResponse>, response: Response<EditProfileResponse>) {
                 if (response.isSuccessful) {
+                    (activity as activity_Dashboard).name=response.body()?.firstname.toString()+" "+response.body()?.lastname.toString()
                     firstname_inp.text= response.body()?.firstname
                     lastname_inp.text=response.body()?.lastname
                     email_inp.text=response.body()?.email

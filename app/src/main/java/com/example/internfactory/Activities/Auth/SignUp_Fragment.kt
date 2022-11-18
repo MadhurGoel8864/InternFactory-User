@@ -73,63 +73,6 @@ class SignUp_Fragment : Fragment() {
         email_inp = view.findViewById(R.id.email_inp)
         password_inp = view.findViewById(R.id.password_form_inp)
         signupbtn=view.findViewById(R.id.sign_up_btn)
-
-//        signupbtn.setOnClickListener{
-//            val firstname =firstname_inp.text.toString()
-//            val lastname = lastname_inp.text.toString()
-//            val emaiil = email_inp.text.toString()
-//            val password= password_inp.text.toString()
-//
-//            val checkfirstname= isValidName(firstname)
-//            val checklastname= isValidName(lastname)
-//            val checkemail= isValidEmail(emaiil)
-//            (activity as connecting).signUpEmail=email_inp.text.toString()
-//            (activity as connecting).signuppass=password_inp.text.toString()
-//
-//
-//            if(checkfirstname){
-//                if(checklastname){
-//                    if(checkemail){
-//                        val msg= isValidPassword(password)
-//                        if (msg=="true"){
-//                            val user = User(firstname,lastname,emaiil,password)
-//                            val retrofitAPI = ServiceBuilder.buildService(RetrofitApi::class.java)
-//                            val call = retrofitAPI.signIn(user)
-//
-//                            call.enqueue(object: Callback<SignUpResponse> {
-//                                override fun onResponse(call: Call<SignUpResponse>, response: Response<SignUpResponse>) {
-//                                    if (response.isSuccessful && response.body()!=null){
-//                                        Toast.makeText(view.context, "Otp Sent Succesfully", Toast.LENGTH_SHORT).show()
-//                                        signupotpVerificationFrag()
-//                                        Log.i("Naman", response.body().toString())
-//                                    }
-//                                    else{
-//                                        android.widget.Toast.makeText(view.context,"Already Registered Email", android.widget.Toast.LENGTH_SHORT).show()
-//                                    }
-//                                }
-//
-//                                override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
-//                                    Toast.makeText(view.context, "Please check your internet connection", Toast.LENGTH_SHORT).show()
-//                                    Log.i("Naman", "Please check your internet connection")
-//                                }
-//                            })
-//                        }
-//                        else{
-//                            Toast.makeText(view.context, msg, Toast.LENGTH_SHORT).show()
-//                        }
-//                    }
-//                    else{
-//                        Toast.makeText(view.context, "Enter a valid email", Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//                else{
-//                    Toast.makeText(view.context, "Enter a valid last name", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//            else{
-//                Toast.makeText(view.context, "Enter valid first name", Toast.LENGTH_SHORT).show()
-//            }
-//        }
         return view
     }
 
@@ -223,11 +166,8 @@ class SignUp_Fragment : Fragment() {
                 Toast.makeText(view.context, "Enter valid first name", Toast.LENGTH_SHORT).show()
                 progressBar.dismiss()
             }
-//                progressBar.dismiss()
             }
-//            progressBar.dismiss()
         }
-//        progressBar.dismiss()
         }
 
 

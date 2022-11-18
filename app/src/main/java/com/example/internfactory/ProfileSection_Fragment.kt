@@ -15,10 +15,12 @@ import com.example.internfactory.modules.UserDetails
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.w3c.dom.Text
 
 class ProfileSection_Fragment : Fragment() {
 
     lateinit var signOutBtn : TextView
+    lateinit var name:TextView
 
     fun signOut(view: View){
         GlobalScope.launch(Dispatchers.IO) {
@@ -38,6 +40,8 @@ class ProfileSection_Fragment : Fragment() {
         val view= inflater.inflate(R.layout.fragment_profile_section_, container, false)
 
         signOutBtn = view.findViewById(R.id.signOut_btn)
+        name=view.findViewById(R.id.textView10)
+        name.text=(activity as activity_Dashboard).name
         signOutBtn.setOnClickListener{
             signOut(view)
         }
