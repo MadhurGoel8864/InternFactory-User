@@ -52,8 +52,8 @@ interface RetrofitApi {
     //Internships
     @POST("/api/user/{email}/internships/{id}/apply")
     fun applyinternship(@Path("email") email:String,@Path("id") id:Int
-                        ,@Body applyInternshipRequest: ApplyInternshipRequest
-                        ,@Header ("Authorization") token :String):Call<ApplyInternshipResponses>
+                        ,@Body applyinternrequest: Applyinternrequest
+                        ,@Header ("Authorization") token :String):Call<Applyinternresponse>
 
     @POST("/api/internships/search/{searchtext}")
     fun searchapi(@Path("searchtext") searchtext:String

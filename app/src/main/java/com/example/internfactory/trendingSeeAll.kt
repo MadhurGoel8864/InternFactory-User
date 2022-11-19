@@ -1,11 +1,14 @@
 package com.example.internfactory
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.internfactory.Activities.Adapters.trending_seeall_adapters
@@ -42,7 +45,10 @@ class trendingSeeAll : Fragment() {
                         recyclerView.adapter=adapter
                         adapter.setOnItemClickListner(object : trending_seeall_adapters.onItemClickListner {
                             override fun onItemClick(position: Int) {
-                                Toast.makeText(view?.context,"Clicked Item", Toast.LENGTH_SHORT).show()
+                                (activity as activity_Dashboard).tid= adapter.trendingSeeallResponse[position].categoryId!!
+                                Log.d("tid",(activity as activity_Dashboard).tid.toString())
+                                internship_see_all_frag()
+//                                Toast.makeText(view?.context,"Clicked Item", Toast.LENGTH_SHORT).show()
                             }
                         })
                     }
@@ -56,5 +62,17 @@ class trendingSeeAll : Fragment() {
 
         })
         return view
+    }
+
+    private fun replaceFrag(fragment : Fragment,name: String){
+        val fm : FragmentManager = parentFragmentManager
+        val ft : FragmentTransaction = fm.beginTransaction()
+        ft.addToBackStack(name)
+        ft.add(R.id.dashboard, fragment)
+        ft.commit()
+    }
+    fun internship_see_all_frag(){
+        val internship_see_all_frag = Internship_See_all()
+        replaceFrag(internship_see_all_frag,"internship_seeAll")
     }
 }

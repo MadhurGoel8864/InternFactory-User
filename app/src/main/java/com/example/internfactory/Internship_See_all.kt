@@ -44,12 +44,14 @@ class Internship_See_all : Fragment(){
         val recyclerView = view.findViewById<RecyclerView>(R.id.MyInternshiprecyclerview)
 
         var pagenum:Int=0
+        var idd:Int
+        if((activity as activity_Dashboard).xid==-1){idd=(activity as activity_Dashboard).tid}else{idd=(activity as activity_Dashboard).xid}
         Log.d("id", (activity as activity_Dashboard).xid.toString())
         val internshipRequest=Internship_request(pagenum,"5","id","asc")
         val serviceBuilder = ServiceBuilder.buildService(RetrofitApi::class.java)
-        val Call = serviceBuilder.allinternship((activity as activity_Dashboard).xid,internshipRequest,"Bearer " + (activity as activity_Dashboard).token)
+        val Call = serviceBuilder.allinternship(idd,internshipRequest,"Bearer " + (activity as activity_Dashboard).token)
 
-        Log.d("id", (activity as activity_Dashboard).xid.toString()+" "+"token: "+(activity as activity_Dashboard).token)
+        Log.d("id", idd.toString()+" "+"token: "+(activity as activity_Dashboard).token)
         Call.enqueue(object : Callback,
             retrofit2.Callback<Internship_response> {
             override fun onResponse(

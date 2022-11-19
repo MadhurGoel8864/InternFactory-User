@@ -26,6 +26,7 @@ class activity_Dashboard : AppCompatActivity() {
     var xid: Int=-1
     var internshipId=-1
     var name: String="Name"
+    var tid=-1
 
     private lateinit var bottom_nav: BottomNavigationView
 

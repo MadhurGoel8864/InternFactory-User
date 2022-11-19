@@ -54,7 +54,7 @@ class CategoriesSeeAll : Fragment() {
                         override fun onItemClick(position: Int) {
                             (activity as activity_Dashboard).xid = adapter.categoriesSeeAll[position].categoryId!!
                             internship_see_all_frag()
-                            Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
+//                            Toast.makeText(requireContext(), "click", Toast.LENGTH_SHORT).show()
                             Log.d("tech",(activity as activity_Dashboard).xid.toString())
                         }
                     })
